@@ -65,34 +65,4 @@ getGameOutcomeActivity() : GameOutcome
 createGameOutcomeActivity() : GameOutcome
 updateGameOutcomeActivity() : GameOutcome
 }
-
-
-newpage
-
-class Exception
-class RuntimeException
-class PlayerNotFoundException
-class GroupNotFoundException
-class GameNotFoundException
-class GameOutcomeNotFoundException
-class PlayerInvalidException
-class GroupInvalidException
-class GameInvalidException
-class OutcomeInvalidException
-class InvalidAttributeValueException
-class InvalidAttributeChangeException
-class InvalidAttributeException
-class PlaylistNotFoundException
-Exception <|-- RuntimeException
-RuntimeException <|-- InvalidAttributeException
-RuntimeException <|-- PlaylistNotFoundException
-InvalidAttributeException <|-- PlayerInvalidException
-InvalidAttributeException <|-- GroupInvalidException
-InvalidAttributeException <|-- GameInvalidException
-InvalidAttributeException <|--  OutcomeInvalidException
-
-InvalidAttributeException <|-- InvalidAttributeValueException
-InvalidAttributeException <|-- InvalidAttributeChangeException
-
-
 @enduml
