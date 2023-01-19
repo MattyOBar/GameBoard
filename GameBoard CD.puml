@@ -1,9 +1,13 @@
 @startuml
 
 Player -- PlayerDao
+Player -- GroupDao
 Group -- GroupDao
+Group -- GameDao
+Group -- PlayerDao
+Group -- GameOutcomeDao
 Game -- GameDao
-GameOutcome --  GameOutcomeDao
+GameOutcome -- GameOutcomeDao
 
 class Player {
 String playerId
