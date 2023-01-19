@@ -62,7 +62,7 @@ I will be using API Gateway and Lambda to create 14 API endpoints.
 I will be using tables in DynamoDB to store the player, group, game, and gameOutcome data.
 
 
-![GameBoard PlantUML](GameBoard CD.png)
+![GameBoard PlantUML](GameBoardCD.png)
 
 # 6. API
 
