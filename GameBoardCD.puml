@@ -1,12 +1,12 @@
 @startuml
 
 Player -- PlayerDao
-Player -- GroupDao
+Player -- Group
 Group -- GroupDao
-Group -- GameDao
-Group -- PlayerDao
-Group -- GameOutcomeDao
+Group -- Game
+Group -- GameOutcome
 Game -- GameDao
+Game -- GameOutcome
 GameOutcome -- GameOutcomeDao
 
 class Player {
