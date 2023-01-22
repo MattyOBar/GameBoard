@@ -1,0 +1,4 @@
+rootProject.name = 'GameBoard'
+include 'GameBoardServiceLambda'
+include 'GameBoardServiceLambda'
+
