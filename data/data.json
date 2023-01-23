@@ -1,0 +1,13 @@
+{
+  "players" : [
+    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "test"},
+          "playerName": {"S": "fakeName"},
+          "groupIds": {"SS": ["testGroupId1", "testGroupId2"]}
+        }
+      }
+    }
+  ]
+}
