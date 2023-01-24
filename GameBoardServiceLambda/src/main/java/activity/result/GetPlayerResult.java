@@ -1,0 +1,39 @@
+package activity.result;
+
+import models.PlayerModel;
+
+public class GetPlayerResult {
+    private final PlayerModel playerModel;
+
+    private GetPlayerResult(PlayerModel playerModel) {
+        this.playerModel = playerModel;
+    }
+    public PlayerModel getPlayerModel() {
+        return playerModel;
+    }
+
+    @Override
+    public String toString() {
+        return "GetPlayerResult{" +
+                "playerModel=" + playerModel +
+                '}';
+    }
+
+    //CHECKSTYLE:OFF:Builder
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private PlayerModel playerModel;
+
+        public Builder withPlayer(PlayerModel playerModel) {
+            this.playerModel = playerModel;
+            return this;
+        }
+
+        public GetPlayerResult build() {
+            return new GetPlayerResult(playerModel);
+        }
+    }
+}
