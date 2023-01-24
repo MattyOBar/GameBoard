@@ -20,7 +20,7 @@ public class GetPlayerActivity {
 
     /**
      * Instantiates a GetPlayerActivity object.
-     * @param playerDao PlayerDao to access the Players table
+     * @param playerDao PlayerDao to access the Players table.
      */
     @Inject
     public GetPlayerActivity(PlayerDao playerDao) {
@@ -30,8 +30,8 @@ public class GetPlayerActivity {
 
     /**
      * This method handles the incoming request by retrieving the player from the database.
-     * @param getPlayerRequest the request object containing the playerId
-     * @return getPlayerResult object containing the API defined PlayerModel
+     * @param getPlayerRequest the request object containing the playerId.
+     * @return getPlayerResult object containing the API defined PlayerModel.
      */
     public GetPlayerResult handleRequest(final GetPlayerRequest getPlayerRequest) {
         log.info("Received GetPlayerRequest {}", getPlayerRequest);

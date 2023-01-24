@@ -22,7 +22,7 @@ public class PlayerDao {
 
     /**
      * Instantiates a PlayerDao object.
-     * @param dynamoDBMapper the link used to interact with the Players Table
+     * @param dynamoDBMapper the link used to interact with the Players Table.
      * @param metricsPublisher the link used to record metrics
      */
     @Inject

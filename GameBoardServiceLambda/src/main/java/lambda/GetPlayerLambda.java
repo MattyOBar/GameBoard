@@ -5,9 +5,9 @@ import activity.result.GetPlayerResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-public class GetPlayerLambda extends
-        LambdaActivityRunner<GetPlayerRequest, GetPlayerResult> implements
-        RequestHandler<LambdaRequest<GetPlayerRequest>, LambdaResponse> {
+public class GetPlayerLambda
+        extends LambdaActivityRunner<GetPlayerRequest, GetPlayerResult>
+        implements RequestHandler<LambdaRequest<GetPlayerRequest>, LambdaResponse> {
 
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetPlayerRequest> input, Context context) {

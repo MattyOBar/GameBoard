@@ -1,5 +1,6 @@
 package dependency;
 
+import activity.GetGroupActivity;
 import activity.GetPlayerActivity;
 import dagger.Component;
 
@@ -16,4 +17,10 @@ public interface ServiceComponent {
      * @return GetPlayerActivity
      */
     GetPlayerActivity provideGetPlayerActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetGroupActivity
+     */
+    GetGroupActivity provideGetGroupActivity();
 }
