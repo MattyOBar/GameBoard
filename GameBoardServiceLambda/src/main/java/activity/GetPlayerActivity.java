@@ -1,24 +1,32 @@
 package activity;
 
-import Models.PlayerModel;
 import activity.request.GetPlayerRequest;
 import activity.result.GetPlayerResult;
 import converters.ModelConverter;
 import dynamodb.PlayerDao;
 import dynamodb.models.Player;
+import models.PlayerModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 
+/**
+ * This API allows the user to retrieve a specific Player object.
+ */
 public class GetPlayerActivity {
     private final Logger log = LogManager.getLogger();
     private final PlayerDao playerDao;
 
+    /**
+     * Instantiates a GetPlayerActivity object
+     * @param playerDao PlayerDao to access the Players table
+     */
     @Inject
     public GetPlayerActivity(PlayerDao playerDao) {
         this.playerDao = playerDao;
     }
+
 
     public GetPlayerResult handleRequest(final GetPlayerRequest getPlayerRequest) {
         log.info("Received GetPlayerRequest {}", getPlayerRequest);

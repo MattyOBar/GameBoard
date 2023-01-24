@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 public class MetricsModule {
 
     /**
-     * Provides CloudWatch Client
+     * Provides CloudWatch Client.
      * @return instance for AmazonCloudWatchAsync
      */
     @Provides

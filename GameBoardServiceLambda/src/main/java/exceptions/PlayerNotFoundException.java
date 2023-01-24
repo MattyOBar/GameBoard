@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Exception to throw when a given playerId is not found in the database.

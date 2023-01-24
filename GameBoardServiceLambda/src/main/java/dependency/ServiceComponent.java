@@ -16,4 +16,4 @@ public interface ServiceComponent {
      * @return GetPlayerActivity
      */
     GetPlayerActivity provideGetPlayerActivity();
- }
+}

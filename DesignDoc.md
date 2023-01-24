@@ -66,7 +66,7 @@ I will be using tables in DynamoDB to store the player, group, game, and gameOut
 
 # 6. API
 
-## 6.1. Public Models
+## 6.1. Public models
 
 
 ```

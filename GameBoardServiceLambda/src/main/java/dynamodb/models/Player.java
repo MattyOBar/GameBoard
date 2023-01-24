@@ -4,7 +4,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 @DynamoDBTable(tableName = "players")
@@ -25,7 +24,7 @@ public class Player {
     }
 
     @DynamoDBAttribute(attributeName = "groupIds")
-    public Set<String> getGroups() {
+    public Set<String> getGroupIds() {
         return groups;
     }
     
@@ -48,12 +47,12 @@ public class Player {
         Player player = (Player) o;
         return Objects.equals(getPlayerId(), player.getPlayerId()) &&
                 Objects.equals(getPlayerName(), player.getPlayerName()) &&
-                Objects.equals(getGroups(), player.getGroups());
+                Objects.equals(getGroupIds(), player.getGroupIds());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPlayerId(), getPlayerName(), getGroups());
+        return Objects.hash(getPlayerId(), getPlayerName(), getGroupIds());
     }
 
     @Override

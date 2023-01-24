@@ -1,7 +1,6 @@
 package activity.result;
 
-import Models.PlayerModel;
-import org.apache.commons.lang3.builder.Builder;
+import models.PlayerModel;
 
 public class GetPlayerResult {
     private final PlayerModel playerModel;

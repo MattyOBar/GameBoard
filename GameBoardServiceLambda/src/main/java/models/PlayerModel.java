@@ -1,6 +1,5 @@
-package Models;
+package models;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,8 +30,8 @@ public class PlayerModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
         PlayerModel that = (PlayerModel) o;
         return Objects.equals(getPlayerId(), that.getPlayerId()) &&
                 Objects.equals(getPlayerName(), that.getPlayerName()) &&

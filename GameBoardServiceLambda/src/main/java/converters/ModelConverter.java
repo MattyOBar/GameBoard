@@ -1,7 +1,7 @@
 package converters;
 
-import Models.PlayerModel;
 import dynamodb.models.Player;
+import models.PlayerModel;
 
 /**
  * Converts between Data and Coral models.
@@ -17,7 +17,7 @@ public class ModelConverter {
         return PlayerModel.builder()
                 .withPlayerId(player.getPlayerId())
                 .withPlayerName(player.getPlayerName())
-                .withGroupIds(player.getGroups())
+                .withGroupIds(player.getGroupIds())
                 .build();
     }
 }

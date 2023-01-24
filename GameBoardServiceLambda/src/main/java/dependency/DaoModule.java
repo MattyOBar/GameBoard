@@ -1,7 +1,6 @@
 package dependency;
 
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.nashss.se.aws.dynamodb.DynamoDbClientProvider;
 import dagger.Module;
@@ -15,7 +14,7 @@ import javax.inject.Singleton;
 @Module
 public class DaoModule {
     /**
-     * Provides a DynamoDbMapper singleton instance;
+     * Provides a DynamoDbMapper singleton instance.
      * @return DynamoDBMapper object
      */
     @Singleton
