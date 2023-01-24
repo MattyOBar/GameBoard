@@ -37,10 +37,10 @@ public class PlayerDao {
     public Player getPlayer(String playerId) {
         Player player = this.dynamoDBMapper.load(Player.class, playerId);
         if (player == null) {
-            metricsPublisher.addCount(MetricsConstants.GETPLAYER_PLAYERNOTFOUND_COUNT, 1);
+//            metricsPublisher.addCount(MetricsConstants.GETPLAYER_PLAYERNOTFOUND_COUNT, 1);
             throw new PlayerNotFoundException("Could not find player: " + playerId);
         }
-        metricsPublisher.addCount(MetricsConstants.GETPLAYER_PLAYERNOTFOUND_COUNT, 0);
+//        metricsPublisher.addCount(MetricsConstants.GETPLAYER_PLAYERNOTFOUND_COUNT, 0);
         return player;
     }
 

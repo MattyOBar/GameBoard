@@ -7,12 +7,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-@DynamoDBTable(tableName = "Players")
+@DynamoDBTable(tableName = "players")
 public class Player {
 
     private String playerId;
     private String playerName;
-    private List<String> groups;
+    private Set<String> groups;
 
     @DynamoDBHashKey(attributeName = "playerId")
     public String getPlayerId() {
@@ -24,8 +24,8 @@ public class Player {
         return playerName;
     }
 
-    @DynamoDBAttribute(attributeName = "groups")
-    public List<String> getGroups() {
+    @DynamoDBAttribute(attributeName = "groupIds")
+    public Set<String> getGroups() {
         return groups;
     }
     
@@ -37,7 +37,7 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public void setGroups(List<String> groups) {
+    public void setGroups(Set<String> groups) {
         this.groups = groups;
     }
 

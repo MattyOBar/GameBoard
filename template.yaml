@@ -230,7 +230,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: GameBoardServiceLambda
-      Handler: src.main.java.lambda.GetPlayerLambda.java::handleRequest
+      Handler: lambda.GetPlayerLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64

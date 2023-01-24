@@ -2,15 +2,16 @@ package Models;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class PlayerModel {
     private final String playerId;
 
     private final String playerName;
 
-    private final List<String> groupIds;
+    private final Set<String> groupIds;
 
-    private PlayerModel(String playerId, String playerName, List<String> groupIds) {
+    private PlayerModel(String playerId, String playerName, Set<String> groupIds) {
         this.playerId = playerId;
         this.playerName = playerName;
         this.groupIds = groupIds;
@@ -24,7 +25,7 @@ public class PlayerModel {
         return playerName;
     }
 
-    public List<String> getGroupIds() {
+    public Set<String> getGroupIds() {
         return groupIds;
     }
 
@@ -54,7 +55,7 @@ public class PlayerModel {
     public static class Builder {
         private String playerId;
         private String playerName;
-        private List<String> groupIds;
+        private Set<String> groupIds;
 
         public Builder withPlayerId(String playerId) {
             this.playerId = playerId;
@@ -66,7 +67,7 @@ public class PlayerModel {
             return this;
         }
 
-        public Builder withGroupIds(List<String> groupIds) {
+        public Builder withGroupIds(Set<String> groupIds) {
             this.groupIds = groupIds;
             return this;
         }
