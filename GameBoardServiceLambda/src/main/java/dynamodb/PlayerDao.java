@@ -1,10 +1,11 @@
 package dynamodb;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
+import dynamodb.models.Player;
 
 import exceptions.PlayerNotFoundException;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import dynamodb.models.Player;
 import metrics.MetricsConstants;
 import metrics.MetricsPublisher;
 
@@ -20,8 +21,8 @@ public class PlayerDao {
     private final MetricsPublisher metricsPublisher;
 
     /**
-     * Instantiates a PlayerDao object
-     * @param dynamoDBMapper the link used to interact with the Players Table
+     * Instantiates a PlayerDao object.
+     * @param dynamoDBMapper the link used to interact with the Players Table.
      * @param metricsPublisher the link used to record metrics
      */
     @Inject

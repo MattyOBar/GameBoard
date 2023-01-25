@@ -44,7 +44,6 @@ public class PlayerDaoTest {
         assertNotNull(player);
         verify(dynamoDBMapper).load(Player.class, playerId);
         verify(metricsPublisher).addCount(eq(MetricsConstants.GETPLAYER_PLAYERNOTFOUND_COUNT), anyDouble());
-
     }
 
     @Test

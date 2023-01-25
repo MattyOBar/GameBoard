@@ -9,5 +9,19 @@
         }
       }
     }
+  ],
+  "groups" : [
+    {
+      "PutRequest": {
+        "Item": {
+          "groupId": {"S": "testGroup"},
+          "groupName": {"S":  "groupName"},
+          "favoriteGameId": {"S":  "Monopoly"},
+          "gameIds": {"SS": ["monopoly", "chess", "skip-bo"]},
+          "gameOutcomeIds": {"SS": ["0001", "0002", "0003"]},
+          "playerIds": {"SS": ["TB15", "OA24", "MO27"]}
+        }
+      }
+    }
   ]
 }

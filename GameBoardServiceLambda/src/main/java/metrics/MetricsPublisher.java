@@ -1,7 +1,7 @@
 package metrics;
 
-
 import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
+
 import com.amazonaws.services.cloudwatch.model.Dimension;
 import com.amazonaws.services.cloudwatch.model.MetricDatum;
 import com.amazonaws.services.cloudwatch.model.PutMetricDataRequest;
