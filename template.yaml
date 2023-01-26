@@ -5,10 +5,10 @@ Description: >
 
 Parameters:
 
-#  CognitoDomain:
-#    Type: String
-#    Description: A name for the cognito Domain
-#    Default: "gameBoard"
+  CognitoDomain:
+    Type: String
+    Description: A name for the cognito Domain
+    Default: "gameboard"
 
   S3Bucket:
     Type: String
@@ -36,12 +36,12 @@ Globals:
       AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
       AllowHeaders: "'content-type,authorization'"
       AllowOrigin: "'*'"
-#    Auth:
-#      DefaultAuthorizer: CognitoAuthorizer
-#      AddDefaultAuthorizerToCorsPreflight: false
-#      Authorizers:
-#        CognitoAuthorizer:
-#          UserPoolArn: !GetAtt UserPool.Arn
+    Auth:
+      DefaultAuthorizer: CognitoAuthorizer
+      AddDefaultAuthorizerToCorsPreflight: false
+      Authorizers:
+        CognitoAuthorizer:
+          UserPoolArn: !GetAtt UserPool.Arn
 
 Resources:
 
@@ -49,62 +49,62 @@ Resources:
   # Cognito Configuration for user management
   #-----------------------------------------------------
 
-#  UserPool:
-#    Type: AWS::Cognito::UserPool
-#    Properties:
-#      AccountRecoverySetting:
-#        RecoveryMechanisms:
-#          - Name: verified_email
-#            Priority: 1
-#      UsernameAttributes:
-#        - email
-#      UsernameConfiguration:
-#        CaseSensitive: false
-#      AutoVerifiedAttributes:
-#        - email
-#      UserPoolName: !Sub ${CognitoDomain}-user-pool
-#      Schema:
-#        - Name: email
-#          AttributeDataType: String
-#          Mutable: false
-#          Required: true
-#        - Name: name
-#          AttributeDataType: String
-#          Mutable: true
-#          Required: true
-#
-#  UserPoolClient:
-#    Type: AWS::Cognito::UserPoolClient
-#    Properties:
-#      UserPoolId: !Ref UserPool
-#      AllowedOAuthFlowsUserPoolClient: true
-#      CallbackURLs:
-#        - !If
-#          - DeployCloudFront
-#          - !Sub "https://${CloudfrontDistribution.DomainName}"
-#          - http://localhost:8000
-#      LogoutURLs:
-#        - !If
-#          - DeployCloudFront
-#          - !Sub "https://${CloudfrontDistribution.DomainName}"
-#          - http://localhost:8000
-#      AllowedOAuthFlows:
-#        - code
-#        - implicit
-#      AllowedOAuthScopes:
-#        - phone
-#        - email
-#        - openid
-#        - profile
-#      SupportedIdentityProviders:
-#        - COGNITO
-#      PreventUserExistenceErrors: ENABLED
-#
-#  UserPoolDomain:
-#    Type: AWS::Cognito::UserPoolDomain
-#    Properties:
-#      Domain: !Ref CognitoDomain
-#      UserPoolId: !Ref UserPool
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+      UsernameAttributes:
+        - email
+      UsernameConfiguration:
+        CaseSensitive: false
+      AutoVerifiedAttributes:
+        - email
+      UserPoolName: !Sub ${CognitoDomain}-user-pool
+      Schema:
+        - Name: email
+          AttributeDataType: String
+          Mutable: false
+          Required: true
+        - Name: name
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      AllowedOAuthFlowsUserPoolClient: true
+      CallbackURLs:
+        - !If
+          - DeployCloudFront
+          - !Sub "https://${CloudfrontDistribution.DomainName}"
+          - http://localhost:8000
+      LogoutURLs:
+        - !If
+          - DeployCloudFront
+          - !Sub "https://${CloudfrontDistribution.DomainName}"
+          - http://localhost:8000
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - phone
+        - email
+        - openid
+        - profile
+      SupportedIdentityProviders:
+        - COGNITO
+      PreventUserExistenceErrors: ENABLED
+
+  UserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      Domain: !Ref CognitoDomain
+      UserPoolId: !Ref UserPool
 
 
   #-----------------------------------------------------
@@ -296,7 +296,7 @@ Resources:
         - AttributeName: "groupId"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: ""
+      TableName: "groups"
 
 
 #-----------------------------------------------------
@@ -304,28 +304,28 @@ Resources:
 #  to the screen after a successful deploy
 #-----------------------------------------------------
 
-#Outputs:
-#
-#  CognitoUserPoolId:
-#    Value: !Ref UserPool
-#    Description: "The Cognito User Pool ID (COGNITO_USER_POOL_ID)."
-#  CognitoUserPoolClientId:
-#    Value: !Ref UserPoolClient
-#    Description: "The Cognito User Pool Client ID (COGNITO_USER_POOL_CLIENT_ID)."
-#  CognitoDomain:
-#    Value: !Sub "${CognitoDomain}.auth.us-east-2.amazoncognito.com"
-#    Description: "The Cognito Domain (COGNITO_DOMAIN)."
-#
-#  ApiBaseUrl:
-#    Description: "API Gateway endpoint base URL for Prod stage (API_BASE_URL)."
-#    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
-#
-#  CognitoRedirectSignin:
-#    Description: "The URL of the deployed front-end application (COGNITO_REDIRECT_SIGNIN)."
-#    Value: !Sub "https://${CloudfrontDistribution.DomainName}"
-#    Condition: DeployCloudFront
-#  CognitoRedirectSignout:
-#    Description: "The URL of the deployed front-end application (COGNITO_REDIRECT_SIGNOUT)."
-#    Value: !Sub "https://${CloudfrontDistribution.DomainName}"
-#    Condition: DeployCloudFront
+Outputs:
+
+  CognitoUserPoolId:
+    Value: !Ref UserPool
+    Description: "The Cognito User Pool ID (COGNITO_USER_POOL_ID)."
+  CognitoUserPoolClientId:
+    Value: !Ref UserPoolClient
+    Description: "The Cognito User Pool Client ID (COGNITO_USER_POOL_CLIENT_ID)."
+  CognitoDomain:
+    Value: !Sub "${CognitoDomain}.auth.us-east-2.amazoncognito.com"
+    Description: "The Cognito Domain (COGNITO_DOMAIN)."
+
+  ApiBaseUrl:
+    Description: "API Gateway endpoint base URL for Prod stage (API_BASE_URL)."
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
+  CognitoRedirectSignin:
+    Description: "The URL of the deployed front-end application (COGNITO_REDIRECT_SIGNIN)."
+    Value: !Sub "https://${CloudfrontDistribution.DomainName}"
+    Condition: DeployCloudFront
+  CognitoRedirectSignout:
+    Description: "The URL of the deployed front-end application (COGNITO_REDIRECT_SIGNOUT)."
+    Value: !Sub "https://${CloudfrontDistribution.DomainName}"
+    Condition: DeployCloudFront
 
