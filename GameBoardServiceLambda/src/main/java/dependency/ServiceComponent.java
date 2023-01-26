@@ -2,6 +2,7 @@ package dependency;
 
 import activity.GetGroupActivity;
 import activity.GetPlayerActivity;
+import activity.request.UpdatePlayersGroupsInActivity;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -23,4 +24,6 @@ public interface ServiceComponent {
      * @return GetGroupActivity
      */
     GetGroupActivity provideGetGroupActivity();
+
+    UpdatePlayersGroupsInActivity provideUpdatePlayersGroupsInActivity();
 }
