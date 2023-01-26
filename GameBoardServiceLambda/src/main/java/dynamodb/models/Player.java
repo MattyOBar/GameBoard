@@ -11,7 +11,7 @@ public class Player {
 
     private String playerId;
     private String playerName;
-    private Set<String> groups;
+    private Set<String> groupIds;
 
     @DynamoDBHashKey(attributeName = "playerId")
     public String getPlayerId() {
@@ -25,7 +25,7 @@ public class Player {
 
     @DynamoDBAttribute(attributeName = "groupIds")
     public Set<String> getGroupIds() {
-        return groups;
+        return groupIds;
     }
     
     public void setPlayerId(String playerId) {
@@ -36,8 +36,8 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public void setGroups(Set<String> groups) {
-        this.groups = groups;
+    public void setGroupIds(Set<String> groupIds) {
+        this.groupIds = groupIds;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Player {
         return "Player{" +
                 "playerId='" + playerId + '\'' +
                 ", playerName='" + playerName + '\'' +
-                ", groups=" + groups +
+                ", groupIds=" + groupIds +
                 '}';
     }
 }
