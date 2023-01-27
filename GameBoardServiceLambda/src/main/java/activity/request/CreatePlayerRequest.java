@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import java.util.Set;
 
+@JsonDeserialize(builder = CreatePlayerRequest.Builder.class)
 public class CreatePlayerRequest {
     private final String playerId;
     private final String playerName;
@@ -42,6 +43,7 @@ public class CreatePlayerRequest {
         return new Builder();
     }
 
+    @JsonPOJOBuilder
     public static class Builder {
         private String playerId;
         private String playerName;
