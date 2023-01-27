@@ -1,5 +1,8 @@
 package activity.request;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import java.util.Set;
 
 public class CreatePlayerRequest {
@@ -43,5 +46,24 @@ public class CreatePlayerRequest {
         private String playerId;
         private String playerName;
         private Set<String> groupIds;
+
+        public Builder withPlayerId(String playerId) {
+            this.playerId = playerId;
+            return this;
+        }
+
+        public Builder withPlayerName(String playerName) {
+            this.playerName = playerName;
+            return this;
+        }
+
+        public Builder withGroupIds(Set<String> groupIds) {
+            this.groupIds = groupIds;
+            return this;
+        }
+
+        public CreatePlayerRequest build() {
+            return new CreatePlayerRequest(playerId, playerName, groupIds);
+        }
     }
 }
