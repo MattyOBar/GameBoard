@@ -296,7 +296,7 @@ Resources:
         - AttributeName: "groupId"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: ""
+      TableName: "groups"
 
 
 #-----------------------------------------------------
