@@ -39,7 +39,7 @@ public class GetPlayerActivityTest {
         Player player = new Player();
         player.setPlayerId(playerId);
         player.setPlayerName(playerName);
-        player.setGroups(groupIds);
+        player.setGroupIds(groupIds);
 
         when(playerDao.getPlayer(playerId)).thenReturn(player);
 

@@ -22,7 +22,7 @@ public class ModelConverterTest {
         Player player = new Player();
         player.setPlayerId(playerId);
         player.setPlayerName(playerName);
-        player.setGroups(groupIds);
+        player.setGroupIds(groupIds);
 
         //WHEN
         PlayerModel playerModel = modelConverter.toPlayerModel(player);
