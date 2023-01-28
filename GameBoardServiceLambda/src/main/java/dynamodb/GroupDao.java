@@ -42,4 +42,14 @@ public class GroupDao {
         metricsPublisher.addCount(MetricsConstants.GETGROUP_GROUPNOTFOUND_COUNT, 0);
         return group;
     }
+
+    /**
+     * Makes a DynamoDB call to save a group object.
+     * @param group the Group object to be saved to DynamoDB.
+     * @return the Group object is then returned.
+     */
+    public Group saveGroup(Group group) {
+        this.dynamoDBMapper.save(group);
+        return group;
+    }
 }
