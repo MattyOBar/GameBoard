@@ -1,6 +1,7 @@
 # GameBoard
 GameBoard - My NSS SWE capstone project
 
+curl http://127.0.0.1:300
 
 IGNORE THESE FOR NOW::
 CURRENT CURL COMMANDS USED FOR API TESTING:
@@ -12,5 +13,4 @@ GetGame:
 
 curl http://127.0.0.1:3000/games/gameId | jq
 
-GetGroup:
-curl http://127.0.0.1:3000/groups/testGroup | jq
+GetGroup:0/groups/testGroup | jq

@@ -29,7 +29,7 @@ public class GetGameActivity {
     }
 
     /**
-     * This method handles the incoming request by retrieving the game from the database
+     * This method handles the incoming request by retrieving the game from the database.
      * @param getGameRequest the request object containing the gameId.
      * @return getGameResult object containing the API defined GameModel.
      */
