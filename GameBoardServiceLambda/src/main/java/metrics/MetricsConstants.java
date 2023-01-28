@@ -11,4 +11,7 @@ public class MetricsConstants {
 
     public static final String GETGROUP_GROUPNOTFOUND_COUNT =
             "GetGroup.GroupNotFoundException.Count";
+
+    public static final String GETGAME_GAMENOTFOUND_COUNT =
+            "GetGame.GameNotFoundException.Count";
 }
