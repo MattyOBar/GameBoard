@@ -1,9 +1,6 @@
 package dependency;
 
-import activity.CreatePlayerActivity;
-import activity.GetGameActivity;
-import activity.GetGroupActivity;
-import activity.GetPlayerActivity;
+import activity.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -37,4 +34,10 @@ public interface ServiceComponent {
      * @return GetGameActivity
      */
     GetGameActivity provideGetGameActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateGameActivity
+     */
+    CreateGameActivity provideCreateGameActivity();
 }
