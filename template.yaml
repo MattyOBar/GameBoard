@@ -283,6 +283,25 @@ Resources:
             Path: /players
             Method: post
 
+  CreateGameLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GameBoardServiceLambda
+      Handler: lambda.CreateGameLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        GameBoardService:
+          Type: Api
+          Properties:
+            Path: /games
+            Method: post
+
   GetGroupLambda:
     Type: AWS::Serverless::Function
     Properties:

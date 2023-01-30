@@ -11,9 +11,9 @@ public class CreatePlayerLambda
     @Override
     public LambdaResponse handleRequest(LambdaRequest<CreatePlayerRequest> input, Context context) {
         return super.runActivity(
-                () -> input.fromBody(CreatePlayerRequest.class),
-                (request, serviceComponent) ->
-                        serviceComponent.provideCreatePlayerActivity().handleRequest(request)
+            () -> input.fromBody(CreatePlayerRequest.class),
+            (request, serviceComponent) ->
+                    serviceComponent.provideCreatePlayerActivity().handleRequest(request)
         );
     }
 }
