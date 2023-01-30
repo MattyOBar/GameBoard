@@ -1,12 +1,9 @@
 package activity;
 
 import activity.request.CreateGameRequest;
-import activity.request.CreatePlayerRequest;
 import activity.result.CreateGameResult;
-import activity.result.CreatePlayerResult;
 import dynamodb.GameDao;
 import dynamodb.models.Game;
-import dynamodb.models.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
