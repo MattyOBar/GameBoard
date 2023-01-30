@@ -9,19 +9,32 @@ import models.PlayerModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.inject.Inject;
 import java.util.Set;
 import java.util.UUID;
+import javax.inject.Inject;
+
+/**
+ * This API allows a user to create a new Player object.
+ */
 
 public class CreatePlayerActivity {
     private final Logger log = LogManager.getLogger();
     private final PlayerDao playerDao;
 
+    /**
+     * Instantiates a CreatePlayerActivity object.
+     * @param playerDao PlayerDao to access the Players table.
+     */
     @Inject
     public CreatePlayerActivity(PlayerDao playerDao) {
         this.playerDao = playerDao;
     }
 
+    /**
+     * This method handles the incoming request by building a new Player object and saving it to the PlayersDao.
+     * @param createPlayerRequest the request object containing the new Player data.
+     * @return CreatePlayerResult object containing the API defined PlayerModel.
+     */
     public CreatePlayerResult handleRequest(final CreatePlayerRequest createPlayerRequest) {
         log.info("Received CreatePlayerRequest {}", createPlayerRequest);
         String playerId = UUID.randomUUID().toString().substring(0, 5);
