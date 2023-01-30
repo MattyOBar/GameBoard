@@ -1,6 +1,12 @@
 package dependency;
 
-import activity.*;
+import activity.CreateGameActivity;
+import activity.CreateGroupActivity;
+import activity.CreatePlayerActivity;
+import activity.GetGameActivity;
+import activity.GetGroupActivity;
+import activity.GetPlayerActivity;
+
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -11,6 +17,13 @@ import javax.inject.Singleton;
 @Singleton
 @Component(modules = {DaoModule.class, MetricsModule.class})
 public interface ServiceComponent {
+
+    /**
+     * Provides the relevant activity.
+     * @return CreatePlayerActivity
+     */
+    CreatePlayerActivity provideCreatePlayerActivity();
+
     /**
      * Provides the relevant activity.
      * @return GetPlayerActivity
@@ -19,15 +32,14 @@ public interface ServiceComponent {
 
     /**
      * Provides the relevant activity.
+     * @return CreateGroupActivity
+     */
+    CreateGroupActivity provideCreateGroupActivity();
+    /**
+     * Provides the relevant activity.
      * @return GetGroupActivity
      */
     GetGroupActivity provideGetGroupActivity();
-
-    /**
-     * Provides the relevant activity.
-     * @return CreatePlayerActivity
-     */
-    CreatePlayerActivity provideCreatePlayerActivity();
 
     /**
      * Provides the relevant activity.
