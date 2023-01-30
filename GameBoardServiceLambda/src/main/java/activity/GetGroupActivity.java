@@ -31,7 +31,7 @@ public class GetGroupActivity {
     }
 
     /**
-     * his method handles the incoming request by retrieving the group from the database.
+     * This method handles the incoming request by retrieving the group from the database.
      * @param getGroupRequest the request object containing the groupId.
      * @return getGroupResult object containing the API defined GroupModel.
      */

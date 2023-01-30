@@ -23,5 +23,17 @@
         }
       }
     }
+  ],
+  "games" : [
+    {
+      "PutRequest": {
+        "Item": {
+          "gameId": {"S": "gameId"},
+          "gameName": {"S":  "Chess"},
+          "rulesLink": {"S":  "www.chess.com"},
+          "purchaseLink": {"S": "www.amazon.com"}
+        }
+      }
+    }
   ]
 }

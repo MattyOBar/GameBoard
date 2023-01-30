@@ -50,9 +50,11 @@ public class PlayerDao {
     /**
      * Makes a DynamoDB call to save the given player.
      * @param player the player used to specify the player to be saved.
+     * @return the Player object is then returned.
      */
-    public void savePlayer(Player player) {
+    public Player savePlayer(Player player) {
         this.dynamoDBMapper.save(player);
+        return player;
     }
 
 }
