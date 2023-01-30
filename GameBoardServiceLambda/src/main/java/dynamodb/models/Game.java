@@ -4,8 +4,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
-import java.util.Objects;
-
 @DynamoDBTable(tableName = "games")
 public class Game {
     private String gameId;
@@ -47,27 +45,6 @@ public class Game {
 
     public void setPurchaseLink(String purchaseLink) {
         this.purchaseLink = purchaseLink;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Game game = (Game) o;
-        return Objects.equals(getGameId(), game.getGameId()) &&
-                Objects.equals(getGameName(), game.getGameName()) &&
-                Objects.equals(getRulesLink(), game.getRulesLink()) &&
-                Objects.equals(getPurchaseLink(), game.getPurchaseLink());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getGameId(), getGameName(),
-                getRulesLink(), getPurchaseLink());
     }
 
     @Override
