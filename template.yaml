@@ -245,11 +245,11 @@ Resources:
   # Lambda Functions Configuration
   #-----------------------------------------------------
 #
-  GetPlayerLambda:
+  CreateGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: GameBoardServiceLambda
-      Handler: lambda.GetPlayerLambda::handleRequest
+      Handler: lambda.CreateGroupLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -261,8 +261,9 @@ Resources:
         GameBoardService:
           Type: Api
           Properties:
-            Path: /players/{playerId}
-            Method: get
+            Path: /groups
+            Method: post
+
 
   CreatePlayerLambda:
     Type: AWS::Serverless::Function
@@ -302,6 +303,25 @@ Resources:
             Path: /games
             Method: post
 
+  GetPlayerLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GameBoardServiceLambda
+      Handler: lambda.GetPlayerLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        GameBoardService:
+          Type: Api
+          Properties:
+            Path: /players/{playerId}
+            Method: get
+
   GetGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
@@ -339,6 +359,7 @@ Resources:
           Properties:
             Path: /games/{gameId}
             Method: get
+
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
