@@ -1,6 +1,5 @@
 package exceptions;
 
-import dynamodb.models.GameOutcome;
 
 public class GameOutcomeNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 6810218611332192949L;

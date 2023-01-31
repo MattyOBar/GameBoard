@@ -20,7 +20,6 @@ public class GetGameRequest {
 
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
-
         return new Builder();
     }
     public static class Builder {

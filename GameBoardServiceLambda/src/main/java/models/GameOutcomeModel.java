@@ -10,7 +10,8 @@ public class GameOutcomeModel {
     private final String playerWinId;
     private final Set<String> playerLoseIds;
 
-    private GameOutcomeModel(String gameOutcomeId, String groupId, String gameId, String playerWinId, Set<String> playerLoseIds) {
+    private GameOutcomeModel(String gameOutcomeId, String groupId, String gameId,
+                             String playerWinId, Set<String> playerLoseIds) {
         this.gameOutcomeId = gameOutcomeId;
         this.groupId = groupId;
         this.gameId = gameId;

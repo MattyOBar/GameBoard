@@ -27,7 +27,7 @@ public class GameOutcomeDao {
     }
 
     /**
-     * Makes a DynamoDb call to retrieve the specified GameOutcome
+     * Makes a DynamoDb call to retrieve the specified GameOutcome.
      * @param gameOutcomeId the parameter that indicates the specified GameOutcome.
      * @return the GameOutcome object retrieved from DynamoDb.
      */

@@ -4,13 +4,12 @@ import activity.request.CreateGroupRequest;
 import activity.result.CreateGroupResult;
 import dynamodb.GroupDao;
 import dynamodb.models.Group;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import java.util.Set;
-import java.util.UUID;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -54,13 +53,11 @@ public class CreateGroupActivityTest {
 
         //THEN
         verify(groupDao).saveGroup(any(Group.class));
-
         assertNotNull(result.getGroupModel().getGroupId());
         assertEquals(groupName, result.getGroupModel().getGroupName());
         assertEquals(favoriteGameId, result.getGroupModel().getFavoriteGameId());
         assertEquals(gameIds, result.getGroupModel().getGameIds());
         assertEquals(gameOutcomeIds, result.getGroupModel().getGameOutcomeIds());
         assertEquals(playerIds, result.getGroupModel().getPlayerIds());
-
     }
 }
