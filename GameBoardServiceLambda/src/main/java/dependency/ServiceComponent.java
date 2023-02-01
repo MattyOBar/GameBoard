@@ -1,11 +1,6 @@
 package dependency;
 
-import activity.CreateGameActivity;
-import activity.CreateGroupActivity;
-import activity.CreatePlayerActivity;
-import activity.GetGameActivity;
-import activity.GetGroupActivity;
-import activity.GetPlayerActivity;
+import activity.*;
 
 import dagger.Component;
 
@@ -52,4 +47,17 @@ public interface ServiceComponent {
      * @return CreateGameActivity
      */
     CreateGameActivity provideCreateGameActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateGameOutcomeActivity
+     */
+    CreateGameOutcomeActivity provideCreateGameOutcomeActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return GetGameOutcomeActivity
+     */
+    GetGameOutcomeActivity provideGetGameOutcomeActivity();
+
 }

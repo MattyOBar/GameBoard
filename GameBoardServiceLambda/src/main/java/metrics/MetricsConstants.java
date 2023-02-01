@@ -14,4 +14,6 @@ public class MetricsConstants {
 
     public static final String GETGAME_GAMENOTFOUND_COUNT =
             "GetGame.GameNotFoundException.Count";
+    public static final String GETGAMEOUTCOME_GAMEOUTCOMENOTFOUND_COUNT =
+            "GetGameOutcome.GameOutcomeNotFoundException.Count";
 }

@@ -46,7 +46,7 @@ public class GameDao {
     /**
      * Makes a DynamoDB call to save a game object.
      * @param game the Game object to be saved to DynamoDB.
-     * @return the Game object is then returned.fffffffffffffffffffffffff
+     * @return the Game object is then returned.
      */
     public Game saveGame(Game game) {
         this.dynamoDBMapper.save(game);

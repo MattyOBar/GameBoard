@@ -1,9 +1,11 @@
 package converters;
 
 import dynamodb.models.Game;
+import dynamodb.models.GameOutcome;
 import dynamodb.models.Group;
 import dynamodb.models.Player;
 import models.GameModel;
+import models.GameOutcomeModel;
 import models.GroupModel;
 import models.PlayerModel;
 
@@ -42,6 +44,7 @@ public class ModelConverter {
 
 
     }
+
     /**
      * Converts a provided {@link Game} into a {@link GameModel} representation.
      * @param game the game to convert
@@ -56,5 +59,20 @@ public class ModelConverter {
                 .build();
 
 
+    }
+
+    /**
+     * Converts a provided {@link GameOutcome} into a {@link GameOutcomeModel} representation.
+     * @param gameOutcome the gameOutcome to convert
+     * @return the converted GameOutcomeModel
+     */
+    public GameOutcomeModel toGameOutcomeModel(GameOutcome gameOutcome) {
+        return GameOutcomeModel.builder()
+                .withGameOutcomeId(gameOutcome.getGameOutcomeId())
+                .withGroupID(gameOutcome.getGroupId())
+                .withGameId(gameOutcome.getGameId())
+                .withPlayerWinId(gameOutcome.getPlayerWinId())
+                .withPlayerLoseIds(gameOutcome.getPlayerLoseIds())
+                .build();
     }
 }
