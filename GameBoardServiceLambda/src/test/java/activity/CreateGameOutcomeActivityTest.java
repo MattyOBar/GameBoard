@@ -48,8 +48,7 @@ public class CreateGameOutcomeActivityTest {
 
         //THEN
         verify(gameOutcomeDao).saveGameOutcome(any(GameOutcome.class));
-        System.out.println("GameOutcomeID = " + result.getGameOutcomeModel().getGameOutcomeId());
-//        assertNotNull(result.getGameOutcomeModel().getGameOutcomeId());
+        assertNotNull(result.getGameOutcomeModel().getGameOutcomeId());
         assertEquals(gameId, result.getGameOutcomeModel().getGameId());
         assertEquals(groupId, result.getGameOutcomeModel().getGroupId());
         assertEquals(playerWinId, result.getGameOutcomeModel().getPlayerWinId());
