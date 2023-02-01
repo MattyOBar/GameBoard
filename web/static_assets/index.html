@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="javascript" src="src/api/authenticator.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="background">
+<header class="header" id="header">header</header>
+<div class="card">
+    <h2>Welcome *Player Name*</h2>
+    <div class="select-group-dropdown">
+        <label for="select-group-dropdown">Select A Group</label>
+        <select name="select-group-dropdown" id="select-group-dropdown">
+
+
+        </select>
+
+    </div>
+    <form class="card-content" id="search-playlists-form">
+        <p class="form-field">
+            <label>Search by name or tag</label>
+            <input type="text" class="validated-field" id="search-criteria" placeholder="smooth-jamz" autofocus>
+            <sub>Search is case-sensitive and tags must match exactly.</sub>
+        </p>
+    </form>
+    <p class="button-group">
+        <a href="#" class="button" id="search-btn">View Groups</a>
+        <a href="createPlaylist.html" class="button">New Playlist</a>
+    </p>
+</div>
+<div class="card hidden" id='search-results-container'>
+    <h3>Results for <span id="search-criteria-display"></span></h3>
+    <div id="search-results-display">
+    </div>
+</div>
+</body>
+
+</html>

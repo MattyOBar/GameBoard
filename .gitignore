@@ -20,3 +20,4 @@
 build
 logs
 node_modules
+/GameBoardServiceLambda/bin/
