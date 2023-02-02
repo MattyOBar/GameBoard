@@ -15,7 +15,7 @@ export default class GameBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -49,6 +49,15 @@ export default class GameBoardClient extends BindingClass {
             }
 
             return await this.authenticator.getCurrentUserInfo();
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getPlayer(id, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`players/${playerId}`)
+            return response.data.player;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
