@@ -60,4 +60,6 @@ public interface ServiceComponent {
      */
     GetGameOutcomeActivity provideGetGameOutcomeActivity();
 
+    GetGroupsByPlayerActivity provideGetGroupsByPlayerActivity();
+
 }

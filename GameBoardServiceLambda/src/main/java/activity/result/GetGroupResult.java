@@ -1,7 +1,7 @@
 package activity.result;
 
 import models.GroupModel;
-import org.apache.commons.lang3.builder.Builder;
+
 
 public class GetGroupResult {
 
