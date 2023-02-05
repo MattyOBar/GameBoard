@@ -4,18 +4,16 @@ import activity.request.GetGroupsByPlayerRequest;
 import activity.result.GetGroupsByPlayerResult;
 import converters.ModelConverter;
 import dynamodb.GroupDao;
-import dynamodb.PlayerDao;
 import dynamodb.models.Group;
-import dynamodb.models.Player;
 import models.GroupModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.inject.Inject;
 
 public class GetGroupsByPlayerActivity {
     private final Logger log = LogManager.getLogger();
@@ -33,7 +31,6 @@ public class GetGroupsByPlayerActivity {
         List<GroupModel> playerIsIn = new ArrayList<>();
         for (Group group : groupList) {
             Set<String> playerIds = group.getPlayerIds();
-            log.info("group : {}", group);
             if (playerIds.contains(playerId)) {
                 GroupModel groupModel = new ModelConverter().toGroupModel(group);
                 playerIsIn.add(groupModel);

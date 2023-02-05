@@ -12,12 +12,12 @@ public class GetGroupByPlayerLambda
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetGroupsByPlayerRequest> input, Context context) {
         return super.runActivity(
-                () -> input.fromPath(path ->
-                        GetGroupsByPlayerRequest.builder()
-                                .withPlayerID(path.get("playerId"))
-                                .build()),
-                (request, serviceComponent) ->
-                        serviceComponent.provideGetGroupsByPlayerActivity().handleRequest(request)
+            () -> input.fromPath(path ->
+                    GetGroupsByPlayerRequest.builder()
+                            .withPlayerID(path.get("playerIds"))
+                            .build()),
+            (request, serviceComponent) ->
+                    serviceComponent.provideGetGroupsByPlayerActivity().handleRequest(request)
         );
 
     }

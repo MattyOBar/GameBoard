@@ -6,10 +6,10 @@ import dynamodb.models.Group;
 import exceptions.GroupNotFoundException;
 import metrics.MetricsConstants;
 import metrics.MetricsPublisher;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.List;
 
 /**
  * Access data for our group objects.
@@ -55,7 +55,11 @@ public class GroupDao {
         return group;
     }
 
+    /**
+     * Makes a DynamoDB call to get all of the Groups in the groups table and return them.
+     * @return
+     */
     public List<Group> getGroupsByPlayer() {
-     return this.dynamoDBMapper.scan(Group.class, new DynamoDBScanExpression());
+        return this.dynamoDBMapper.scan(Group.class, new DynamoDBScanExpression());
     }
 }
