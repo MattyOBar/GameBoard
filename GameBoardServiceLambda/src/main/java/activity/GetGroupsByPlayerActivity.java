@@ -15,15 +15,29 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+/**
+ * This API allows the user to retrieve a set of all the groups a player belongs to.
+ */
+
+
 public class GetGroupsByPlayerActivity {
     private final Logger log = LogManager.getLogger();
     private GroupDao groupDao;
 
+    /**
+     * Instantiates a GetGroupsByPlayerActivity object.
+     * @param groupDao GroupDao to access the groups table.
+     */
     @Inject
     public GetGroupsByPlayerActivity(GroupDao groupDao) {
         this.groupDao = groupDao;
     }
 
+    /**
+     * This method handles the request by returning the Groups that contain the playerId.
+     * @param getGroupsByPlayerRequest the request object containing the playerId.
+     * @return the group objects that contain the playerId.
+     */
     public GetGroupsByPlayerResult handleRequest(final GetGroupsByPlayerRequest getGroupsByPlayerRequest) {
         log.info("Received GetGroupsByPlayerActivity {}", getGroupsByPlayerRequest);
         String playerId = getGroupsByPlayerRequest.getPlayerId();
