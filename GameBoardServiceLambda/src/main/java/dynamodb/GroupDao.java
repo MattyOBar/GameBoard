@@ -1,10 +1,12 @@
 package dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import dynamodb.models.Group;
 import exceptions.GroupNotFoundException;
 import metrics.MetricsConstants;
 import metrics.MetricsPublisher;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -51,5 +53,13 @@ public class GroupDao {
     public Group saveGroup(Group group) {
         this.dynamoDBMapper.save(group);
         return group;
+    }
+
+    /**
+     * Makes a DynamoDB call to get all of the Groups in the groups table and return them.
+     * @return
+     */
+    public List<Group> getGroupsByPlayer() {
+        return this.dynamoDBMapper.scan(Group.class, new DynamoDBScanExpression());
     }
 }

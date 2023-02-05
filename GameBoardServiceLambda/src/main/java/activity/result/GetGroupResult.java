@@ -2,6 +2,7 @@ package activity.result;
 
 import models.GroupModel;
 
+
 public class GetGroupResult {
 
     private final GroupModel groupModel;
