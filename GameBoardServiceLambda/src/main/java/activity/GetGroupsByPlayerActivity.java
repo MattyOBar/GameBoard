@@ -33,6 +33,7 @@ public class GetGroupsByPlayerActivity {
         List<GroupModel> playerIsIn = new ArrayList<>();
         for (Group group : groupList) {
             Set<String> playerIds = group.getPlayerIds();
+            log.info("group : {}", group);
             if (playerIds.contains(playerId)) {
                 GroupModel groupModel = new ModelConverter().toGroupModel(group);
                 playerIsIn.add(groupModel);

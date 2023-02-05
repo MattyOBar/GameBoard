@@ -6,14 +6,18 @@
           "playerId": {"S":  "P00025"},
           "playerName": {"S": "Olivia A"},
           "groupIds": {"SS": ["GR00001"]}
-        },
+        }
+      }
+    },
+    {
+        "PutRequest": {
         "Item": {
           "playerId": {"S":  "P00027"},
           "playerName": {"S": "Matt O"},
           "groupIds": {"SS": ["GR00001", "GR00002"]}
+          }
         }
       }
-    }
   ],
   "groups" : [
     {
@@ -26,8 +30,9 @@
           "gameOutcomeIds": {"SS": ["00001", "00002", "00003"]},
           "playerIds": {"SS": ["OA025", "MO027"]}
         }
-      },
-
+      }
+    },
+    {
       "PutRequest": {
         "Item": {
           "groupId": {"S": "GR00002"},
@@ -49,7 +54,9 @@
           "rulesLink": {"S":  "www.chess.com"},
           "purchaseLink": {"S": "www.amazon.com"}
         }
-      },
+      }
+    },
+    {
       "PutRequest": {
         "Item": {
           "gameId": {"S": "GM00002"},
