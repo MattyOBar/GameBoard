@@ -5,6 +5,7 @@ import activity.result.GetPlayerResult;
 import converters.ModelConverter;
 import dynamodb.PlayerDao;
 import dynamodb.models.Player;
+import exceptions.PlayerInvalidException;
 import models.PlayerModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,6 +37,10 @@ public class GetPlayerActivity {
     public GetPlayerResult handleRequest(final GetPlayerRequest getPlayerRequest) {
         log.info("Received GetPlayerRequest {}", getPlayerRequest);
         String playerId = getPlayerRequest.getPlayerId();
+        if (playerId == null || !playerId.startsWith("P") ||
+                playerId.length() != 6) {
+            throw new PlayerInvalidException("PlayerId: " + playerId + " is invalid.");
+        }
         Player player = playerDao.getPlayer(playerId);
         PlayerModel playerModel = new ModelConverter().toPlayerModel(player);
         return GetPlayerResult.builder()

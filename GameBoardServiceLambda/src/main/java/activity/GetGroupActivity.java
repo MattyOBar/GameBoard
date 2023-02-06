@@ -5,6 +5,7 @@ import activity.result.GetGroupResult;
 import converters.ModelConverter;
 import dynamodb.GroupDao;
 import dynamodb.models.Group;
+import exceptions.GroupInvalidException;
 import models.GroupModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +39,10 @@ public class GetGroupActivity {
     public GetGroupResult handleRequest(final GetGroupRequest getGroupRequest) {
         log.info("Received GetGroupRequest {}", getGroupRequest);
         String groupId = getGroupRequest.getGroupId();
+        if (groupId == null || !groupId.startsWith("GRP") ||
+                groupId.length() != 8){
+            throw new GroupInvalidException("GroupId: " + groupId + " is invalid.");
+        }
         Group group = groupDao.getGroup(groupId);
         GroupModel groupModel = new ModelConverter().toGroupModel(group);
         return GetGroupResult.builder()
