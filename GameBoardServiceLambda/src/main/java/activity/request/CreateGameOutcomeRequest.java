@@ -12,6 +12,14 @@ public class CreateGameOutcomeRequest {
     private final String playerWinId;
     private final Set<String> playerLoseIds;
 
+    /**
+     * Instantiates the request for creating a GameOutcome.
+     * @param gameOutcomeId The unique GameOutcomeId.
+     * @param groupId The groupId.
+     * @param gameId GameId.
+     * @param playerWinId playerWinId.
+     * @param playerLoseIds playerLoseId set.
+     */
     public CreateGameOutcomeRequest(String gameOutcomeId, String groupId, String gameId,
                                     String playerWinId, Set<String> playerLoseIds) {
         this.gameOutcomeId = gameOutcomeId;

@@ -42,8 +42,7 @@ public class GetGroupsByPlayerActivity {
     public GetGroupsByPlayerResult handleRequest(final GetGroupsByPlayerRequest getGroupsByPlayerRequest) {
         log.info("Received GetGroupsByPlayerActivity {}", getGroupsByPlayerRequest);
         String playerId = getGroupsByPlayerRequest.getPlayerId();
-        if (playerId == null || !playerId.startsWith("P") ||
-        playerId.length() != 7) {
+        if (playerId == null || !playerId.startsWith("P") || playerId.length() != 6) {
             throw new PlayerInvalidException("PlayerId: " + playerId + " is invalid.");
         }
         List<Group> groupList = groupDao.getGroupsByPlayer();

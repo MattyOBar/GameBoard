@@ -37,8 +37,7 @@ public class GetGameActivity {
     public GetGameResult handleRequest(final GetGameRequest getGameRequest) {
         log.info("Received GetGameRequest {}", getGameRequest);
         String gameId = getGameRequest.getGameId();
-        if (gameId == null || !gameId.startsWith("GM") ||
-        gameId.length() != 7) {
+        if (gameId == null || !gameId.startsWith("GM") || gameId.length() != 7) {
             throw new GameInvalidException("GameId: " + gameId + " is invalid.");
         }
         Game game = gameDao.getGame(gameId);

@@ -31,9 +31,9 @@ public class GetPlayerActivityTest {
     @Test
     public void handleRequest_savedPlayerFound_ReturnsPlayerModelInResult() {
         //GIVEN
-        String playerId = "testId";
+        String playerId = "P00001";
         String playerName = "testName";
-        Set<String> groupIds = Set.of("groupId1", "groupId2");
+        Set<String> groupIds = Set.of("GRP02373", "GRP03645");
 
         Player player = new Player();
         player.setPlayerId(playerId);

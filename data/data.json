@@ -5,7 +5,7 @@
         "Item": {
           "playerId": {"S":  "P00025"},
           "playerName": {"S": "Olivia A"},
-          "groupIds": {"SS": ["GR00001"]}
+          "groupIds": {"SS": ["GRP00001"]}
         }
       }
     },
@@ -14,7 +14,7 @@
         "Item": {
           "playerId": {"S":  "P00027"},
           "playerName": {"S": "Matt O"},
-          "groupIds": {"SS": ["GR00001", "GR00002"]}
+          "groupIds": {"SS": ["GRP00001", "GRP00002"]}
           }
         }
       }
@@ -23,24 +23,24 @@
     {
       "PutRequest": {
         "Item": {
-          "groupId": {"S": "GR00001"},
+          "groupId": {"S": "GRP00001"},
           "groupName": {"S":  "Our House"},
           "favoriteGameId": {"S":  "Monopoly"},
           "gameIds": {"SS": ["GM00001", "GM00002", "GM00003"]},
-          "gameOutcomeIds": {"SS": ["00001", "00002", "00003"]},
-          "playerIds": {"SS": ["OA025", "MO027"]}
+          "gameOutcomeIds": {"SS": ["GO00001", "GO00002", "GO00003"]},
+          "playerIds": {"SS": ["P00025", "P00027"]}
         }
       }
     },
     {
       "PutRequest": {
         "Item": {
-          "groupId": {"S": "GR00002"},
+          "groupId": {"S": "GRP00002"},
           "groupName": {"S":  "NSS Chess Club"},
           "favoriteGameId": {"S":  "Monopoly"},
           "gameIds": {"SS": ["GM00001"]},
-          "gameOutcomeIds": {"SS": ["00001", "00002", "00003"]},
-          "playerIds": {"SS": ["MO027"]}
+          "gameOutcomeIds": {"SS": ["GO00001", "GO00002", "GO00003"]},
+          "playerIds": {"SS": ["P00027"]}
         }
       }
     }
@@ -73,6 +73,19 @@
           "gameName": {"S":  "Settlers of Catan"},
           "rulesLink": {"S":  "www.SoC.com"},
           "purchaseLink": {"S": "www.amazon.com"}
+        }
+      }
+    }
+  ],
+  "gameOutcomes" : [
+    {
+      "PutRequest": {
+        "Item": {
+          "gameOutcomeId": {"S": "GO00001"},
+          "groupId": {"S": "GRP00002"},
+          "gameId": {"S": "GM00003"},
+          "playerWinId": {"S": "P00025"},
+          "playerLoseIds": {"SS": ["P00027"]}
         }
       }
     }

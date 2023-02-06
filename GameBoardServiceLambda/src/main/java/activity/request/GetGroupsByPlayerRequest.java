@@ -3,6 +3,10 @@ package activity.request;
 public class GetGroupsByPlayerRequest {
     private final String playerId;
 
+    /**
+     * Request object containing the PlayerId.
+     * @param playerId the playerId.
+     */
     public GetGroupsByPlayerRequest(String playerId) {
         this.playerId = playerId;
     }

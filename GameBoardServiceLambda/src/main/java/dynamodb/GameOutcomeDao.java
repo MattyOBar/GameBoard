@@ -1,12 +1,17 @@
 package dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import dynamodb.models.GameOutcome;
 import exceptions.GameOutcomeNotFoundException;
 import metrics.MetricsConstants;
 import metrics.MetricsPublisher;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
 
 /**
  * Access data for our game objects.
@@ -49,6 +54,22 @@ public class GameOutcomeDao {
     public GameOutcome saveGameOutcome(GameOutcome gameOutcome) {
         this.dynamoDBMapper.save(gameOutcome);
         return gameOutcome;
+    }
+
+    /**
+     * This method retrieves a List of GameOutcomes for a specific group.
+     * @param groupId the GroupId needed for the lookup.
+     * @return the List of GameOutcomes specific to the groupId.
+     */
+    public List<GameOutcome> getGameOutcomesByGroupId(String groupId) {
+        GameOutcome gameOutcome = new GameOutcome();
+        gameOutcome.setGroupId(groupId);
+
+        DynamoDBQueryExpression<GameOutcome> queryExpression = new DynamoDBQueryExpression<GameOutcome>()
+                .withHashKeyValues(gameOutcome);
+        queryExpression.withConsistentRead(false);
+        PaginatedQueryList<GameOutcome> gameOutcomeList = dynamoDBMapper.query(GameOutcome.class, queryExpression);
+        return gameOutcomeList;
     }
 
 }

@@ -3,11 +3,14 @@ package activity.result;
 import models.GroupModel;
 
 import java.util.List;
-import java.util.Set;
 
 public class GetGroupsByPlayerResult {
     public final List<GroupModel> groupModelList;
 
+    /**
+     * Result object containing the List of Groups that a Player belongs to.
+     * @param groupModelList List of all the GroupModels that the player belongs to.
+     */
     public GetGroupsByPlayerResult(List<GroupModel> groupModelList) {
         this.groupModelList = groupModelList;
     }
