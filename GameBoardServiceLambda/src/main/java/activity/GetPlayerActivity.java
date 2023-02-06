@@ -36,6 +36,7 @@ public class GetPlayerActivity {
     public GetPlayerResult handleRequest(final GetPlayerRequest getPlayerRequest) {
         log.info("Received GetPlayerRequest {}", getPlayerRequest);
         String playerId = getPlayerRequest.getPlayerId();
+
         Player player = playerDao.getPlayer(playerId);
         PlayerModel playerModel = new ModelConverter().toPlayerModel(player);
         return GetPlayerResult.builder()

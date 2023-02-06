@@ -36,7 +36,7 @@ public class CreateGroupActivity {
      */
     public CreateGroupResult handleRequest(final CreateGroupRequest createGroupRequest) {
         log.info("Received CreateGroupRequest {}", createGroupRequest);
-        String groupId = UUID.randomUUID().toString().substring(0, 5);
+        String groupId = "GRP".concat(UUID.randomUUID().toString().substring(0, 5));
         String groupName = createGroupRequest.getGroupName();
         String favoriteGameId = createGroupRequest.getFavoriteGameId();
         Set<String> gameIds = createGroupRequest.getGameIds();

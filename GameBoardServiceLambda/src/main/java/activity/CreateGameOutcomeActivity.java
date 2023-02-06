@@ -39,7 +39,7 @@ public class CreateGameOutcomeActivity {
     public CreateGameOutcomeResult handleRequest(final CreateGameOutcomeRequest createGameOutcomeRequest) {
         log.info("Received CreateGameOutcomeRequest {}", createGameOutcomeRequest);
 
-        String gameOutcomeId = UUID.randomUUID().toString().substring(0, 5);
+        String gameOutcomeId = "GO".concat(UUID.randomUUID().toString().substring(0, 5));
         String groupId = createGameOutcomeRequest.getGroupId();
         String gameId = createGameOutcomeRequest.getGameId();
         String playerWinId = createGameOutcomeRequest.getPlayerWinId();

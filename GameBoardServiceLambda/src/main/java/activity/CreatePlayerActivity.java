@@ -37,7 +37,7 @@ public class CreatePlayerActivity {
      */
     public CreatePlayerResult handleRequest(final CreatePlayerRequest createPlayerRequest) {
         log.info("Received CreatePlayerRequest {}", createPlayerRequest);
-        String playerId = UUID.randomUUID().toString().substring(0, 5);
+        String playerId = "P".concat(UUID.randomUUID().toString().substring(0, 5));
         String playerName = createPlayerRequest.getPlayerName();
         Set<String> groupIds = createPlayerRequest.getGroupIds();
 
