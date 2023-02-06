@@ -1,14 +1,13 @@
 package dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.Objects;
 import java.util.Set;
 
 @DynamoDBTable(tableName = "gameOutcomes")
 public class GameOutcome {
+    public static final String GROUPANDGAME_INDEX = "GroupIdAndGameIdIndex";
     private String gameOutcomeId;
     private String groupId;
     private String gameId;
@@ -21,11 +20,13 @@ public class GameOutcome {
     }
 
     @DynamoDBAttribute(attributeName = "groupId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexNames = {GROUPANDGAME_INDEX})
     public String getGroupId() {
         return groupId;
     }
 
     @DynamoDBAttribute(attributeName = "gameId")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {GROUPANDGAME_INDEX})
     public String getGameId() {
         return gameId;
     }

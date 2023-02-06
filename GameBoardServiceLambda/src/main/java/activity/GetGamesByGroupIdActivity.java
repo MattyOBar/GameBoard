@@ -7,7 +7,6 @@ import dynamodb.GameDao;
 import dynamodb.GroupDao;
 import dynamodb.models.Game;
 import dynamodb.models.Group;
-import exceptions.GameOutcomeInvalidException;
 import exceptions.GroupInvalidException;
 import models.GameModel;
 import org.apache.logging.log4j.LogManager;

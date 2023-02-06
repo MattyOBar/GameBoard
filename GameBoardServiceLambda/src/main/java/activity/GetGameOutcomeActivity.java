@@ -34,10 +34,9 @@ public class GetGameOutcomeActivity {
      * @return getGameOutcomeResult object containing the API defined GameOutcomeModel.
      */
     public GetGameOutcomeResult handleRequest(final GetGameOutcomeRequest getGameOutcomeRequest) {
-        log.info("Recieved GetGameOutcomeResult {}", getGameOutcomeRequest);
+        log.info("Received GetGameOutcomeRequest {}", getGameOutcomeRequest);
         String gameOutcomeId = getGameOutcomeRequest.getGameOutcomeId();
-        if (gameOutcomeId == null || !gameOutcomeId.startsWith("GO") ||
-        gameOutcomeId.length() != 7) {
+        if (gameOutcomeId == null || !gameOutcomeId.startsWith("GO") || gameOutcomeId.length() != 7) {
             throw new GameOutcomeInvalidException("GameOutcomeId: " + gameOutcomeId + " is invalid.");
         }
         GameOutcome gameOutcome = gameOutcomeDao.getGameOutcome(gameOutcomeId);
