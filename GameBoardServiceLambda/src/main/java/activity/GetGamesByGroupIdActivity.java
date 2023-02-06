@@ -7,6 +7,8 @@ import dynamodb.GameDao;
 import dynamodb.GroupDao;
 import dynamodb.models.Game;
 import dynamodb.models.Group;
+import exceptions.GameOutcomeInvalidException;
+import exceptions.GroupInvalidException;
 import models.GameModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,6 +49,10 @@ public class GetGamesByGroupIdActivity {
     public GetGamesByGroupIdResult handleRequest(final GetGamesByGroupIdRequest getGamesByGroupIdRequest) {
         log.info("Received GetGamesByGroupIdRequest {}", getGamesByGroupIdRequest);
         String groupId = getGamesByGroupIdRequest.getGroupId();
+        if (groupId == null || !groupId.startsWith("GRP") ||
+        groupId.length() != 8) {
+            throw new GroupInvalidException("GroupId: " + groupId + " is invalid.");
+        }
         Group group = groupDao.getGroup(groupId);
         Set<String> gameIds = group.getGameIds();
         Set<GameModel> gameSet = new HashSet<>();

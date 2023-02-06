@@ -5,6 +5,7 @@ import activity.result.GetGroupsByPlayerResult;
 import converters.ModelConverter;
 import dynamodb.GroupDao;
 import dynamodb.models.Group;
+import exceptions.PlayerInvalidException;
 import models.GroupModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,6 +42,10 @@ public class GetGroupsByPlayerActivity {
     public GetGroupsByPlayerResult handleRequest(final GetGroupsByPlayerRequest getGroupsByPlayerRequest) {
         log.info("Received GetGroupsByPlayerActivity {}", getGroupsByPlayerRequest);
         String playerId = getGroupsByPlayerRequest.getPlayerId();
+        if (playerId == null || !playerId.startsWith("P") ||
+        playerId.length() != 7) {
+            throw new PlayerInvalidException("PlayerId: " + playerId + " is invalid.");
+        }
         List<Group> groupList = groupDao.getGroupsByPlayer();
         List<GroupModel> playerIsIn = new ArrayList<>();
         for (Group group : groupList) {

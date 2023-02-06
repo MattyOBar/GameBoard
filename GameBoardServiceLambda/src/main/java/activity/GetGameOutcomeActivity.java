@@ -5,6 +5,7 @@ import activity.result.GetGameOutcomeResult;
 import converters.ModelConverter;
 import dynamodb.GameOutcomeDao;
 import dynamodb.models.GameOutcome;
+import exceptions.GameOutcomeInvalidException;
 import models.GameOutcomeModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +36,10 @@ public class GetGameOutcomeActivity {
     public GetGameOutcomeResult handleRequest(final GetGameOutcomeRequest getGameOutcomeRequest) {
         log.info("Recieved GetGameOutcomeResult {}", getGameOutcomeRequest);
         String gameOutcomeId = getGameOutcomeRequest.getGameOutcomeId();
+        if (gameOutcomeId == null || !gameOutcomeId.startsWith("GO") ||
+        gameOutcomeId.length() != 7) {
+            throw new GameOutcomeInvalidException("GameOutcomeId: " + gameOutcomeId + " is invalid.");
+        }
         GameOutcome gameOutcome = gameOutcomeDao.getGameOutcome(gameOutcomeId);
         GameOutcomeModel gameOutcomeModel = new ModelConverter().toGameOutcomeModel(gameOutcome);
         return GetGameOutcomeResult.builder()

@@ -5,6 +5,7 @@ import activity.result.GetGameResult;
 import converters.ModelConverter;
 import dynamodb.GameDao;
 import dynamodb.models.Game;
+import exceptions.GameInvalidException;
 import models.GameModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,6 +37,10 @@ public class GetGameActivity {
     public GetGameResult handleRequest(final GetGameRequest getGameRequest) {
         log.info("Received GetGameRequest {}", getGameRequest);
         String gameId = getGameRequest.getGameId();
+        if (gameId == null || !gameId.startsWith("GM") ||
+        gameId.length() != 7) {
+            throw new GameInvalidException("GameId: " + gameId + " is invalid.");
+        }
         Game game = gameDao.getGame(gameId);
         GameModel gameModel = new ModelConverter().toGameModel(game);
         return GetGameResult.builder()
