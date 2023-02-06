@@ -32,11 +32,11 @@ public class GetGameOutcomeActivityTest {
     @Test
     public void handleRequest_SavedGameOutcomeFound_ReturnsGameOutcomeModel() {
         //GIVEN
-        String gameOutcomeId = "testId";
-        String gameId = "GME001";
-        String groupId = "GR001";
-        String playerWinId = "P0001";
-        Set<String> playerLoseIds = Set.of("P0002", "P0003");
+        String gameOutcomeId = "GO00001";
+        String gameId = "GM00001";
+        String groupId = "GRP00001";
+        String playerWinId = "P00001";
+        Set<String> playerLoseIds = Set.of("P00002", "P00003");
 
         GameOutcome gameOutcome = new GameOutcome();
         gameOutcome.setGameOutcomeId(gameOutcomeId);

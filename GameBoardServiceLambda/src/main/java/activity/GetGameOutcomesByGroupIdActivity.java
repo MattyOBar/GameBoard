@@ -44,7 +44,7 @@ public class GetGameOutcomesByGroupIdActivity {
             gameOutcomeModelList.add(gameOutcomeModel);
         }
 
-       return GetGameOutcomesByGroupIdResult.builder()
+        return GetGameOutcomesByGroupIdResult.builder()
                .withGameOutcomeModelList(gameOutcomeModelList)
                .build();
     }

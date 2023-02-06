@@ -76,5 +76,18 @@
         }
       }
     }
+  ],
+  "gameOutcomes" : [
+    {
+      "PutRequest": {
+        "Item": {
+          "gameOutcomeId": {"S": "GO00001"},
+          "groupId": {"S": "GRP00002"},
+          "gameId": {"S": "GM00003"},
+          "playerWinId": {"S": "P00025"},
+          "playerLoseIds": {"SS": ["P00027"]}
+        }
+      }
+    }
   ]
 }

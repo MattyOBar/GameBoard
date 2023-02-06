@@ -60,6 +60,7 @@ public class GameOutcomeDao {
 
         DynamoDBQueryExpression<GameOutcome> queryExpression = new DynamoDBQueryExpression<GameOutcome>()
                 .withHashKeyValues(gameOutcome);
+        queryExpression.withConsistentRead(false);
         PaginatedQueryList<GameOutcome> gameOutcomeList = dynamoDBMapper.query(GameOutcome.class, queryExpression);
         return gameOutcomeList;
     }

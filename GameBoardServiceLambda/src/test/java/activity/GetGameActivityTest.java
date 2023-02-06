@@ -28,7 +28,7 @@ public class GetGameActivityTest {
     @Test
     public void handleRequest_savedGameFound_ReturnsGameModelInResult() {
         //GIVEN
-        String gameId = "Game001";
+        String gameId = "GM00001";
         String gameName = "Monopoly";
         String rulesLink = "www.monopoly.com";
         String purchaseLink = "www.amazon.com";

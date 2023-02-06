@@ -48,8 +48,7 @@ public class GetGamesByGroupIdActivity {
     public GetGamesByGroupIdResult handleRequest(final GetGamesByGroupIdRequest getGamesByGroupIdRequest) {
         log.info("Received GetGamesByGroupIdRequest {}", getGamesByGroupIdRequest);
         String groupId = getGamesByGroupIdRequest.getGroupId();
-        if (groupId == null || !groupId.startsWith("GRP") ||
-        groupId.length() != 8) {
+        if (groupId == null || !groupId.startsWith("GRP") || groupId.length() != 8) {
             throw new GroupInvalidException("GroupId: " + groupId + " is invalid.");
         }
         Group group = groupDao.getGroup(groupId);
