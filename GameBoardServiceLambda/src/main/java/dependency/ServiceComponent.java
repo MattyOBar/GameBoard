@@ -66,4 +66,9 @@ public interface ServiceComponent {
      */
     GetGroupsByPlayerActivity provideGetGroupsByPlayerActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return GetGamesByGroupIdActivity
+     */
+    GetGamesByGroupIdActivity provideGetGamesByGroupIdActivity();
 }
