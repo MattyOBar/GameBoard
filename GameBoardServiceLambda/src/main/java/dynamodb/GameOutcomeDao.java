@@ -8,8 +8,10 @@ import exceptions.GameOutcomeNotFoundException;
 import metrics.MetricsConstants;
 import metrics.MetricsPublisher;
 
-import javax.inject.Inject;
 import java.util.List;
+
+import javax.inject.Inject;
+
 
 /**
  * Access data for our game objects.
@@ -54,6 +56,11 @@ public class GameOutcomeDao {
         return gameOutcome;
     }
 
+    /**
+     * This method retrieves a List of GameOutcomes for a specific group.
+     * @param groupId the GroupId needed for the lookup.
+     * @return the List of GameOutcomes specific to the groupId.
+     */
     public List<GameOutcome> getGameOutcomesByGroupId(String groupId) {
         GameOutcome gameOutcome = new GameOutcome();
         gameOutcome.setGroupId(groupId);

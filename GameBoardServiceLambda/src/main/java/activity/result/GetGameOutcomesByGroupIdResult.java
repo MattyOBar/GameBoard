@@ -7,6 +7,10 @@ import java.util.List;
 public class GetGameOutcomesByGroupIdResult {
     private final List<GameOutcomeModel> gameOutcomeModelList;
 
+    /**
+     * List of GameOutcomes that relate to a specific group.
+     * @param gameOutcomeModelList  The list of GameOutcomeModels to be returned.
+     */
     public GetGameOutcomesByGroupIdResult(List<GameOutcomeModel> gameOutcomeModelList) {
         this.gameOutcomeModelList = gameOutcomeModelList;
     }

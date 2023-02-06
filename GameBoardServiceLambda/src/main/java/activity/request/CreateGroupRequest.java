@@ -14,6 +14,15 @@ public class CreateGroupRequest {
     private final Set<String> gameOutcomeIds;
     private final Set<String> playerIds;
 
+    /**
+     * Request object for creating a new Group object.
+     * @param groupId The unique groupId.
+     * @param groupName The name of the group.
+     * @param favoriteGameId Id for the group's favorite game to play
+     * @param gameIds Ids for all of the games that the group plays.
+     * @param gameOutcomeIds Ids for all of the GameOutcomes relating to the group.
+     * @param playerIds Ids for all the players in the group.
+     */
     public CreateGroupRequest(String groupId, String groupName, String favoriteGameId,
                               Set<String> gameIds, Set<String> gameOutcomeIds, Set<String> playerIds) {
         this.groupId = groupId;

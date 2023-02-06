@@ -7,6 +7,10 @@ import java.util.Set;
 public class GetGamesByGroupIdResult {
     public final Set<GameModel> gameModelSet;
 
+    /**
+     * Result object that contains a set of gameModels.
+     * @param gameModelSet gameModel set of games that belong to a specific group.
+     */
     public GetGamesByGroupIdResult(Set<GameModel> gameModelSet) {
         this.gameModelSet = gameModelSet;
     }

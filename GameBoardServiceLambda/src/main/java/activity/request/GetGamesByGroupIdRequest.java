@@ -3,6 +3,10 @@ package activity.request;
 public class GetGamesByGroupIdRequest {
     private final String groupId;
 
+    /**
+     * Request for getting all the Game's that a group plays.
+     * @param groupId The groupId for the specifc group.
+     */
     public GetGamesByGroupIdRequest(String groupId) {
         this.groupId = groupId;
     }

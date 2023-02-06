@@ -15,8 +15,8 @@ public class GetGameOutcomesByGroupIdLambda
                     GetGameOutcomesByGroupIdRequest.builder()
                             .withGroupId(path.get("groupId"))
                             .build()),
-    (request, serviceComponent) ->
-            serviceComponent.provideGetGameOutcomesByGroupIdActivity().handleRequest(request)
-            );
+            (request, serviceComponent) ->
+                    serviceComponent.provideGetGameOutcomesByGroupIdActivity().handleRequest(request)
+                    );
     }
 }

@@ -4,7 +4,6 @@ import activity.request.GetGameOutcomesByGroupIdRequest;
 import activity.result.GetGameOutcomesByGroupIdResult;
 import converters.ModelConverter;
 import dynamodb.GameOutcomeDao;
-import dynamodb.GroupDao;
 import dynamodb.models.GameOutcome;
 import exceptions.GroupInvalidException;
 import models.GameOutcomeModel;
@@ -22,14 +21,20 @@ public class GetGameOutcomesByGroupIdActivity {
 
     private final GameOutcomeDao gameOutcomeDao;
 
-    private final GroupDao groupDao;
-
+    /**
+     * Instantiates a GetGameOutcomesByGroupIdActivity object.
+     * @param gameOutcomeDao GameOutcomeDao to access the GameOutcomes table.
+     */
     @Inject
-    public GetGameOutcomesByGroupIdActivity(GameOutcomeDao gameOutcomeDao, GroupDao groupDao) {
+    public GetGameOutcomesByGroupIdActivity(GameOutcomeDao gameOutcomeDao) {
         this.gameOutcomeDao = gameOutcomeDao;
-        this.groupDao = groupDao;
     }
 
+    /**
+     * This method handles the incoming request by retrieving all the GameOutcomes that relate to a specific groupId.
+     * @param getGameOutcomesByGroupIdRequest the request object containing the groupId.
+     * @return getGameOutcomesByGroupIdResult the object containing the list of GameOutcomes
+     */
     public GetGameOutcomesByGroupIdResult handleRequest(final GetGameOutcomesByGroupIdRequest getGameOutcomesByGroupIdRequest) {
         log.info("Received GetGameOutcomesByGroupIdRequest {}", getGameOutcomesByGroupIdRequest);
         String groupId = getGameOutcomesByGroupIdRequest.getGroupId();
