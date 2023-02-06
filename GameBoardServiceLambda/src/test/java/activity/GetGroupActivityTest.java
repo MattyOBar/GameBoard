@@ -29,12 +29,12 @@ public class GetGroupActivityTest {
     @Test
     public void handleRequest_savedPlayerFound_ReturnsPlayerModelInResult() {
         //GIVEN
-        String groupId = "testId";
+        String groupId = "GRP17232";
         String groupName = "testName";
-        String favoriteGameId = "favoriteGame";
-        Set<String> gameIds = Set.of("gameId1", "gameId2");
-        Set<String> gameOutcomeIds = Set.of("gameOutcome1", "gameOutcome2");
-        Set<String> playerIds = Set.of("player1", "player2");
+        String favoriteGameId = "GM00001";
+        Set<String> gameIds = Set.of("GM00001", "GM00002");
+        Set<String> gameOutcomeIds = Set.of("GO00001", "GO01012");
+        Set<String> playerIds = Set.of("P02321", "P02932");
 
         Group group = new Group();
         group.setGroupId(groupId);

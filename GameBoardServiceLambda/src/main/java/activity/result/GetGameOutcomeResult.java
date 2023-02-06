@@ -5,6 +5,10 @@ import models.GameOutcomeModel;
 public class GetGameOutcomeResult {
     private final GameOutcomeModel gameOutcomeModel;
 
+    /**
+     * Result object that contains a specifc GameOutcomeModel.
+     * @param gameOutcomeModel The API defined gameOutcomeModel.
+     */
     public GetGameOutcomeResult(GameOutcomeModel gameOutcomeModel) {
         this.gameOutcomeModel = gameOutcomeModel;
     }

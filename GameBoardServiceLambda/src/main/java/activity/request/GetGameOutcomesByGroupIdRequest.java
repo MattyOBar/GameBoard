@@ -1,13 +1,13 @@
 package activity.request;
 
-public class GetGamesByGroupIdRequest {
+public class GetGameOutcomesByGroupIdRequest {
     private final String groupId;
 
     /**
-     * Request for getting all the Game's that a group plays.
-     * @param groupId The groupId for the specifc group.
+     * Request object for getting gameOutcomes by groupId.
+     * @param groupId the groupId for the specific group that GameOutcomes should be returned for.
      */
-    public GetGamesByGroupIdRequest(String groupId) {
+    public GetGameOutcomesByGroupIdRequest(String groupId) {
         this.groupId = groupId;
     }
 
@@ -17,7 +17,7 @@ public class GetGamesByGroupIdRequest {
 
     @Override
     public String toString() {
-        return "GetGamesByGroupIdRequest{" +
+        return "GetGameOutcomesByGroupIdRequest{" +
                 "groupId='" + groupId + '\'' +
                 '}';
     }
@@ -30,13 +30,13 @@ public class GetGamesByGroupIdRequest {
     public static class Builder {
         private String groupId;
 
-        public Builder withGroupID(String groupId) {
+        public Builder withGroupId(String groupId) {
             this.groupId = groupId;
             return this;
         }
 
-        public GetGamesByGroupIdRequest build() {
-            return new GetGamesByGroupIdRequest(groupId);
+        public GetGameOutcomesByGroupIdRequest build() {
+            return new GetGameOutcomesByGroupIdRequest(groupId);
         }
     }
 }
