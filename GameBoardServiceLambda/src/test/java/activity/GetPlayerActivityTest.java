@@ -53,7 +53,6 @@ public class GetPlayerActivityTest {
         assertEquals(playerId, result.getPlayerModel().getPlayerId());
         assertEquals(playerName, result.getPlayerModel().getPlayerName());
         assertEquals(groupIds, result.getPlayerModel().getGroupIds());
-
     }
 
 

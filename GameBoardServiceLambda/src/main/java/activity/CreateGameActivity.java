@@ -38,7 +38,8 @@ public class CreateGameActivity {
 
     public CreateGameResult handleRequest(final CreateGameRequest createGameRequest) {
         log.info("Received CreateGameRequest {}", createGameRequest);
-        String gameId = UUID.randomUUID().toString().substring(0, 5);
+        String gameId = "GM".concat(UUID.randomUUID().toString().substring(0, 5));
+        System.out.println(gameId);
         String gameName = createGameRequest.getGameName();
         String rulesLink = createGameRequest.getRulesLink();
         String purchaseLink = createGameRequest.getPurchaseLink();
