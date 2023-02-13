@@ -31,10 +31,12 @@ public class CreatePlayerActivityTest {
     @Test
     public void handleRequest_CreatesAndSavesNewPlayer_ReturnCreatedPlayer() {
         //GIVEN
+        String expectedPlayerId = "testId@gmail.com";
         String expectedPlayerName = "TestName";
         Set<String> expectedGroupIds = Set.of("G0001", "G0002", "G0003");
 
         CreatePlayerRequest request = CreatePlayerRequest.builder()
+                                            .withPlayerId(expectedPlayerId)
                                             .withPlayerName(expectedPlayerName)
                                             .withGroupIds(expectedGroupIds)
                                             .build();
@@ -44,7 +46,7 @@ public class CreatePlayerActivityTest {
         //THEN
         verify(playerDao).savePlayer(any(Player.class));
 
-        assertNotNull(result.getPlayer().getPlayerId());
+        assertEquals(expectedPlayerId, result.getPlayer().getPlayerId());
         assertEquals(expectedPlayerName, result.getPlayer().getPlayerName());
         assertEquals(expectedGroupIds, result.getPlayer().getGroupIds());
     }

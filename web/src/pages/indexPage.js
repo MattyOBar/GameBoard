@@ -11,7 +11,7 @@ class Index extends BindingClass {
         super();
         this.bindClassMethods(['mount', 'login', 'redirectToViewGroups', 'createProfile', 'redirectToCreateProfile'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToWorkout);
+        this.dataStore.addChangeListener(this.redirectToViewGroups);
         this.dataStore.addChangeListener(this.redirectToCreateProfile);
         this.header = new Header(this.dataStore);
     }
@@ -21,7 +21,7 @@ class Index extends BindingClass {
      */
     mount() {
         document.getElementById('login').addEventListener('click', this.login);
-        document.getElementById('create-profile').addEventListener('click', this.createProfile)
+        document.getElementById('create-profile').addEventListener('click', this.createProfile);
 
         this.header.addHeaderToPage();
 
@@ -34,14 +34,14 @@ class Index extends BindingClass {
      */
     async login() {
         document.getElementById('login').addEventListener('click', this.client.login);
-        this.redirectToViewGroups;
+        document.location.href();
     }
 
     /**
      * When the user has logged in, redirect to the page to viewGroupsByPlayer page.
      */
     async redirectToViewGroups() {
-        // TODO
+        console.log("test")
         window.alert("Redirect to view a player's group page.")
     }
 

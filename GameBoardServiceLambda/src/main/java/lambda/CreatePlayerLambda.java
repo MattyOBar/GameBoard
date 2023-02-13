@@ -11,7 +11,15 @@ public class CreatePlayerLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreatePlayerRequest> input, Context context) {
         return super.runActivity(
-            () -> input.fromBody(CreatePlayerRequest.class),
+            () -> {
+                CreatePlayerRequest unauthenticatedRequest =  input.fromBody(CreatePlayerRequest.class);
+                return input.fromUserClaims(claims ->
+                        CreatePlayerRequest.builder()
+                                .withPlayerId(claims.get("email"))
+                                .withPlayerName(claims.get("name"))
+                                .withGroupIds(unauthenticatedRequest.getGroupIds())
+                                .build());
+            },
             (request, serviceComponent) ->
                     serviceComponent.provideCreatePlayerActivity().handleRequest(request)
         );
