@@ -68,10 +68,15 @@ export default class GameBoardClient extends BindingClass {
     **/
     async getGroupsByPlayerId(id, errorCallback) {
         try {
-        const response = await this.axiosClient.get(`groups/getGroupsByPlayerId/${playerIds}`);
-        return response.data.groupModel;
+            const token = await this.getTokenOrThrow("Please login!");
+            const response = await this.axiosClient.get('groups/getGroupsByPlayerId/', {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.groupModel;
         } catch (error) {
-        this.handleError(error, errorCallback);
+            this.handleError(error, errorCallback);
         }
     }
 

@@ -414,7 +414,7 @@ Resources:
         GameBoardService:
           Type: Api
           Properties:
-            Path: /groups/getGroupsByPlayerId/{playerIds}
+            Path: /groups/getGroupsByPlayerId/{}
             Method: get
 
   GetGamesByGroupIdLambda:

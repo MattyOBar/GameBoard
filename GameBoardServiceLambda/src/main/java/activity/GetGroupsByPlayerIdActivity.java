@@ -1,11 +1,10 @@
 package activity;
 
-import activity.request.GetGroupsByPlayerRequest;
-import activity.result.GetGroupsByPlayerResult;
+import activity.request.GetGroupsByPlayerIdRequest;
+import activity.result.GetGroupsByPlayerIdResult;
 import converters.ModelConverter;
 import dynamodb.GroupDao;
 import dynamodb.models.Group;
-import exceptions.PlayerInvalidException;
 import models.GroupModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +20,7 @@ import javax.inject.Inject;
  */
 
 
-public class GetGroupsByPlayerActivity {
+public class GetGroupsByPlayerIdActivity {
     private final Logger log = LogManager.getLogger();
     private GroupDao groupDao;
 
@@ -30,7 +29,7 @@ public class GetGroupsByPlayerActivity {
      * @param groupDao GroupDao to access the groups table.
      */
     @Inject
-    public GetGroupsByPlayerActivity(GroupDao groupDao) {
+    public GetGroupsByPlayerIdActivity(GroupDao groupDao) {
         this.groupDao = groupDao;
     }
 
@@ -39,7 +38,7 @@ public class GetGroupsByPlayerActivity {
      * @param getGroupsByPlayerRequest the request object containing the playerId.
      * @return the group objects that contain the playerId.
      */
-    public GetGroupsByPlayerResult handleRequest(final GetGroupsByPlayerRequest getGroupsByPlayerRequest) {
+    public GetGroupsByPlayerIdResult handleRequest(final GetGroupsByPlayerIdRequest getGroupsByPlayerRequest) {
         log.info("Received GetGroupsByPlayerActivity {}", getGroupsByPlayerRequest);
         String playerId = getGroupsByPlayerRequest.getPlayerId();
         List<Group> groupList = groupDao.getGroupsByPlayer();
@@ -51,7 +50,7 @@ public class GetGroupsByPlayerActivity {
                 playerIsIn.add(groupModel);
             }
         }
-        return GetGroupsByPlayerResult.builder()
+        return GetGroupsByPlayerIdResult.builder()
                 .withGroupModelList(playerIsIn)
                 .build();
 

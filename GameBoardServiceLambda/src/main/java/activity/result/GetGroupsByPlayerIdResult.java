@@ -4,14 +4,14 @@ import models.GroupModel;
 
 import java.util.List;
 
-public class GetGroupsByPlayerResult {
+public class GetGroupsByPlayerIdResult {
     public final List<GroupModel> groupModelList;
 
     /**
      * Result object containing the List of Groups that a Player belongs to.
      * @param groupModelList List of all the GroupModels that the player belongs to.
      */
-    public GetGroupsByPlayerResult(List<GroupModel> groupModelList) {
+    public GetGroupsByPlayerIdResult(List<GroupModel> groupModelList) {
         this.groupModelList = groupModelList;
     }
 
@@ -33,8 +33,8 @@ public class GetGroupsByPlayerResult {
             return this;
         }
 
-        public GetGroupsByPlayerResult build() {
-            return new GetGroupsByPlayerResult(groupModelList);
+        public GetGroupsByPlayerIdResult build() {
+            return new GetGroupsByPlayerIdResult(groupModelList);
         }
     }
 }

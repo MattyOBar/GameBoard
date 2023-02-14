@@ -25,11 +25,11 @@ class SelectGroup extends BindingClass {
 
     async displayGroupsOnPage() {
         const groupList = this.datastore.get('groupList');
-        console.log(groupList);
-
         if (!groupList) {
             return;
         }
+        console.log(groupList);
+
 
         let container = document.getElementById('group-buttons');
         for (let i = 0; i < groupList.size(); i++) {
