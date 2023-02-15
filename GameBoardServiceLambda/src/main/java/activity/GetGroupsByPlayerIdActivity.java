@@ -39,7 +39,7 @@ public class GetGroupsByPlayerIdActivity {
      * @return the group objects that contain the playerId.
      */
     public GetGroupsByPlayerIdResult handleRequest(final GetGroupsByPlayerIdRequest getGroupsByPlayerRequest) {
-        log.info("Received GetGroupsByPlayerActivity {}", getGroupsByPlayerRequest);
+        log.info("Received GetGroupsByPlayerIdRequest {}", getGroupsByPlayerRequest);
         String playerId = getGroupsByPlayerRequest.getPlayerId();
         List<Group> groupList = groupDao.getGroupsByPlayer();
         List<GroupModel> playerIsIn = new ArrayList<>();

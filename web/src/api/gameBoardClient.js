@@ -15,10 +15,9 @@ export default class GameBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer', 'getGroupsByPlayerId'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer', 'getGroupsByPlayerId', 'getGroup'];
         this.bindClassMethods(methodsToBind, this);
-
-        this.authenticator = new Authenticator();;
+        this.authenticator = new Authenticator();
         this.props = props;
 
         axios.defaults.baseURL = process.env.API_BASE_URL;
@@ -56,20 +55,36 @@ export default class GameBoardClient extends BindingClass {
 
     async getPlayer(id, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`players/${playerId}`)
-            return response.data.player;
+            const token = await this.getTokenOrThrow("Please login!");
+            const response = await this.axiosClient.get(`players/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(response.data);
+            return response.data.playerModel;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
     }
 
-    /**
-    * This method is used to populate the page that lets a user select which group they belong to.
-    **/
+    async getGroup(id, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`groups/${id}`)
+            console.log(response.data);
+            return response.data.groupModel;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+//    /**
+//    * This method is used to populate the page that lets a user select which group they belong to.
+//    **/
     async getGroupsByPlayerId(id, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Please login!");
-            const response = await this.axiosClient.get('groups/getGroupsByPlayerId/', {}, {
+            const response = await this.axiosClient.get(`groups/getGroupsByPlayerId/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

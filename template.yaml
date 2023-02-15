@@ -402,7 +402,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: GameBoardServiceLambda
-      Handler: lambda.GetGroupByPlayerLambda::handleRequest
+      Handler: lambda.GetGroupsByPlayerIdLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -414,7 +414,7 @@ Resources:
         GameBoardService:
           Type: Api
           Properties:
-            Path: /groups/getGroupsByPlayerId/{}
+            Path: /groups/getGroupsByPlayerId/{playerId}
             Method: get
 
   GetGamesByGroupIdLambda:

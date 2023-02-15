@@ -11,16 +11,12 @@ public class GetGroupsByPlayerIdLambda
 
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetGroupsByPlayerIdRequest> input, Context context) {
-        return super.runActivity(
-            () -> {
-                GetGroupsByPlayerIdRequest unauthenicatedRequest = input.fromBody(GetGroupsByPlayerIdRequest.class);
-                return input.fromUserClaims(claims ->
+        return super.runActivity(() -> input.fromUserClaims(claims ->
                         GetGroupsByPlayerIdRequest.builder()
-                                .withPlayerID(claims.get("playerId"))
-                                .build());
-            },
+                                .withPlayerID(claims.get("email"))
+                                .build()),
             (request, serviceComponent) ->
-                    serviceComponent.provideGetGroupsByPlayerActivity().handleRequest(request)
+                    serviceComponent.provideGetGroupsByPlayerIdActivity().handleRequest(request)
         );
     }
 }
