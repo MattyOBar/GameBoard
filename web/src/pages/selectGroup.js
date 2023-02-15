@@ -29,7 +29,6 @@ class SelectGroup extends BindingClass {
 //    }
 
     async displayGroupsOnPage() {
-//        document.getElementById('group-buttons').innerText = "(Loading Groups)";
         const playerId = document.getElementById('emailInput').value;
         const player = await this.client.getPlayer(playerId);
         this.dataStore.set('player', player);
@@ -42,6 +41,9 @@ class SelectGroup extends BindingClass {
             const group = await this.client.getGroup(groupsList[i]);
             let button = document.createElement("button");
             button.innerHTML = group.groupName;
+            button.onclick = function () {
+                location.href = "/viewGroup.html"
+            };
             groupButtons.appendChild(button);
         }
     }
