@@ -6,33 +6,47 @@ import DataStore from '../util/DataStore';
 class SelectGroup extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayGroupsOnPage'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayNameAndGroupsOnPage', 'displayGroupsOnPage'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
 
     async clientLoaded() {
+        document.getElementById('welcome-name').innerText = "(Loading please wait...)"
+
+        this.displayNameAndGroupsOnPage();
 //        this.displayGroupsOnPage();
-//        const groupList = await this.client.getGroupsByPlayerId();
-//        this.dataStore.set('groupList', groupList);
     }
 
     async mount() {
         this.header.addHeaderToPage();
-        document.getElementById('look-up-groups-button').addEventListener('click', this.displayGroupsOnPage)
         this.client = new GameBoardClient();
         await this.clientLoaded();
     }
 
-//    async displayNameOnPage() {
-//
-//    }
-
-    async displayGroupsOnPage() {
-        const playerId = document.getElementById('emailInput').value;
+    async displayNameAndGroupsOnPage() {
+        const currentUser = await this.client.getIdentity();
+        const playerId = currentUser.email;
         const player = await this.client.getPlayer(playerId);
         this.dataStore.set('player', player);
-        document.getElementById('welcome-name').innerText = "Welcome to GameBoard " + player.playerName;
+        document.getElementById('welcome-name').innerText = player.playerName;
+        const groupsList = player.groupIds;
+        console.log(groupsList);
+        document.getElementById('loading-message').innerText = "(Loading Please Wait...)";
+        const groupButtons = document.getElementById('groupName-buttons');
+            for (let i = 0; i < groupsList.length; i++) {
+                const group = await this.client.getGroup(groupsList[i]);
+                let button = document.createElement("button");
+                button.innerHTML = group.groupName;
+                button.onclick = function () {
+                    location.href = "/viewGroup.html"
+                };
+                groupButtons.appendChild(button);
+            }
+        document.getElementById('loading-message').innerText = "";
+    }
+
+    async displayGroupsOnPage() {
         const groupsList = player.groupIds;
         console.log(groupsList);
 

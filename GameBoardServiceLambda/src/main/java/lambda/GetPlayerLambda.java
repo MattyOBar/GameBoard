@@ -7,14 +7,14 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public class GetPlayerLambda
         extends LambdaActivityRunner<GetPlayerRequest, GetPlayerResult>
-        implements RequestHandler<LambdaRequest<GetPlayerRequest>, LambdaResponse> {
+        implements RequestHandler<AuthenticatedLambdaRequest<GetPlayerRequest>, LambdaResponse> {
 
     @Override
-    public LambdaResponse handleRequest(LambdaRequest<GetPlayerRequest> input, Context context) {
+    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetPlayerRequest> input, Context context) {
         return super.runActivity(
-            () -> input.fromPath(path ->
+            () -> input.fromUserClaims(claims ->
                     GetPlayerRequest.builder()
-                            .withPlayerID(path.get("playerId"))
+                            .withPlayerID(claims.get("email"))
                             .build()),
             (getPlayerRequest, serviceComponent) ->
                     serviceComponent.provideGetPlayerActivity().handleRequest(getPlayerRequest)
