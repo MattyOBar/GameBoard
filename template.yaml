@@ -81,8 +81,8 @@ Resources:
       CallbackURLs:
         - !If
           - DeployCloudFront
-          - !Sub "https://${CloudfrontDistribution.DomainName}"
-          - http://localhost:8000
+          - !Sub "https://${CloudfrontDistribution.DomainName}/selectGroup.html"
+          - http://localhost:8000/selectGroup.html
       LogoutURLs:
         - !If
           - DeployCloudFront
