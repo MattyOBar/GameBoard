@@ -6,7 +6,7 @@ import DataStore from '../util/DataStore';
 class SelectGroup extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayNameAndGroupsOnPage', 'displayGroupsOnPage'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayNameAndGroupsOnPage'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
@@ -15,7 +15,6 @@ class SelectGroup extends BindingClass {
         document.getElementById('welcome-name').innerText = "(Loading please wait...)"
 
         this.displayNameAndGroupsOnPage();
-//        this.displayGroupsOnPage();
     }
 
     async mount() {
@@ -39,28 +38,13 @@ class SelectGroup extends BindingClass {
                 let button = document.createElement("button");
                 button.innerHTML = group.groupName;
                 button.onclick = function () {
-                    location.href = "/viewGroup.html"
+                    window.location.href = "/viewGroup.html?groupId=" + group.groupId;
                 };
                 groupButtons.appendChild(button);
             }
         document.getElementById('loading-message').innerText = "";
     }
 
-    async displayGroupsOnPage() {
-        const groupsList = player.groupIds;
-        console.log(groupsList);
-
-        const groupButtons = document.getElementById('groupName-buttons');
-        for (let i = 0; i < groupsList.length; i++) {
-            const group = await this.client.getGroup(groupsList[i]);
-            let button = document.createElement("button");
-            button.innerHTML = group.groupName;
-            button.onclick = function () {
-                location.href = "/viewGroup.html"
-            };
-            groupButtons.appendChild(button);
-        }
-    }
 }
 
 const main = async () => {

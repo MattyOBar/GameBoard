@@ -25,6 +25,7 @@ module.exports = {
   entry: {
    indexPage: path.resolve(__dirname, 'src', 'pages', 'indexPage.js'),
    selectGroup: path.resolve(__dirname, 'src', 'pages', 'selectGroup.js'),
+   viewGroup: path.resolve(__dirname, 'src', 'pages', 'viewGroup.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

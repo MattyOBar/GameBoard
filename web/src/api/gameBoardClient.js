@@ -15,7 +15,7 @@ export default class GameBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer', 'getGroupsByPlayerId', 'getGroup'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame'];
         this.bindClassMethods(methodsToBind, this);
         this.authenticator = new Authenticator();
         this.props = props;
@@ -78,9 +78,6 @@ export default class GameBoardClient extends BindingClass {
         }
     }
 
-//    /**
-//    * This method is used to populate the page that lets a user select which group they belong to.
-//    **/
     async getGroupsByPlayerId(id, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Please login!");
@@ -90,6 +87,15 @@ export default class GameBoardClient extends BindingClass {
                 }
             });
             return response.data.groupModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    async getGame(id, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`games/${id}`);
+            return response.data.gameModel;
         } catch (error) {
             this.handleError(error, errorCallback);
         }
