@@ -83,4 +83,10 @@ public interface ServiceComponent {
      * @return DeleteGameOutcomeActivity
      */
     DeleteGameOutcomeActivity provideDeleteGameOutcomeActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdateGroupActivity
+     */
+    UpdateGroupActivity provideUpdateGroupAcitivty();
 }

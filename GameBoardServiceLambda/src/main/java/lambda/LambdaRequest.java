@@ -18,8 +18,8 @@ import static utils.NullUtils.ifNull;
  */
 public class LambdaRequest<T> extends APIGatewayProxyRequestEvent {
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-    private final Logger log = LogManager.getLogger();
+    protected static final ObjectMapper MAPPER = new ObjectMapper();
+    protected final Logger log = LogManager.getLogger();
 
     /**
      * Dserialize a T (aka 'requestClass`) from the body of the request.
