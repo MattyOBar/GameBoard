@@ -40,7 +40,7 @@ class SelectGroup extends BindingClass {
             button.onclick = function () {
                 window.location.href = "/viewGroup.html?groupId=" + group.groupId;
             };
-        groupButtons.appendChild(button);
+            groupButtons.appendChild(button);
         }
         document.getElementById('loading-message').innerText = "";
     }
