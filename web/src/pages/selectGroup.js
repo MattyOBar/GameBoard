@@ -33,15 +33,15 @@ class SelectGroup extends BindingClass {
         console.log(groupsList);
         document.getElementById('loading-message').innerText = "(Loading Please Wait...)";
         const groupButtons = document.getElementById('groupName-buttons');
-            for (let i = 0; i < groupsList.length; i++) {
-                const group = await this.client.getGroup(groupsList[i]);
-                let button = document.createElement("button");
-                button.innerHTML = group.groupName;
-                button.onclick = function () {
-                    window.location.href = "/viewGroup.html?groupId=" + group.groupId;
-                };
-                groupButtons.appendChild(button);
-            }
+        for (let i = 0; i < groupsList.length; i++) {
+            const group = await this.client.getGroup(groupsList[i]);
+            let button = document.createElement("button");
+            button.innerHTML = group.groupName;
+            button.onclick = function () {
+                window.location.href = "/viewGroup.html?groupId=" + group.groupId;
+            };
+        groupButtons.appendChild(button);
+        }
         document.getElementById('loading-message').innerText = "";
     }
 
