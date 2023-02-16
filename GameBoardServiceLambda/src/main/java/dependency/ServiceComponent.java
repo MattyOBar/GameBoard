@@ -77,4 +77,10 @@ public interface ServiceComponent {
      * @return GetGameOutcomesByGroupIdActivity
      */
     GetGameOutcomesByGroupIdActivity provideGetGameOutcomesByGroupIdActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return DeleteGameOutcomeActivity
+     */
+    DeleteGameOutcomeActivity provideDeleteGameOutcomeActivity();
 }

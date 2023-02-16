@@ -21,7 +21,7 @@ public class GetGameActivity {
     private final GameDao gameDao;
 
     /**
-     * Instaniates a GetGameActivity object.
+     * Instantiates a GetGameActivity object.
      * @param gameDao GameDao to access the Games table.
      */
     @Inject

@@ -72,4 +72,13 @@ public class GameOutcomeDao {
         return gameOutcomeList;
     }
 
+    /**
+     * Deletes the specified GameOutcome.
+     * @param gameOutcome the GameOutcome to delete.
+     */
+    public void deleteGameOutcome(GameOutcome gameOutcome) {
+        gameOutcome.setGameId(gameOutcome.getGameOutcomeId());
+        this.dynamoDBMapper.delete(gameOutcome);
+    }
+
 }

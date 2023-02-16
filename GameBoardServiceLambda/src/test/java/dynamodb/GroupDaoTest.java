@@ -9,8 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -56,5 +55,18 @@ public class GroupDaoTest {
         // WHEN + THEN
         assertThrows(GroupNotFoundException.class, () -> groupDao.getGroup(nonExistentGroupId));
         verify(metricsPublisher).addCount(eq(MetricsConstants.GETGROUP_GROUPNOTFOUND_COUNT), anyDouble());
+    }
+
+    @Test
+    public void saveGroup_CallsMapperWithGroup() {
+        // GIVEN
+        Group group = new Group();
+
+        // WHEN
+        Group result = groupDao.saveGroup(group);
+
+        // THEN
+        verify(dynamoDBMapper).save(group);
+        assertEquals(group, result);
     }
 }

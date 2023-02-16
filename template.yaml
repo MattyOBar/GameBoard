@@ -455,6 +455,25 @@ Resources:
             Path: /gameOutcomes/getGameOutcomesByGroupId/{groupId}
             Method: get
 
+  DeleteGameOutcomeLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GameBoardServiceLambda
+      Handler: lambda.DeleteGameOutcomeLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        GameBoardService:
+          Type: Api
+          Properties:
+            Path: /gameOutcomes/{gameOutcomeId}
+            Method: delete
+
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------

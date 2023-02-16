@@ -5,6 +5,10 @@ import models.GameOutcomeModel;
 public class DeleteGameOutcomeResult {
     private final GameOutcomeModel gameOutcome;
 
+    /**
+     * Result object that contains the GameOutcome model that was deleted.
+     * @param gameOutcome a GameOutcomeModel that belongs to a no longer exist GameOutcome
+     */
     public DeleteGameOutcomeResult(GameOutcomeModel gameOutcome) {
         this.gameOutcome = gameOutcome;
     }
@@ -27,7 +31,7 @@ public class DeleteGameOutcomeResult {
     public static class Builder {
         private static GameOutcomeModel gameOutcome;
 
-        public Builder withGameOutcome(GameOutcomeModel gameOutcome) {
+        public Builder withGameOutcomeModel(GameOutcomeModel gameOutcome) {
             this.gameOutcome = gameOutcome;
             return this;
         }

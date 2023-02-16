@@ -56,4 +56,16 @@ public class PlayerDaoTest {
         assertThrows(PlayerNotFoundException.class, () -> playerDao.getPlayer(nonexistentPlayerId));
         verify(metricsPublisher).addCount(eq(MetricsConstants.GETPLAYER_PLAYERNOTFOUND_COUNT), anyDouble());
     }
+    @Test
+    public void savePlayer_CallsMapperWithPlayer() {
+        // GIVEN
+        Player player = new Player();
+
+        //WHEN
+        Player result = playerDao.savePlayer(player);
+
+        // THEN
+        verify(dynamoDBMapper).save(player);
+        assertEquals(player, result);
+    }
 }
