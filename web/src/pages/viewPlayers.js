@@ -13,8 +13,8 @@ class ViewPlayers extends BindingClass {
 
     async clientLoaded() {
         document.getElementById('groupName').innerText = "(Loading please wait...)"
-//        this.displayGroupName();
-        this.displayPlayersInGroup();
+        await this.displayGroupName();
+        await this.displayPlayersInGroup();
     }
 
     async mount() {

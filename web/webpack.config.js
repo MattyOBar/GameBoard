@@ -28,6 +28,7 @@ module.exports = {
    viewGroup: path.resolve(__dirname, 'src', 'pages', 'viewGroup.js'),
    viewPlayers: path.resolve(__dirname, 'src', 'pages', 'viewPlayers.js'),
    viewGames: path.resolve(__dirname, 'src', 'pages', 'viewGames.js'),
+   viewGameOutcomes: path.resolve(__dirname, 'src', 'pages', 'viewGameOutcomes.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),
