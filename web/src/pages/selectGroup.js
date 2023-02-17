@@ -26,9 +26,12 @@ class SelectGroup extends BindingClass {
     async displayNameAndGroupsOnPage() {
         const currentUser = await this.client.getIdentity();
         const playerId = currentUser.email;
+        const playerName = currentUser.name;
+        console.log(playerName);
+        console.log(playerId);
         const player = await this.client.getPlayer(playerId);
-        this.dataStore.set('player', player);
-        document.getElementById('welcome-name').innerText = player.playerName;
+        console.log(player);
+        document.getElementById('welcome-name').innerText = playerName;
         const groupsList = player.groupIds;
         console.log(groupsList);
         document.getElementById('loading-message').innerText = "(Loading Please Wait...)";

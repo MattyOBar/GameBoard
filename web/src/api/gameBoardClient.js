@@ -15,7 +15,7 @@ export default class GameBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame', 'updateGroup'];
         this.bindClassMethods(methodsToBind, this);
         this.authenticator = new Authenticator();
         this.props = props;
@@ -55,26 +55,21 @@ export default class GameBoardClient extends BindingClass {
 
     async getPlayer(id, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Please login!");
-            const response = await this.axiosClient.get(`players/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            const response = await this.axiosClient.get(`players/${id}`);
             console.log(response.data);
             return response.data.playerModel;
         } catch (error) {
-            this.handleError(error, errorCallback)
+            this.handleError(error, errorCallback);
         }
     }
 
     async getGroup(id, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`groups/${id}`)
+            const response = await this.axiosClient.get(`groups/${id}`);
             console.log(response.data);
             return response.data.groupModel;
         } catch (error) {
-            this.handleError(error, errorCallback)
+            this.handleError(error, errorCallback);
         }
     }
 
@@ -97,6 +92,15 @@ export default class GameBoardClient extends BindingClass {
             const response = await this.axiosClient.get(`games/${id}`);
             return response.data.gameModel;
         } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    async updateGroup(group, errorCallback) {
+        try {
+            const response = await this.axiosClient.put(`groups/${group.groupId}`, group);
+            return response.data.groupModel;
+        } catch (error){
             this.handleError(error, errorCallback);
         }
     }
