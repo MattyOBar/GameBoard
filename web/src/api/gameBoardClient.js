@@ -15,7 +15,7 @@ export default class GameBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame', 'updateGroup'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createGameOutcome', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame', 'updateGroup'];
         this.bindClassMethods(methodsToBind, this);
         this.authenticator = new Authenticator();
         this.props = props;
@@ -34,6 +34,14 @@ export default class GameBoardClient extends BindingClass {
         }
     }
 
+    async createGameOutcome(gameOutcome, errorCallback) {
+        try {
+            const response = await this.axiosClient.put(`gameOutcome/${gameOutcome.gameOutcomeId}`, gameOutcome);
+            return response.data.gameOutcomeModel;
+        } catch (error){
+            this.handleError(error, errorCallback);
+        }
+    }
     /**
      * Get the identity of the current user
      * @param errorCallback (Optional) A function to execute if the call fails.

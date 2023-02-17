@@ -6,15 +6,14 @@ import DataStore from '../util/DataStore';
 class ViewGameOutcomes extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayGroupName', 'displayGameOutcomes'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayGroupName'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
 
     async clientLoaded() {
-        document.getElementById('groupName').innerText = "(Loading please wait...)"
+        document.getElementById('groupName').innerText = "(Loading please wait...)";
         await this.displayGroupName();
-        await this.displayGameOutcomes();
     }
 
     async mount() {
@@ -24,24 +23,17 @@ class ViewGameOutcomes extends BindingClass {
     }
 
     async displayGroupName() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        const group = await this.client.getGroup(groupId);
-        document.getElementById('groupName').innerText = group.groupName;
-    }
+            const urlParams = new URLSearchParams(window.location.search);
+            const groupId = urlParams.get('groupId');
+            const group = await this.client.getGroup(groupId);
+            document.getElementById('groupName').innerText = group.groupName;
+        }
 
-    async displayGames() {
-
-    }
-
-    async addGameOutcome() {
-
-    }
 }
 
 const main = async () => {
     const viewGameOutcomes = new ViewGameOutcomes();
-    viewGamesOutcome.mount();
+    viewGameOutcomes.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
