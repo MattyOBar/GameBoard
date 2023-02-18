@@ -40,7 +40,6 @@ class ViewPlayers extends BindingClass {
         document.getElementById('groupName').innerText = group.groupName;
 
         const playerIdsInGroupSet = group.playerIds;
-        console.log(playerIdsInGroupSet);
 
         const playerNames = document.getElementById('displayPlayerNames')
         for (let i = 0; i < playerIdsInGroupSet.length; i++) {

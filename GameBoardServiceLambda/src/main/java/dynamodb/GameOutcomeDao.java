@@ -3,12 +3,16 @@ package dynamodb;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
+
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import dynamodb.models.GameOutcome;
 import exceptions.GameOutcomeNotFoundException;
 import metrics.MetricsConstants;
 import metrics.MetricsPublisher;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -61,13 +65,17 @@ public class GameOutcomeDao {
      * @param groupId the GroupId needed for the lookup.
      * @return the List of GameOutcomes specific to the groupId.
      */
-    public List<GameOutcome> getGameOutcomesByGroupId(String groupId) {
-        GameOutcome gameOutcome = new GameOutcome();
-        gameOutcome.setGroupId(groupId);
+    public List<GameOutcome> getGameOutcomesByGroupId(String groupId, String gameId) {
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":groupId", new AttributeValue().withS(groupId));
+        valueMap.put(":gameId", new AttributeValue().withS(gameId));
 
         DynamoDBQueryExpression<GameOutcome> queryExpression = new DynamoDBQueryExpression<GameOutcome>()
-                .withHashKeyValues(gameOutcome);
-        queryExpression.withConsistentRead(false);
+                .withIndexName(GameOutcome.GROUPANDGAME_INDEX)
+                .withConsistentRead(false)
+                .withKeyConditionExpression("groupId = :groupId and gameId = :gameId")
+                .withExpressionAttributeValues(valueMap);
+
         PaginatedQueryList<GameOutcome> gameOutcomeList = dynamoDBMapper.query(GameOutcome.class, queryExpression);
         return gameOutcomeList;
     }

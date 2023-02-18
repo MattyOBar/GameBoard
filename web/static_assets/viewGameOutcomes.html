@@ -8,26 +8,46 @@
 <body>
     <header class="header" id="header"></header>
     <div class="main">
-        <h3 class="groupName" id="groupName"></h3>
+        <h2 class="groupName" id="groupName"></h2>
         <h5>GameOutcomes:</h5>
-        <div class="displayGames" id="displayGameOutcomes"></div>
+        <div class="displayGameOutcomes" id="displayGameOutcomesHere"></div>
         <div class="addButton" id="addGameOutcomes">
             <button type="button" id="addGameOutcomesButton" onclick="showForm()">Add New Outcome!</button>
+            <p id="showPlayerMessage" style="display:none">Please select the winner.</p>
             <select id="playersWinDropDown" style="display: none;">
             </select>
+            <p id="showGameMessage" style="display:none">Please select the game.</p>
             <select id="loadGamesDropDown" style="display: none;">
             </select>
-            <button type="button" id="submitButton" onclick="showForm()" style="display: none;">Submit!</button>
+            <button type="button" id="submitButton" style="display: none;">Submit!</button>
             <script type="text/javascript">
                 function showForm() {
                     document.getElementById('playersWinDropDown').style.display = 'block';
                     document.getElementById('loadGamesDropDown').style.display = 'block';
+                    document.getElementById('showPlayerMessage').style.display = 'block';
+                    document.getElementById('showGameMessage').style.display = 'block';
                     document.getElementById('submitButton').style.display = 'block';
                 }
             </script>
         </div>
         <div class="removeButton" id="removeGameOutcomes">
-            <button type="button" id="removeGameOutcomesButton">Delete Outcome!</button>
+            <button type="button" id="removeGameOutcomesButton" onclick="showFormRemove()">Delete Outcome!</button>
+            <p id="showPlayerMessageRemove" style="display:none">Please select the player.</p>
+            <select id="playersWinDropDownRemove" style="display: none;">
+            </select>
+            <p id="showGameMessageRemove" style="display:none">Please select the game.</p>
+            <select id="loadGamesDropDownRemove" style="display: none;">
+            </select>
+            <button type="button" id="submitButtonRemove" style="display: none;">Submit!</button>
+            <script type="text/javascript">
+                function showFormRemove() {
+                    document.getElementById('playersWinDropDownRemove').style.display = 'block';
+                    document.getElementById('loadGamesDropDownRemove').style.display = 'block';
+                    document.getElementById('showPlayerMessageRemove').style.display = 'block';
+                    document.getElementById('showGameMessageRemove').style.display = 'block';
+                    document.getElementById('submitButtonRemove').style.display = 'block';
+                }
+                </script>
         </div>
     </div>
 

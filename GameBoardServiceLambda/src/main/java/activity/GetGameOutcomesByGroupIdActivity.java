@@ -5,6 +5,7 @@ import activity.result.GetGameOutcomesByGroupIdResult;
 import converters.ModelConverter;
 import dynamodb.GameOutcomeDao;
 import dynamodb.models.GameOutcome;
+import exceptions.GameInvalidException;
 import exceptions.GroupInvalidException;
 import models.GameOutcomeModel;
 import org.apache.logging.log4j.LogManager;
@@ -41,8 +42,12 @@ public class GetGameOutcomesByGroupIdActivity {
         if (groupId == null || !groupId.startsWith("GRP") || groupId.length() != 8) {
             throw new GroupInvalidException("GroupId: " + groupId + " is invalid!");
         }
+        String gameId = getGameOutcomesByGroupIdRequest.getGameId();
+        if (gameId == null || !gameId.startsWith("GM") || gameId.length() != 7) {
+            throw new GameInvalidException("GameId: " + gameId + " is invalid!");
+        }
 
-        List<GameOutcome> gameOutcomeList = gameOutcomeDao.getGameOutcomesByGroupId(groupId);
+        List<GameOutcome> gameOutcomeList = gameOutcomeDao.getGameOutcomesByGroupId(groupId, gameId);
         List<GameOutcomeModel> gameOutcomeModelList = new ArrayList<>();
         for (GameOutcome gameOutcome : gameOutcomeList) {
             GameOutcomeModel gameOutcomeModel = new ModelConverter().toGameOutcomeModel(gameOutcome);

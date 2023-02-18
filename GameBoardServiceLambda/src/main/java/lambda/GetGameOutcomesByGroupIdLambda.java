@@ -11,12 +11,16 @@ public class GetGameOutcomesByGroupIdLambda
     @Override
     public LambdaResponse handleRequest(LambdaRequest<GetGameOutcomesByGroupIdRequest> input, Context context) {
         return super.runActivity(
-            () -> input.fromPath(path ->
-                    GetGameOutcomesByGroupIdRequest.builder()
-                            .withGroupId(path.get("groupId"))
-                            .build()),
+            () -> {
+                GetGameOutcomesByGroupIdRequest request = input.fromBody(GetGameOutcomesByGroupIdRequest.class);
+                return input.fromPath(path ->
+                        GetGameOutcomesByGroupIdRequest.builder()
+                                .withGroupId(path.get("groupId"))
+                                .withGameId(request.getGameId())
+                                .build());
+            },
             (request, serviceComponent) ->
                     serviceComponent.provideGetGameOutcomesByGroupIdActivity().handleRequest(request)
-                    );
+        );
     }
 }

@@ -15,7 +15,8 @@ export default class GameBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createGameOutcome', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame', 'updateGroup'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createGameOutcome', 'getGameOutcome',
+        'getGameOutcomeByGroupId', 'deleteGameOutcome', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame', 'updateGroup'];
         this.bindClassMethods(methodsToBind, this);
         this.authenticator = new Authenticator();
         this.props = props;
@@ -34,18 +35,42 @@ export default class GameBoardClient extends BindingClass {
         }
     }
 
-    async createGameOutcome(groupId, gameId, playerWinId, errorCallback) {
+    async createGameOutcome(gameOutcome, errorCallback) {
         try {
-            const response = await this.axiosClient.put(`gameOutcome`, {
-            groupId: groupId,
-            gameId: gameId,
-            playerWinId: playerWinId
-            });
+            const response = await this.axiosClient.put(`gameOutcomes`, gameOutcome);
             return response.data.gameOutcomeModel;
         } catch (error){
             this.handleError(error, errorCallback);
         }
     }
+
+    async getGameOutcome(id, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`gameOutcomes/${id}`);
+            return response.data.gameOutcomeModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    async getGameOutcomeByGroupId(groupId, gameId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`gameOutcomes/getGameOutcomesByGroupId/${groupId}`, {gameId:gameId});
+            return response.data.gameOutcomeModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    async deleteGameOutcome(id, errorCallback) {
+        try {
+            const response = await this.axiosClient.delete(`gameOutcomes/${id}`);
+            return response.data.gameOutcomeModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
     /**
      * Get the identity of the current user
      * @param errorCallback (Optional) A function to execute if the call fails.
