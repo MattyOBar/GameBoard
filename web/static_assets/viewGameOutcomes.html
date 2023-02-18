@@ -12,7 +12,19 @@
         <h5>GameOutcomes:</h5>
         <div class="displayGames" id="displayGameOutcomes"></div>
         <div class="addButton" id="addGameOutcomes">
-            <button type="button" id="addGameOutcomesButton">Add New Outcome!</button>
+            <button type="button" id="addGameOutcomesButton" onclick="showForm()">Add New Outcome!</button>
+            <select id="playersWinDropDown" style="display: none;">
+            </select>
+            <select id="loadGamesDropDown" style="display: none;">
+            </select>
+            <button type="button" id="submitButton" onclick="showForm()" style="display: none;">Submit!</button>
+            <script type="text/javascript">
+                function showForm() {
+                    document.getElementById('playersWinDropDown').style.display = 'block';
+                    document.getElementById('loadGamesDropDown').style.display = 'block';
+                    document.getElementById('submitButton').style.display = 'block';
+                }
+            </script>
         </div>
         <div class="removeButton" id="removeGameOutcomes">
             <button type="button" id="removeGameOutcomesButton">Delete Outcome!</button>
