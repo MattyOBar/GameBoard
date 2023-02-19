@@ -113,7 +113,7 @@ class ViewGameOutcomes extends BindingClass {
             const game = await this.client.getGame(gameOutcome.gameId);
             const player = await this.client.getPlayer(gameOutcome.playerWinId);
             let element = document.createElement("div");
-            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName;
+            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName +" The OutcomeId is: " + gameOutcome.gameOutcomeId;
             element.innerText = printThis;
             gameOutcomeEl.append(element);
         }
@@ -122,12 +122,28 @@ class ViewGameOutcomes extends BindingClass {
     async deleteGameOutcome() {
         const urlParams = new URLSearchParams(window.location.search);
         const groupId = urlParams.get('groupId');
-        const group = await this.client.getGroup(groupId);
+        var group = await this.client.getGroup(groupId);
         const gameId = document.getElementById("loadGamesDropDownRemove").value;
         console.log(groupId);
         console.log(gameId);
-        const gameOutcomes = await this.client.getGameOutcomeByGroupId(groupId);
-        console.log("BANG BANG GREEN FLAG " + gameOutcomes);
+        const gameOutcomeId = document.getElementById("IWantThisId").value;
+        const gameOutcome = await this.client.deleteGameOutcome(gameOutcomeId);
+        var outcomes = group.gameOutcomeIds;
+        var updatedGameOutcomeIds = new Array();
+        for (let i = 0; i < outcomes.length; i++) {
+            if (outcomes[i] != gameOutcomeId){
+                updatedGameOutcomeIds.push(outcomes[i]);
+            }
+        }
+        console.log(updatedGameOutcomeIds)
+        group.gameOutcomeIds = updatedGameOutcomeIds;
+        await this.client.updateGroup(group);
+        location.reload();
+
+        console.log(gameOutcome);
+
+//        const gameOutcomeModelList = await this.client.getGameOutcomeByGroupId(groupId, gameId);
+//        console.log("BANG BANG GREEN FLAG " + gameOutcomeModelList);
 //        const playerWinId = document.getElementById("playersWinDropDown").value;
     }
 
