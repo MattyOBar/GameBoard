@@ -1,13 +1,13 @@
 package activity.request;
 
-public class GetGroupsByPlayerRequest {
+public class GetGroupsByPlayerIdRequest {
     private final String playerId;
 
     /**
      * Request object containing the PlayerId.
      * @param playerId the playerId.
      */
-    public GetGroupsByPlayerRequest(String playerId) {
+    public GetGroupsByPlayerIdRequest(String playerId) {
         this.playerId = playerId;
     }
 
@@ -35,8 +35,8 @@ public class GetGroupsByPlayerRequest {
             return this;
         }
 
-        public GetGroupsByPlayerRequest build() {
-            return new GetGroupsByPlayerRequest(playerId);
+        public GetGroupsByPlayerIdRequest build() {
+            return new GetGroupsByPlayerIdRequest(playerId);
         }
     }
 }
