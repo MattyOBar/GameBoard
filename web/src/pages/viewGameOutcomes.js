@@ -6,7 +6,8 @@ import DataStore from '../util/DataStore';
 class ViewGameOutcomes extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayGroupName', 'createNewGameOutcome', 'loadPlayersDropDownAdd', 'loadPlayersDropDownRemove', 'displayGameOutcomes', 'deleteGameOutcome'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayGroupName', 'createNewGameOutcome',
+        'loadPlayersDropDownAdd', 'loadPlayersDropDownRemove', 'displayGameOutcomes', 'deleteGameOutcome'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
@@ -124,7 +125,7 @@ class ViewGameOutcomes extends BindingClass {
         const group = await this.client.getGroup(groupId);
         const gameId = document.getElementById("loadGamesDropDownRemove").value;
         const gameOutcomes = await this.client.getGameOutcomeByGroupId(groupId, gameId);
-        console.log(gameOutcomes);
+        console.log("BANG BANG GREEN FLAG " + gameOutcomes);
 //        const playerWinId = document.getElementById("playersWinDropDown").value;
     }
 

@@ -55,7 +55,7 @@ export default class GameBoardClient extends BindingClass {
 
     async getGameOutcomeByGroupId(groupId, gameId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`gameOutcomes/getGameOutcomesByGroupId/${groupId}`, {gameId:gameId});
+            const response = await this.axiosClient.get(`gameOutcomes/getGameOutcomesByGroupId/${groupId}`, gameId);
             return response.data.gameOutcomeModel;
         } catch (error) {
             this.handleError(error, errorCallback);
