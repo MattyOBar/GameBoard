@@ -124,7 +124,9 @@ class ViewGameOutcomes extends BindingClass {
         const groupId = urlParams.get('groupId');
         const group = await this.client.getGroup(groupId);
         const gameId = document.getElementById("loadGamesDropDownRemove").value;
-        const gameOutcomes = await this.client.getGameOutcomeByGroupId(groupId, gameId);
+        console.log(groupId);
+        console.log(gameId);
+        const gameOutcomes = await this.client.getGameOutcomeByGroupId(groupId);
         console.log("BANG BANG GREEN FLAG " + gameOutcomes);
 //        const playerWinId = document.getElementById("playersWinDropDown").value;
     }
