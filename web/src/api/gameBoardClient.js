@@ -37,6 +37,7 @@ export default class GameBoardClient extends BindingClass {
 
     async createGameOutcome(gameOutcome, errorCallback) {
         try {
+
             const response = await this.axiosClient.post(`gameOutcomes`, gameOutcome);
             return response.data.gameOutcomeModel;
         } catch (error){

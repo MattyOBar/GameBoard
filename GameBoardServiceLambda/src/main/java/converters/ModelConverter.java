@@ -72,7 +72,6 @@ public class ModelConverter {
                 .withGroupID(gameOutcome.getGroupId())
                 .withGameId(gameOutcome.getGameId())
                 .withPlayerWinId(gameOutcome.getPlayerWinId())
-                .withPlayerLoseIds(gameOutcome.getPlayerLoseIds())
                 .build();
     }
 }

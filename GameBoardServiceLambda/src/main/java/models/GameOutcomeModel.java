@@ -8,15 +8,14 @@ public class GameOutcomeModel {
     private final String groupId;
     private final String gameId;
     private final String playerWinId;
-    private final Set<String> playerLoseIds;
+
 
     private GameOutcomeModel(String gameOutcomeId, String groupId, String gameId,
-                             String playerWinId, Set<String> playerLoseIds) {
+                             String playerWinId) {
         this.gameOutcomeId = gameOutcomeId;
         this.groupId = groupId;
         this.gameId = gameId;
         this.playerWinId = playerWinId;
-        this.playerLoseIds = playerLoseIds;
     }
 
     public String getGameOutcomeId() {
@@ -35,9 +34,6 @@ public class GameOutcomeModel {
         return playerWinId;
     }
 
-    public Set<String> getPlayerLoseIds() {
-        return playerLoseIds;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,14 +47,13 @@ public class GameOutcomeModel {
         return Objects.equals(getGameOutcomeId(), that.getGameOutcomeId()) &&
                 Objects.equals(getGroupId(), that.getGroupId()) &&
                 Objects.equals(getGameId(), that.getGameId()) &&
-                Objects.equals(getPlayerWinId(), that.getPlayerWinId()) &&
-                Objects.equals(getPlayerLoseIds(), that.getPlayerLoseIds());
+                Objects.equals(getPlayerWinId(), that.getPlayerWinId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getGameOutcomeId(), getGroupId(), getGameId(),
-                getPlayerWinId(), getPlayerLoseIds());
+                getPlayerWinId());
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -71,7 +66,6 @@ public class GameOutcomeModel {
         private String groupId;
         private String gameId;
         private String playerWinId;
-        private Set<String> playerLoseIds;
 
         public Builder withGameOutcomeId(String gameOutcomeId) {
             this.gameOutcomeId = gameOutcomeId;
@@ -93,13 +87,8 @@ public class GameOutcomeModel {
             return this;
         }
 
-        public Builder withPlayerLoseIds(Set<String> playerLoseIds) {
-            this.playerLoseIds = playerLoseIds;
-            return this;
-        }
-
         public GameOutcomeModel build() {
-            return new GameOutcomeModel(gameOutcomeId, groupId, gameId, playerWinId, playerLoseIds);
+            return new GameOutcomeModel(gameOutcomeId, groupId, gameId, playerWinId);
         }
 
     }

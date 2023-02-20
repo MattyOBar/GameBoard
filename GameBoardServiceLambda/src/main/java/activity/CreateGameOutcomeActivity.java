@@ -43,14 +43,12 @@ public class CreateGameOutcomeActivity {
         String groupId = createGameOutcomeRequest.getGroupId();
         String gameId = createGameOutcomeRequest.getGameId();
         String playerWinId = createGameOutcomeRequest.getPlayerWinId();
-        Set<String> playerLoseIds = createGameOutcomeRequest.getPlayerLoseIds();
 
         GameOutcome gameOutcome = new GameOutcome();
         gameOutcome.setGameOutcomeId(gameOutcomeId);
         gameOutcome.setGroupId(groupId);
         gameOutcome.setGameId(gameId);
         gameOutcome.setPlayerWinId(playerWinId);
-        gameOutcome.setPlayerLoseIds(playerLoseIds);
 
         gameOutcomeDao.saveGameOutcome(gameOutcome);
         GameOutcomeModel gameOutcomeModel = new ModelConverter().toGameOutcomeModel(gameOutcome);
