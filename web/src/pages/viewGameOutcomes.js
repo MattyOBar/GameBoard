@@ -114,7 +114,7 @@ class ViewGameOutcomes extends BindingClass {
             const game = await this.client.getGame(gameOutcome.gameId);
             const player = await this.client.getPlayer(gameOutcome.playerWinId);
             let element = document.createElement("div");
-            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName +" The OutcomeId is: " + gameOutcome.gameOutcomeId;
+            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName;
             element.innerText = printThis;
             gameOutcomeEl.append(element);
         }
