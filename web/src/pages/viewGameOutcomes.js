@@ -94,6 +94,7 @@ class ViewGameOutcomes extends BindingClass {
         const playerWinId = document.getElementById("playersWinDropDown").value;
         var gameOutcome = {groupId:groupId, gameId: gameId, playerWinId: playerWinId};
         gameOutcome = await this.client.createGameOutcome(gameOutcome);
+
         var updatedGameOutcomeIds = group.gameOutcomeIds;
         updatedGameOutcomeIds.push(gameOutcome.gameOutcomeId);
         group.gameOutcomeIds = updatedGameOutcomeIds;
@@ -124,27 +125,33 @@ class ViewGameOutcomes extends BindingClass {
         const groupId = urlParams.get('groupId');
         var group = await this.client.getGroup(groupId);
         const gameId = document.getElementById("loadGamesDropDownRemove").value;
-        console.log(groupId);
-        console.log(gameId);
-        const gameOutcomeId = document.getElementById("IWantThisId").value;
-        const gameOutcome = await this.client.deleteGameOutcome(gameOutcomeId);
-        var outcomes = group.gameOutcomeIds;
-        var updatedGameOutcomeIds = new Array();
-        for (let i = 0; i < outcomes.length; i++) {
-            if (outcomes[i] != gameOutcomeId){
-                updatedGameOutcomeIds.push(outcomes[i]);
+        const playerId = document.getElementById("playersWinDropDownRemove").value;
+        console.log("groupId"+ groupId);
+        console.log("GameId" + gameId);
+        var gameOutcomeModelList = await this.client.getGameOutcomeByGroupId(groupId, gameId);
+
+        console.log("gameOutcomeList" + gameOutcomeModelList);
+        var deleted = false;
+        console.log(gameOutcomeModelList[0]);
+        for (let i = 0; i < gameOutcomeModelList.length; i++) {
+            if (playerId == gameOutcomeModelList[i].playerWinId && deleted == false) {
+            console.log("YOU GOT HERE");
+                await this.client.deleteGameOutcome(gameOutcomeModelList[i]);
+                var outcomes = group.gameOutcomeIds;
+                console.log(outcomes);
+                var updatedGameOutcomeIds = new Array();
+                for (let j = 0; j < outcomes.length; j++) {
+                    if (outcomes[j] != gameOutcomeModelList[i].gameOutcomeId){
+                        updatedGameOutcomeIds.push(outcomes[j]);
+                    }
+                }
+                console.log(updatedGameOutcomeIds)
+                group.gameOutcomeIds = updatedGameOutcomeIds;
+                await this.client.updateGroup(group);
+                deleted = true;
+                location.reload()
             }
         }
-        console.log(updatedGameOutcomeIds)
-        group.gameOutcomeIds = updatedGameOutcomeIds;
-        await this.client.updateGroup(group);
-        location.reload();
-
-        console.log(gameOutcome);
-
-//        const gameOutcomeModelList = await this.client.getGameOutcomeByGroupId(groupId, gameId);
-//        console.log("BANG BANG GREEN FLAG " + gameOutcomeModelList);
-//        const playerWinId = document.getElementById("playersWinDropDown").value;
     }
 
 }

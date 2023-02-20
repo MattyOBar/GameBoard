@@ -32,10 +32,6 @@
         </div>
         <div class="removeButton" id="removeGameOutcomes">
             <button type="button" id="removeGameOutcomesButton" onclick="showFormRemove()">Delete Outcome!</button>
-
-            <form id="inputGameOutcomeId" style="display:none">
-                <input type="text" id="IWantThisId"></input>
-            </form>
             <p id="showPlayerMessageRemove" style="display:none">Please select the player.</p>
             <select id="playersWinDropDownRemove" style="display: none;">
             </select>
@@ -50,7 +46,6 @@
                     document.getElementById('showPlayerMessageRemove').style.display = 'block';
                     document.getElementById('showGameMessageRemove').style.display = 'block';
                     document.getElementById('submitButtonRemove').style.display = 'block';
-                    document.getElementById('inputGameOutcomeId').style.display = 'block';
                 }
                 </script>
         </div>

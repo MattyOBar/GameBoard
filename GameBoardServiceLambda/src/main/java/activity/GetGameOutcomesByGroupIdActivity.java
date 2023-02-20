@@ -37,7 +37,6 @@ public class GetGameOutcomesByGroupIdActivity {
      * @return getGameOutcomesByGroupIdResult the object containing the list of GameOutcomes
      */
     public GetGameOutcomesByGroupIdResult handleRequest(final GetGameOutcomesByGroupIdRequest getGameOutcomesByGroupIdRequest) {
-        log.info("BANG BANG WE HIT A THANG");
         log.info("Received GetGameOutcomesByGroupIdRequest {}", getGameOutcomesByGroupIdRequest);
         String groupId = getGameOutcomesByGroupIdRequest.getGroupId();
         if (groupId == null || !groupId.startsWith("GRP") || groupId.length() != 8) {
