@@ -319,7 +319,7 @@ Resources:
           Type: Api
           Properties:
             Path: /gameOutcomes
-            Method: put
+            Method: post
 
   GetPlayerLambda:
     Type: AWS::Serverless::Function
@@ -490,7 +490,7 @@ Resources:
           Type: Api
           Properties:
             Path: /groups/{groupId}
-            Method: post
+            Method: put
 
   #-----------------------------------------------------
   # DynamoDB Configuration

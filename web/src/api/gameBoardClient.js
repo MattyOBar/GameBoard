@@ -37,7 +37,7 @@ export default class GameBoardClient extends BindingClass {
 
     async createGameOutcome(gameOutcome, errorCallback) {
         try {
-            const response = await this.axiosClient.put(`gameOutcomes`, gameOutcome);
+            const response = await this.axiosClient.post(`gameOutcomes`, gameOutcome);
             return response.data.gameOutcomeModel;
         } catch (error){
             this.handleError(error, errorCallback);
@@ -135,7 +135,7 @@ export default class GameBoardClient extends BindingClass {
 
     async updateGroup(group, errorCallback) {
         try {
-            const response = await this.axiosClient.post(`groups/${group.groupId}`, group);
+            const response = await this.axiosClient.put(`groups/${group.groupId}`, group);
             return response.data.groupModel;
         } catch (error){
             this.handleError(error, errorCallback);
