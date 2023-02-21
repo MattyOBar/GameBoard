@@ -36,14 +36,12 @@ public class GetGameOutcomeActivityTest {
         String gameId = "GM00001";
         String groupId = "GRP00001";
         String playerWinId = "P00001";
-        Set<String> playerLoseIds = Set.of("P00002", "P00003");
 
         GameOutcome gameOutcome = new GameOutcome();
         gameOutcome.setGameOutcomeId(gameOutcomeId);
         gameOutcome.setGameId(gameId);
         gameOutcome.setGroupId(groupId);
         gameOutcome.setPlayerWinId(playerWinId);
-        gameOutcome.setPlayerLoseIds(playerLoseIds);
 
         when(gameOutcomeDao.getGameOutcome(gameOutcomeId)).thenReturn(gameOutcome);
 
@@ -59,9 +57,5 @@ public class GetGameOutcomeActivityTest {
         assertEquals(gameOutcome.getGameId(), result.getGameOutcomeModel().getGameId());
         assertEquals(gameOutcome.getGroupId(), result.getGameOutcomeModel().getGroupId());
         assertEquals(gameOutcome.getPlayerWinId(), result.getGameOutcomeModel().getPlayerWinId());
-        assertEquals(gameOutcome.getPlayerLoseIds(), result.getGameOutcomeModel().getPlayerLoseIds());
-
-
-
     }
 }

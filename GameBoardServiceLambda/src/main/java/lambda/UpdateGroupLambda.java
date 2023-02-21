@@ -7,20 +7,20 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public class UpdateGroupLambda
         extends LambdaActivityRunner<UpdateGroupRequest, UpdateGroupResult>
-        implements RequestHandler<LambdaRequest<UpdateGroupRequest>, LambdaResponse> {
+        implements RequestHandler<AuthenticatedLambdaRequest<UpdateGroupRequest>, LambdaResponse> {
     @Override
-    public LambdaResponse handleRequest(LambdaRequest<UpdateGroupRequest> input, Context context) {
+    public LambdaResponse handleRequest(AuthenticatedLambdaRequest<UpdateGroupRequest> input, Context context) {
         return super.runActivity(
             () -> {
-                UpdateGroupRequest request = input.fromBody(UpdateGroupRequest.class);
-                return input.fromPath(path ->
+                UpdateGroupRequest unauthenticatedRequest = input.fromBody(UpdateGroupRequest.class);
+                return input.fromUserClaims(claims ->
                     UpdateGroupRequest.builder()
-                        .withGroupId(path.get("groupId"))
-                        .withGroupName(request.getGroupName())
-                        .withFavoriteGameId(request.getFavoriteGameId())
-                        .withGameIds(request.getGameIds())
-                        .withPlayerIds(request.getPlayerIds())
-                        .withGameOutcomeIds(request.getGameOutcomeIds())
+                        .withGroupId(unauthenticatedRequest.getGroupId())
+                        .withGroupName(unauthenticatedRequest.getGroupName())
+                        .withFavoriteGameId(unauthenticatedRequest.getFavoriteGameId())
+                        .withGameIds(unauthenticatedRequest.getGameIds())
+                        .withPlayerIds(unauthenticatedRequest.getPlayerIds())
+                        .withGameOutcomeIds(unauthenticatedRequest.getGameOutcomeIds())
                         .build());
             },
             (request, serviceComponent) -> serviceComponent.provideUpdateGroupAcitivty().handleRequest(request)

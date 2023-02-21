@@ -199,55 +199,49 @@ Resources:
                   - logs:PutLogEvents
                   - cloudwatch:PutMetricData
                 Resource: '*'
+        - PolicyName: 'AccessGroupIdAndGameIdIndex'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/gameOutcomes/index/GroupIdAndGameIdIndex"
         - PolicyName: 'AccessPlayersTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource:
-                  Fn::Join:
-                            - ''
-                            - - 'arn:aws:dynamodb:'
-                              - !Ref 'AWS::Region'
-                              - ':'
-                              - !Ref 'AWS::AccountId'
-                              - ':table/Players'
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/players"
         - PolicyName: 'AccessGroupsTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource:
-                  Fn::Join:
-                    - ''
-                    - - 'arn:aws:dynamodb:'
-                      - !Ref 'AWS::Region'
-                      - ':'
-                      - !Ref 'AWS::AccountId'
-                      - ':table/Groups'
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/groups"
         - PolicyName: 'AccessGamesTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource:
-                  Fn::Join:
-                    - ''
-                    - - 'arn:aws:dynamodb:'
-                      - !Ref 'AWS::Region'
-                      - ':'
-                      - !Ref 'AWS::AccountId'
-                      - ':table/Games'
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/games"
+        - PolicyName: 'AccessGameOutcomesTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/gameOutcomes"
+
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
-#
   CreateGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreateGroupLambda::handleRequest
       Runtime: java11
@@ -268,6 +262,7 @@ Resources:
   CreatePlayerLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreatePlayerLambda::handleRequest
       Runtime: java11
@@ -287,6 +282,7 @@ Resources:
   CreateGameLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreateGameLambda::handleRequest
       Runtime: java11
@@ -306,6 +302,7 @@ Resources:
   CreateGameOutcomeLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreateGameOutcomeLambda::handleRequest
       Runtime: java11
@@ -320,11 +317,12 @@ Resources:
           Type: Api
           Properties:
             Path: /gameOutcomes
-            Method: put
+            Method: post
 
   GetPlayerLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetPlayerLambda::handleRequest
       Runtime: java11
@@ -340,10 +338,13 @@ Resources:
           Properties:
             Path: /players/{playerId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGroupLambda::handleRequest
       Runtime: java11
@@ -359,10 +360,13 @@ Resources:
           Properties:
             Path: /groups/{groupId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGameLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGameLambda::handleRequest
       Runtime: java11
@@ -378,10 +382,13 @@ Resources:
           Properties:
             Path: /games/{gameId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGameOutcomeLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGameOutcomeLambda::handleRequest
       Runtime: java11
@@ -397,10 +404,13 @@ Resources:
           Properties:
             Path: /gameOutcomes/{gameOutcomeId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGroupByPlayerLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGroupsByPlayerIdLambda::handleRequest
       Runtime: java11
@@ -416,10 +426,13 @@ Resources:
           Properties:
             Path: /groups/getGroupsByPlayerId/{playerId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGamesByGroupIdLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGamesByGroupIdLambda::handleRequest
       Runtime: java11
@@ -435,10 +448,13 @@ Resources:
           Properties:
             Path: /groups/getGamesByGroupId/{groupId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGameOutcomesByGroupIdLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGameOutcomesByGroupIdLambda::handleRequest
       Runtime: java11
@@ -452,12 +468,15 @@ Resources:
         GameBoardService:
           Type: Api
           Properties:
-            Path: /gameOutcomes/getGameOutcomesByGroupId/{groupId}
+            Path: /gameOutcomes/getGameOutcomesByGroupId/{groupId}/{gameId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   DeleteGameOutcomeLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.DeleteGameOutcomeLambda::handleRequest
       Runtime: java11
@@ -473,10 +492,13 @@ Resources:
           Properties:
             Path: /gameOutcomes/{gameOutcomeId}
             Method: delete
+            Auth:
+              Authorizer: 'NONE'
 
   UpdateGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.UpdateGroupLambda::handleRequest
       Runtime: java11
@@ -491,7 +513,7 @@ Resources:
           Type: Api
           Properties:
             Path: /groups/{groupId}
-            Method: post
+            Method: put
 
   #-----------------------------------------------------
   # DynamoDB Configuration
@@ -583,6 +605,7 @@ Outputs:
     Description: "The URL of the deployed front-end application (COGNITO_REDIRECT_SIGNIN)."
     Value: !Sub "https://${CloudfrontDistribution.DomainName}"
     Condition: DeployCloudFront
+
   CognitoRedirectSignout:
     Description: "The URL of the deployed front-end application (COGNITO_REDIRECT_SIGNOUT)."
     Value: !Sub "https://${CloudfrontDistribution.DomainName}"

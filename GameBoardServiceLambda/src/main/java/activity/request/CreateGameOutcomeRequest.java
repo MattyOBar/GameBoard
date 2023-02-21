@@ -1,6 +1,7 @@
 package activity.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import java.util.Set;
 
@@ -10,7 +11,6 @@ public class CreateGameOutcomeRequest {
     private final String groupId;
     private final String gameId;
     private final String playerWinId;
-    private final Set<String> playerLoseIds;
 
     /**
      * Instantiates the request for creating a GameOutcome.
@@ -18,15 +18,13 @@ public class CreateGameOutcomeRequest {
      * @param groupId The groupId.
      * @param gameId GameId.
      * @param playerWinId playerWinId.
-     * @param playerLoseIds playerLoseId set.
      */
     public CreateGameOutcomeRequest(String gameOutcomeId, String groupId, String gameId,
-                                    String playerWinId, Set<String> playerLoseIds) {
+                                    String playerWinId) {
         this.gameOutcomeId = gameOutcomeId;
         this.groupId = groupId;
         this.gameId = gameId;
         this.playerWinId = playerWinId;
-        this.playerLoseIds = playerLoseIds;
     }
 
     public String getGameOutcomeId() {
@@ -45,31 +43,27 @@ public class CreateGameOutcomeRequest {
         return playerWinId;
     }
 
-    public Set<String> getPlayerLoseIds() {
-        return playerLoseIds;
-    }
-
     @Override
     public String toString() {
         return "CreateGameOutcomeRequest{" +
                 "gameOutcomeId='" + gameOutcomeId + '\'' +
                 ", groupId='" + groupId + '\'' +
                 ", gameId='" + gameId + '\'' +
-                ", playerWinId='" + playerWinId + '\'' +
-                ", playerLoseIds=" + playerLoseIds +
+                ", playerWinId='" + playerWinId +
                 '}';
     }
+
 
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
         return new Builder();
     }
+    @JsonPOJOBuilder
     public static class Builder {
         private String gameOutcomeId;
         private String groupId;
         private String gameId;
         private String playerWinId;
-        private Set<String> playerLoseIds;
 
         public Builder withGameOutcomeId(String gameOutcomeId) {
             this.gameOutcomeId = gameOutcomeId;
@@ -91,13 +85,8 @@ public class CreateGameOutcomeRequest {
             return this;
         }
 
-        public Builder withPlayerLoseIds(Set<String> playerLoseIds) {
-            this.playerLoseIds = playerLoseIds;
-            return this;
-        }
-
         public CreateGameOutcomeRequest build() {
-            return new CreateGameOutcomeRequest(gameOutcomeId, groupId, gameId, playerWinId, playerLoseIds);
+            return new CreateGameOutcomeRequest(gameOutcomeId, groupId, gameId, playerWinId);
         }
     }
 }

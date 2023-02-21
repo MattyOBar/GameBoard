@@ -12,7 +12,6 @@ public class GameOutcome {
     private String groupId;
     private String gameId;
     private String playerWinId;
-    private Set<String> playerLoseIds;
 
     @DynamoDBHashKey(attributeName = "gameOutcomeId")
     public String getGameOutcomeId() {
@@ -36,11 +35,6 @@ public class GameOutcome {
         return playerWinId;
     }
 
-    @DynamoDBAttribute(attributeName = "playerLoseIds")
-    public Set<String> getPlayerLoseIds() {
-        return playerLoseIds;
-    }
-
     public void setGameOutcomeId(String gameOutcomeId) {
         this.gameOutcomeId = gameOutcomeId;
     }
@@ -57,9 +51,6 @@ public class GameOutcome {
         this.playerWinId = playerWinId;
     }
 
-    public void setPlayerLoseIds(Set<String> playerLoseIds) {
-        this.playerLoseIds = playerLoseIds;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -73,14 +64,13 @@ public class GameOutcome {
         return Objects.equals(getGameOutcomeId(), that.getGameOutcomeId()) &&
                 Objects.equals(getGroupId(), that.getGroupId()) &&
                 Objects.equals(getGameId(), that.getGameId()) &&
-                Objects.equals(getPlayerWinId(), that.getPlayerWinId()) &&
-                Objects.equals(getPlayerLoseIds(), that.getPlayerLoseIds());
+                Objects.equals(getPlayerWinId(), that.getPlayerWinId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getGameOutcomeId(), getGroupId(), getGameId(),
-                getPlayerWinId(), getPlayerLoseIds());
+                getPlayerWinId());
     }
 
     @Override
@@ -89,8 +79,7 @@ public class GameOutcome {
                 "gameOutcomeId='" + gameOutcomeId + '\'' +
                 ", groupId='" + groupId + '\'' +
                 ", gameId='" + gameId + '\'' +
-                ", playerWinId='" + playerWinId + '\'' +
-                ", playerLoseIds=" + playerLoseIds +
+                ", playerWinId='" + playerWinId +
                 '}';
     }
 }

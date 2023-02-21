@@ -57,8 +57,7 @@ class ViewPlayers extends BindingClass {
         const group = await this.client.getGroup(groupId);
         var updatedPlayerIds = group.playerIds;
         updatedPlayerIds.push(playerId);
-        group.playerIds = updatedPlayerIds;
-        await this.client.updateGroup(group);
+        await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
         location.reload();
     }
 
@@ -73,10 +72,7 @@ class ViewPlayers extends BindingClass {
                 updatedPlayerIds.push(group.playerIds[i]);
             }
         }
-        console.log(updatedPlayerIds);
-        group.playerIds = updatedPlayerIds;
-        console.log(group.playerIds);
-        await this.client.updateGroup(group);
+        await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
         location.reload();
     }
 }

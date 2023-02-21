@@ -74,6 +74,7 @@ public class GameOutcomeDao {
                 .withIndexName(GameOutcome.GROUPANDGAME_INDEX)
                 .withConsistentRead(false)
                 .withKeyConditionExpression("groupId = :groupId and gameId = :gameId")
+//                .withFilterExpression("playerWinId = :playerWinId")
                 .withExpressionAttributeValues(valueMap);
 
         PaginatedQueryList<GameOutcome> gameOutcomeList = dynamoDBMapper.query(GameOutcome.class, queryExpression);

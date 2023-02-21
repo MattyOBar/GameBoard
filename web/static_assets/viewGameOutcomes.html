@@ -3,14 +3,16 @@
 <head>
     <script type="text/javascript" src="assets/viewGameOutcomes.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>GameBoard</title>>
+    <title>GameBoard</title>
 </head>
 <body>
     <header class="header" id="header"></header>
     <div class="main">
         <h2 class="groupName" id="groupName"></h2>
         <h5>GameOutcomes:</h5>
-        <div class="displayGameOutcomes" id="displayGameOutcomesHere"></div>
+        <div class="displayGameOutcomes" id="displayGameOutcomesHere">
+            <h5></h5>
+        </div>
         <div class="addButton" id="addGameOutcomes">
             <button type="button" id="addGameOutcomesButton" onclick="showForm()">Add New Outcome!</button>
             <p id="showPlayerMessage" style="display:none">Please select the winner.</p>
@@ -32,10 +34,6 @@
         </div>
         <div class="removeButton" id="removeGameOutcomes">
             <button type="button" id="removeGameOutcomesButton" onclick="showFormRemove()">Delete Outcome!</button>
-
-            <form id="inputGameOutcomeId" style="display:none">
-                <input type="text" id="IWantThisId"></input>
-            </form>
             <p id="showPlayerMessageRemove" style="display:none">Please select the player.</p>
             <select id="playersWinDropDownRemove" style="display: none;">
             </select>
@@ -50,7 +48,6 @@
                     document.getElementById('showPlayerMessageRemove').style.display = 'block';
                     document.getElementById('showGameMessageRemove').style.display = 'block';
                     document.getElementById('submitButtonRemove').style.display = 'block';
-                    document.getElementById('inputGameOutcomeId').style.display = 'block';
                 }
                 </script>
         </div>

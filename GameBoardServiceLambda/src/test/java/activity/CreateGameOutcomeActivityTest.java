@@ -34,13 +34,11 @@ public class CreateGameOutcomeActivityTest {
         String gameId = "GME001";
         String groupId = "GR001";
         String playerWinId = "P0001";
-        Set<String> playerLoseIds = Set.of("P0002", "P0003");
 
         CreateGameOutcomeRequest request = CreateGameOutcomeRequest.builder()
                 .withGameId(gameId)
                 .withGroupId(groupId)
                 .withPlayerWinId(playerWinId)
-                .withPlayerLoseIds(playerLoseIds)
                 .build();
 
         //WHEN
@@ -52,6 +50,5 @@ public class CreateGameOutcomeActivityTest {
         assertEquals(gameId, result.getGameOutcomeModel().getGameId());
         assertEquals(groupId, result.getGameOutcomeModel().getGroupId());
         assertEquals(playerWinId, result.getGameOutcomeModel().getPlayerWinId());
-        assertEquals(playerLoseIds, result.getGameOutcomeModel().getPlayerLoseIds());
     }
 }
