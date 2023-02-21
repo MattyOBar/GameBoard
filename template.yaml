@@ -199,54 +199,49 @@ Resources:
                   - logs:PutLogEvents
                   - cloudwatch:PutMetricData
                 Resource: '*'
+        - PolicyName: 'AccessGroupIdAndGameIdIndex'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/gameOutcomes/index/GroupIdAndGameIdIndex"
         - PolicyName: 'AccessPlayersTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource:
-                  Fn::Join:
-                            - ''
-                            - - 'arn:aws:dynamodb:'
-                              - !Ref 'AWS::Region'
-                              - ':'
-                              - !Ref 'AWS::AccountId'
-                              - ':table/Players'
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/players"
         - PolicyName: 'AccessGroupsTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource:
-                  Fn::Join:
-                    - ''
-                    - - 'arn:aws:dynamodb:'
-                      - !Ref 'AWS::Region'
-                      - ':'
-                      - !Ref 'AWS::AccountId'
-                      - ':table/Groups'
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/groups"
         - PolicyName: 'AccessGamesTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource:
-                  Fn::Join:
-                    - ''
-                    - - 'arn:aws:dynamodb:'
-                      - !Ref 'AWS::Region'
-                      - ':'
-                      - !Ref 'AWS::AccountId'
-                      - ':table/Games'
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/games"
+        - PolicyName: 'AccessGameOutcomesTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/gameOutcomes"
+
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
   CreateGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreateGroupLambda::handleRequest
       Runtime: java11
@@ -267,6 +262,7 @@ Resources:
   CreatePlayerLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreatePlayerLambda::handleRequest
       Runtime: java11
@@ -286,6 +282,7 @@ Resources:
   CreateGameLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreateGameLambda::handleRequest
       Runtime: java11
@@ -305,6 +302,7 @@ Resources:
   CreateGameOutcomeLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.CreateGameOutcomeLambda::handleRequest
       Runtime: java11
@@ -324,6 +322,7 @@ Resources:
   GetPlayerLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetPlayerLambda::handleRequest
       Runtime: java11
@@ -339,10 +338,13 @@ Resources:
           Properties:
             Path: /players/{playerId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGroupLambda::handleRequest
       Runtime: java11
@@ -364,6 +366,7 @@ Resources:
   GetGameLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGameLambda::handleRequest
       Runtime: java11
@@ -385,6 +388,7 @@ Resources:
   GetGameOutcomeLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGameOutcomeLambda::handleRequest
       Runtime: java11
@@ -406,6 +410,7 @@ Resources:
   GetGroupByPlayerLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGroupsByPlayerIdLambda::handleRequest
       Runtime: java11
@@ -427,6 +432,7 @@ Resources:
   GetGamesByGroupIdLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGamesByGroupIdLambda::handleRequest
       Runtime: java11
@@ -448,6 +454,7 @@ Resources:
   GetGameOutcomesByGroupIdLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.GetGameOutcomesByGroupIdLambda::handleRequest
       Runtime: java11
@@ -469,6 +476,7 @@ Resources:
   DeleteGameOutcomeLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.DeleteGameOutcomeLambda::handleRequest
       Runtime: java11
@@ -490,6 +498,7 @@ Resources:
   UpdateGroupLambda:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt AccessDynamoDBTablesRole.Arn
       CodeUri: GameBoardServiceLambda
       Handler: lambda.UpdateGroupLambda::handleRequest
       Runtime: java11

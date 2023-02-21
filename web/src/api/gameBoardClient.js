@@ -64,7 +64,12 @@ export default class GameBoardClient extends BindingClass {
 
     async getGameOutcomeByGroupId(groupId, gameId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`gameOutcomes/getGameOutcomesByGroupId/${groupId}/${gameId}`);
+            const token = await this.getTokenOrThrow("Please login!");
+            const response = await this.axiosClient.get(`gameOutcomes/getGameOutcomesByGroupId/${groupId}/${gameId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data.gameOutcomeModel;
         } catch (error) {
             this.handleError(error, errorCallback);
@@ -101,7 +106,12 @@ export default class GameBoardClient extends BindingClass {
 
     async getPlayer(id, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`players/${id}`);
+            const token = await this.getTokenOrThrow("Please login!");
+            const response = await this.axiosClient.get(`players/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             console.log(response.data);
             return response.data.playerModel;
         } catch (error) {
