@@ -9,7 +9,7 @@ import DataStore from '../util/DataStore';
 class Index extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'login', 'redirectToViewGroups', 'createProfile', 'redirectToCreateProfile'], this);
+        this.bindClassMethods(['mount', 'login'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.redirectToViewGroups);
         this.dataStore.addChangeListener(this.redirectToCreateProfile);
@@ -20,8 +20,7 @@ class Index extends BindingClass {
      * Add the header to the page and load GameBoardClient
      */
     mount() {
-        document.getElementById('login').addEventListener('click', this.login);
-        document.getElementById('create-profile').addEventListener('click', this.createProfile);
+        document.getElementById('loginButton').addEventListener('click', this.login);
 
         this.header.addHeaderToPage();
 
@@ -33,33 +32,8 @@ class Index extends BindingClass {
      * the user.
      */
     async login() {
-        document.getElementById('login').addEventListener('click', this.client.login);
-        document.location.href();
-    }
-
-    /**
-     * When the user has logged in, redirect to the page to viewGroupsByPlayer page.
-     */
-    async redirectToViewGroups() {
-        console.log("test")
-        window.alert("Redirect to view a player's group page.")
-    }
-
-    /**
-     * Method to run when the create profile button is pressed. Call the GameBoardService to login
-     * the user.
-     */
-    async createProfile() {
-        document.getElementById('create-profile').addEventListener('click', this.client.login);
-        this.redirectToCreateProfile;
-    }
-
-    /**
-     * When the user has created a login information, redirect to create profile page.
-     */
-    async redirectToCreateProfile() {
-        // TODO
-        window.alert("Redirect to create profile page.")
+        console.log("YAY");
+        this.client.login();
     }
 }
 
