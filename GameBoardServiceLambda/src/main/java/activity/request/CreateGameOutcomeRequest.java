@@ -1,6 +1,7 @@
 package activity.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import java.util.Set;
 
@@ -52,10 +53,12 @@ public class CreateGameOutcomeRequest {
                 '}';
     }
 
+
     //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
         return new Builder();
     }
+    @JsonPOJOBuilder
     public static class Builder {
         private String gameOutcomeId;
         private String groupId;

@@ -35,10 +35,18 @@ export default class GameBoardClient extends BindingClass {
         }
     }
 
-    async createGameOutcome(gameOutcome, errorCallback) {
+    async createGameOutcome(groupId, gameId, playerWinId, errorCallback) {
         try {
-
-            const response = await this.axiosClient.post(`gameOutcomes`, gameOutcome);
+            const token = await this.getTokenOrThrow("Only authenticated users get to create GameOutcomes!");
+            const response = await this.axiosClient.post(`gameOutcomes`,{
+                groupId: groupId,
+                gameId: gameId,
+                playerWinId: playerWinId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data.gameOutcomeModel;
         } catch (error){
             this.handleError(error, errorCallback);
@@ -134,9 +142,20 @@ export default class GameBoardClient extends BindingClass {
         }
     }
 
-    async updateGroup(group, errorCallback) {
+    async updateGroup(id, groupName, favoriteGameId, gameIds, gameOutcomeIds, playerIds, errorCallback) {
         try {
-            const response = await this.axiosClient.put(`groups/${group.groupId}`, group);
+            const token = await this.getTokenOrThrow("Only authenticated users can update the group!");
+            const response = await this.axiosClient.put(`groups/${id}`, {
+                groupName: groupName,
+                favoriteGameId: favoriteGameId,
+                gameIds: gameIds,
+                gameOutcomeIds: gameOutcomeIds,
+                playerIds: playerIds
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data.groupModel;
         } catch (error){
             this.handleError(error, errorCallback);

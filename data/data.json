@@ -3,21 +3,56 @@
     {
       "PutRequest": {
         "Item": {
-          "playerId": {"S":  "P00025"},
-          "playerName": {"S": "Olivia A"},
+          "playerId": {"S":  "charlie@nss.com"},
+          "playerName": {"S": "Charlie P."},
           "groupIds": {"SS": ["GRP00001"]}
         }
       }
     },
     {
-        "PutRequest": {
+      "PutRequest": {
         "Item": {
-          "playerId": {"S":  "P00027"},
-          "playerName": {"S": "Matt O"},
-          "groupIds": {"SS": ["GRP00001", "GRP00002"]}
-          }
+          "playerId": {"S":  "Oliviaemail@gmail.com"},
+          "playerName": {"S": "Olivia A."},
+          "groupIds": {"SS": ["GRP00001"]}
         }
       }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "jake@gmail.com"},
+          "playerName": {"S": "Jake P."},
+          "groupIds": {"SS": ["GRP00001"]}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "andy@nss.com"},
+          "playerName": {"S": "Andy C."},
+          "groupIds": {"SS": ["GRP00001"]}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "matthewobar@gmail.com"},
+          "playerName": {"S": "Matt O"},
+          "groupIds": {"SS": ["GRP00001"]}
+        }
+      }
+    },    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "mason@gmail.com"},
+          "playerName": {"S": "Mason S."},
+          "groupIds": {"SS": ["GRP00001"]}
+        }
+      }
+    }
   ],
   "groups" : [
     {
@@ -27,20 +62,8 @@
           "groupName": {"S":  "Our House"},
           "favoriteGameId": {"S":  "Monopoly"},
           "gameIds": {"SS": ["GM00001", "GM00002", "GM00003"]},
-          "gameOutcomeIds": {"SS": ["GO00001", "GO00002", "GO00003"]},
-          "playerIds": {"SS": ["P00025", "P00027"]}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "groupId": {"S": "GRP00002"},
-          "groupName": {"S":  "NSS Chess Club"},
-          "favoriteGameId": {"S":  "Monopoly"},
-          "gameIds": {"SS": ["GM00001"]},
-          "gameOutcomeIds": {"SS": ["GO00001", "GO00002", "GO00003"]},
-          "playerIds": {"SS": ["P00027"]}
+          "gameOutcomeIds": {"SS": ["GO1ed7b","GO3a563","GO4e3f7","GO5b995"]},
+          "playerIds": {"SS": ["charlie@nss.com","jake@gmail.com","matthewobar@gmail.com","trashboatthecat@gmail.com"]}
         }
       }
     }
@@ -81,11 +104,40 @@
     {
       "PutRequest": {
         "Item": {
-          "gameOutcomeId": {"S": "GO00001"},
-          "groupId": {"S": "GRP00002"},
-          "gameId": {"S": "GM00003"},
-          "playerWinId": {"S": "P00025"},
-          "playerLoseIds": {"SS": ["P00027"]}
+          "gameOutcomeId": {"S": "GO5b995"},
+          "groupId": {"S": "GRP00001"},
+          "gameId": {"S": "GM00001"},
+          "playerWinId": {"S": "charlie@nss.com"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "gameOutcomeId": {"S": "GO3a563"},
+          "groupId": {"S": "GRP00001"},
+          "gameId": {"S": "GM00001"},
+          "playerWinId": {"S": "charlie@nss.com"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "gameOutcomeId": {"S": "GO4e3f7"},
+          "groupId": {"S": "GRP00001"},
+          "gameId": {"S": "GM00001"},
+          "playerWinId": {"S": "charlie@nss.com"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "gameOutcomeId": {"S": "GO1ed7b"},
+          "groupId": {"S": "GRP00001"},
+          "gameId": {"S": "GM00001"},
+          "playerWinId": {"S": "matthewobar@gmail.com"}
         }
       }
     }

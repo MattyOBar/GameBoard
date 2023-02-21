@@ -358,6 +358,8 @@ Resources:
           Properties:
             Path: /groups/{groupId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGameLambda:
     Type: AWS::Serverless::Function
@@ -377,6 +379,8 @@ Resources:
           Properties:
             Path: /games/{gameId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGameOutcomeLambda:
     Type: AWS::Serverless::Function
@@ -396,6 +400,8 @@ Resources:
           Properties:
             Path: /gameOutcomes/{gameOutcomeId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGroupByPlayerLambda:
     Type: AWS::Serverless::Function
@@ -415,6 +421,8 @@ Resources:
           Properties:
             Path: /groups/getGroupsByPlayerId/{playerId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGamesByGroupIdLambda:
     Type: AWS::Serverless::Function
@@ -434,6 +442,8 @@ Resources:
           Properties:
             Path: /groups/getGamesByGroupId/{groupId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   GetGameOutcomesByGroupIdLambda:
     Type: AWS::Serverless::Function
@@ -453,6 +463,8 @@ Resources:
           Properties:
             Path: /gameOutcomes/getGameOutcomesByGroupId/{groupId}/{gameId}
             Method: get
+            Auth:
+              Authorizer: 'NONE'
 
   DeleteGameOutcomeLambda:
     Type: AWS::Serverless::Function
@@ -472,6 +484,8 @@ Resources:
           Properties:
             Path: /gameOutcomes/{gameOutcomeId}
             Method: delete
+            Auth:
+              Authorizer: 'NONE'
 
   UpdateGroupLambda:
     Type: AWS::Serverless::Function
