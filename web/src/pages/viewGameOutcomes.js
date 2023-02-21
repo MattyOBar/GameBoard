@@ -98,35 +98,27 @@ class ViewGameOutcomes extends BindingClass {
         var updatedGameOutcomeIds = group.gameOutcomeIds;
         updatedGameOutcomeIds.push(gameOutcome.gameOutcomeId);
         group.gameOutcomeIds = updatedGameOutcomeIds;
-        await this.client.updateGroup(groupId, updatedGameOutcomeIds);
-//        location.reload();
+        await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, updatedGameOutcomeIds, group.playerIds);
+        location.reload();
     }
 
     async displayGameOutcomes() {
         const urlParams = new URLSearchParams(window.location.search);
         const groupId = urlParams.get('groupId');
         var group = await this.client.getGroup(groupId);
-        const gameIds = group.gameIds;
-        const playerIds = group.playerIds
-        var gameOutcomeListMain = new Array();
-        for (let i = 0; i < gameIds.length; i++) {
-            var gameOutcomeList = await this.client.getGameOutcomeByGroupId(groupId, gameIds[i]);
-            gameOutcomeListMain.push(gameOutcomeList);
-        }
 
-console.log(gameOutcomeListMain);
-//
-//        const gameOutcomeEl = document.getElementById("displayGameOutcomesHere")
-//        var gameOutcomeIds = group.gameOutcomeIds;
-//        for (let i = 0; i < gameOutcomeIds.length; i++) {
-//            const gameOutcome = await this.client.getGameOutcome(gameOutcomeIds[i]);
-//            const game = await this.client.getGame(gameOutcome.gameId);
-//            const player = await this.client.getPlayer(gameOutcome.playerWinId);
-//            let element = document.createElement("div");
-//            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName;
-//            element.innerText = printThis;
-//            gameOutcomeEl.append(element);
-//        }
+        const gameOutcomeEl = document.getElementById("displayGameOutcomesHere")
+        var gameOutcomeIds = group.gameOutcomeIds;
+        for (let i = 0; i < gameOutcomeIds.length; i++) {
+            var gameOutcome = await this.client.getGameOutcome(gameOutcomeIds[i]);
+            const gameId = gameOutcome.gameId;
+            var game = await this.client.getGame(gameId);
+            var player = await this.client.getPlayer(gameOutcome.playerWinId);
+            let element = document.createElement("div");
+            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName;
+            element.innerText = printThis;
+            gameOutcomeEl.append(element);
+        }
     }
 
     async deleteGameOutcome() {
@@ -154,10 +146,9 @@ console.log(gameOutcomeListMain);
                     }
                 }
                 console.log(updatedGameOutcomeIds)
-                group.gameOutcomeIds = updatedGameOutcomeIds;
-                await this.client.updateGroup(group.groupId, group.gameOutcomeIds);
+                await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, updatedGameOutcomeIds, group.playerIds);
                 deleted = true;
-//                location.reload()
+                location.reload()
             }
         }
     }

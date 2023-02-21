@@ -15,6 +15,7 @@ public class UpdateGroupLambda
                 UpdateGroupRequest unauthenticatedRequest = input.fromBody(UpdateGroupRequest.class);
                 return input.fromUserClaims(claims ->
                     UpdateGroupRequest.builder()
+                        .withGroupId(unauthenticatedRequest.getGroupId())
                         .withGroupName(unauthenticatedRequest.getGroupName())
                         .withFavoriteGameId(unauthenticatedRequest.getFavoriteGameId())
                         .withGameIds(unauthenticatedRequest.getGameIds())

@@ -53,9 +53,9 @@ export default class GameBoardClient extends BindingClass {
         }
     }
 
-    async getGameOutcome(id, errorCallback) {
+    async getGameOutcome(gameId, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`gameOutcomes/${id}`);
+            const response = await this.axiosClient.get(`gameOutcomes/${gameId}`);
             return response.data.gameOutcomeModel;
         } catch (error) {
             this.handleError(error, errorCallback);
@@ -142,10 +142,11 @@ export default class GameBoardClient extends BindingClass {
         }
     }
 
-    async updateGroup(id, groupName, favoriteGameId, gameIds, gameOutcomeIds, playerIds, errorCallback) {
+    async updateGroup(groupId, groupName, favoriteGameId, gameIds, gameOutcomeIds, playerIds, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can update the group!");
-            const response = await this.axiosClient.put(`groups/${id}`, {
+            const response = await this.axiosClient.put(`groups/${groupId}`, {
+                groupId: groupId,
                 groupName: groupName,
                 favoriteGameId: favoriteGameId,
                 gameIds: gameIds,
