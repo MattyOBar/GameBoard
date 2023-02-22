@@ -88,5 +88,11 @@ public interface ServiceComponent {
      * Provides the relevant activity.
      * @return UpdateGroupActivity
      */
-    UpdateGroupActivity provideUpdateGroupAcitivty();
+    UpdateGroupActivity provideUpdateGroupActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return UpdatePlayerActivity
+     */
+    UpdatePlayerActivity provideUpdatePlayerActivity();
 }

@@ -16,7 +16,8 @@ export default class GameBoardClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createGameOutcome', 'getGameOutcome',
-        'getGameOutcomeByGroupId', 'deleteGameOutcome', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame', 'updateGroup'];
+        'getGameOutcomeByGroupId', 'deleteGameOutcome', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame',
+        'updateGroup', 'updatePlayer'];
         this.bindClassMethods(methodsToBind, this);
         this.authenticator = new Authenticator();
         this.props = props;
@@ -169,6 +170,24 @@ export default class GameBoardClient extends BindingClass {
             });
             return response.data.groupModel;
         } catch (error){
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    async updatePlayer(playerId, playerName, groupIds, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Please login!");
+            const response = await this.axiosClient.put(`players/${playerId}`, {
+                playerId: playerId,
+                playerName: playerName,
+                groupIds: groupIds
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.playerModel;
+        } catch (error) {
             this.handleError(error, errorCallback);
         }
     }

@@ -23,7 +23,7 @@ public class UpdateGroupLambda
                         .withGameOutcomeIds(unauthenticatedRequest.getGameOutcomeIds())
                         .build());
             },
-            (request, serviceComponent) -> serviceComponent.provideUpdateGroupAcitivty().handleRequest(request)
+            (request, serviceComponent) -> serviceComponent.provideUpdateGroupActivity().handleRequest(request)
         );
     }
 }
