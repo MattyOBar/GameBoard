@@ -58,6 +58,15 @@ class ViewPlayers extends BindingClass {
         var updatedPlayerIds = group.playerIds;
         updatedPlayerIds.push(playerId);
         await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
+        var player = await this.client.getPlayer(playerId);
+        var playerGroupIds = player.groupIds;
+        if (playerGroupIds.length == 1) {
+            if (playerGroupIds[0] == "should've used an optional") {
+            playerGroupIds[0] = groupId;
+            }
+        }
+        playerGroupIds.push(groupId);
+        player = await this.client.updatePlayer(player.playerId, player.playerName, playerGroupIds);
         location.reload();
     }
 
@@ -73,6 +82,17 @@ class ViewPlayers extends BindingClass {
             }
         }
         await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
+        var player = await this.client.getPlayer(playerId);
+        var updatedGroupIds = new Array();
+        for (let j = 0; j < player.groupIds.length; j++) {
+            if (player.groupIds[j] != groupId) {
+                updatedGroupIds.push(player.groupIds[j]);
+            }
+        }
+        if (updatedGroupIds.length == 0) {
+            updatedGroupIds.push("should've used an optional");
+        }
+        player = await this.client.updatePlayer(player.playerId, player.playerName, updatedGroupIds);
         location.reload();
     }
 }
