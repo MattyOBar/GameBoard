@@ -23,7 +23,7 @@
         "Item": {
           "playerId": {"S":  "jake@gmail.com"},
           "playerName": {"S": "Jake P."},
-          "groupIds": {"SS": ["GRP00001"]}
+          "groupIds": {"SS": ["GRP00001", "GRP00002"]}
         }
       }
     },
@@ -41,7 +41,7 @@
         "Item": {
           "playerId": {"S":  "matthewobar@gmail.com"},
           "playerName": {"S": "Matt O"},
-          "groupIds": {"SS": ["GRP00001"]}
+          "groupIds": {"SS": ["GRP00001", "GRP00002"]}
         }
       }
     },    {
@@ -52,6 +52,33 @@
           "groupIds": {"SS": ["GRP00001"]}
         }
       }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "joe@gmail.com"},
+          "playerName": {"S": "Joe R."},
+          "groupIds": {"SS": ["GRP00002"]}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "olivia@gmail.com"},
+          "playerName": {"S": "Olivia A."},
+          "groupIds": {"SS": ["GRP00002"]}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "playerId": {"S":  "claudia@gmail.com"},
+          "playerName": {"S": "Claudia J."},
+          "groupIds": {"SS": ["GRP00002"]}
+        }
+      }
     }
   ],
   "groups" : [
@@ -59,11 +86,23 @@
       "PutRequest": {
         "Item": {
           "groupId": {"S": "GRP00001"},
-          "groupName": {"S":  "Our House"},
-          "favoriteGameId": {"S":  "Monopoly"},
+          "groupName": {"S":  "NSS Chess Club"},
+          "favoriteGameId": {"S":  "GM00001"},
           "gameIds": {"SS": ["GM00001", "GM00002", "GM00003"]},
           "gameOutcomeIds": {"SS": ["GO1ed7b","GO3a563","GO4e3f7","GO5b995"]},
           "playerIds": {"SS": ["charlie@nss.com","jake@gmail.com","matthewobar@gmail.com","trashboatthecat@gmail.com"]}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "groupId": {"S": "GRP00002"},
+          "groupName": {"S":  "The Thunderdome!"},
+          "favoriteGameId": {"S":  "GM00003"},
+          "gameIds": {"SS": ["GM0003", "GM00004", "GM00005"]},
+          "gameOutcomeIds": {"SS": ["GO00069", "GO00007"]},
+          "playerIds": {"SS": ["jake@gmail.com","matthewobar@gmail.com", "claudia@gmail.com", "olivia@gmail.com", "joe@gmail.com"]}
         }
       }
     }
@@ -95,6 +134,26 @@
           "gameId": {"S": "GM00003"},
           "gameName": {"S":  "Settlers of Catan"},
           "rulesLink": {"S":  "www.SoC.com"},
+          "purchaseLink": {"S": "www.amazon.com"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "gameId": {"S": "GM00004"},
+          "gameName": {"S":  "Phase 10"},
+          "rulesLink": {"S":  "www.google.com"},
+          "purchaseLink": {"S": "www.amazon.com"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "gameId": {"S": "GM00005"},
+          "gameName": {"S":  "Skip-Bo"},
+          "rulesLink": {"S":  "www.google.com"},
           "purchaseLink": {"S": "www.amazon.com"}
         }
       }
@@ -138,6 +197,26 @@
           "groupId": {"S": "GRP00001"},
           "gameId": {"S": "GM00001"},
           "playerWinId": {"S": "matthewobar@gmail.com"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "gameOutcomeId": {"S": "GO00069"},
+          "groupId": {"S": "GRP00002"},
+          "gameId": {"S": "GM00003"},
+          "playerWinId": {"S": "matthewobar@gmail.com"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "gameOutcomeId": {"S": "GO00007"},
+          "groupId": {"S": "GRP00002"},
+          "gameId": {"S": "GM00005"},
+          "playerWinId": {"S": "olivia@gmail.com"}
         }
       }
     }
