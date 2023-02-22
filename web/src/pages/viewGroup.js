@@ -14,6 +14,10 @@ class ViewGroup extends BindingClass {
     async clientLoaded() {
         document.getElementById('groupName').innerText = "(Loading Please Wait...)";
         document.getElementById('favoriteGame').innerText = "(Loading Please Wait...)";
+        const urlParams = new URLSearchParams(window.location.search);
+        const groupId = urlParams.get('groupId');
+        const group = await this.client.getGroup(groupId);
+        this.dataStore.set('group', group);
         this.loadGroupId();
         this.redirectToViewPlayers();
         this.redirectToViewGames();
@@ -27,13 +31,7 @@ class ViewGroup extends BindingClass {
     }
 
     async loadGroupId() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        this.dataStore.set('groupId', groupId);
-        console.log(groupId);
-        const group = await this.client.getGroup(groupId);
-        this.dataStore.set('group', group);
-        console.log(group);
+        const group = this.dataStore.get('group');
         document.getElementById('groupName').innerText = group.groupName;
         const favoriteGame = await this.client.getGame(group.favoriteGameId);
         console.log(favoriteGame);

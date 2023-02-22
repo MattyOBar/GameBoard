@@ -17,7 +17,7 @@
         <h5>Players in this group:</h5>
         <div class="displayPlayerNames" id="displayPlayerNames"></div>
         <div class="input" id="inputField">
-            <input type="field" id="userInput">
+            <input type="field" id="userInput" placeholder="Enter an email address.">
         </div>
         <div class="addButton" id="addPlayer">
             <button type="button" id="addPlayerButton" onclick="showMessage()">Add Player!</button>
@@ -25,6 +25,8 @@
         <div class="removeButton" id="removePlayer" onclick="showMessage()">
             <button type="button" id="removePlayerButton">Remove Player!</button>
         </div>
+        <h4 id="warningMessage"></h4>
+        <p> To add or remove players you need to enter the email of an existing player.</p>
         <p class="loadingMessage" id="loadingMessage" style="display:none">(Loading... Page will refresh.)</p>
     </div>
 </body>

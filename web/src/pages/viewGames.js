@@ -13,6 +13,10 @@ class ViewGames extends BindingClass {
 
     async clientLoaded() {
         document.getElementById('groupName').innerText = "(Loading please wait...)"
+        const urlParams = new URLSearchParams(window.location.search);
+        const groupId = urlParams.get('groupId');
+        const group = await this.client.getGroup(groupId);
+        this.dataStore.set('group', group);
         await this.displayGroupName();
         await this.displayGames();
     }
@@ -24,16 +28,12 @@ class ViewGames extends BindingClass {
     }
 
     async displayGroupName() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        const group = await this.client.getGroup(groupId);
+        const group = this.dataStore.get('group');
         document.getElementById('groupName').innerText = group.groupName;
     }
 
     async displayGames() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        const group = await this.client.getGroup(groupId);
+        const group = this.dataStore.get('group');
         const gameNames = document.getElementById("displayGames");
         for (let i = 0; i < group.gameIds.length; i++) {
             var game = await this.client.getGame(group.gameIds[i]);

@@ -14,6 +14,10 @@ class ViewGameOutcomes extends BindingClass {
 
     async clientLoaded() {
         document.getElementById('groupName').innerText = "(Loading please wait...)";
+        const urlParams = new URLSearchParams(window.location.search);
+        const groupId = urlParams.get('groupId');
+        const group = await this.client.getGroup(groupId);
+        this.dataStore.set('group', group);
         await this.displayGroupName();
         await this.displayGameOutcomes();
     }
@@ -29,17 +33,13 @@ class ViewGameOutcomes extends BindingClass {
     }
 
     async displayGroupName() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        const group = await this.client.getGroup(groupId);
+        const group = this.dataStore.get('group');
         document.getElementById('groupName').innerText = group.groupName;
     }
 
     //populates the dropdown menu to select winners
     async loadPlayersDropDownAdd() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        const group = await this.client.getGroup(groupId);
+        const group = this.dataStore.get('group');
         const playerIds = group.playerIds;
 
         const selectPlayer = document.getElementById('playersWinDropDown');
@@ -62,9 +62,7 @@ class ViewGameOutcomes extends BindingClass {
     }
 
     async loadPlayersDropDownRemove() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const groupId = urlParams.get('groupId');
-            const group = await this.client.getGroup(groupId);
+            const group = this.dataStore.get('group');
             const playerIds = group.playerIds;
 
             const selectPlayer = document.getElementById('playersWinDropDownRemove');
@@ -87,28 +85,29 @@ class ViewGameOutcomes extends BindingClass {
         }
 
     async createNewGameOutcome() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        var group = await this.client.getGroup(groupId);
+        const group = this.dataStore.get('group');
         const gameId = document.getElementById("loadGamesDropDown").value;
         const playerWinId = document.getElementById("playersWinDropDown").value;
-
-        const gameOutcome = await this.client.createGameOutcome(groupId, gameId, playerWinId);
-
+        const gameOutcome = await this.client.createGameOutcome(group.groupId, gameId, playerWinId);
         var updatedGameOutcomeIds = group.gameOutcomeIds;
         updatedGameOutcomeIds.push(gameOutcome.gameOutcomeId);
-        group.gameOutcomeIds = updatedGameOutcomeIds;
         await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, updatedGameOutcomeIds, group.playerIds);
         location.reload();
     }
 
     async displayGameOutcomes() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        var group = await this.client.getGroup(groupId);
-
+        const group = this.dataStore.get('group');
         const gameOutcomeEl = document.getElementById("displayGameOutcomesHere")
-        var gameOutcomeIds = group.gameOutcomeIds;
+        const gameIds = group.gameIds;
+//        const gameOutcomes = new Array();
+//        for (let i = 0; i < gameIds.length; i++) {
+//            var gameOutcomeModelLists = await this.client.getGameOutcomeByGroupId(group.groupId, gameIds[i]);
+//
+//            console.log("inside of loop: " + gameOutcomes);
+//        }
+//        console.log(gameOutcomes);
+
+        const gameOutcomeIds = group.gameOutcomeIds;
         for (let i = 0; i < gameOutcomeIds.length; i++) {
             var gameOutcome = await this.client.getGameOutcome(gameOutcomeIds[i]);
             const gameId = gameOutcome.gameId;
@@ -124,18 +123,11 @@ class ViewGameOutcomes extends BindingClass {
     }
 
     async deleteGameOutcome() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const groupId = urlParams.get('groupId');
-        var group = await this.client.getGroup(groupId);
+        const group = this.dataStore.get('group');
         const gameId = document.getElementById("loadGamesDropDownRemove").value;
         const playerId = document.getElementById("playersWinDropDownRemove").value;
-        console.log("groupId"+ groupId);
-        console.log("GameId" + gameId);
-        var gameOutcomeModelList = await this.client.getGameOutcomeByGroupId(groupId, gameId);
-
-        console.log("gameOutcomeList" + gameOutcomeModelList);
+        var gameOutcomeModelList = await this.client.getGameOutcomeByGroupId(group.groupId, gameId);
         var deleted = false;
-        console.log(gameOutcomeModelList[0]);
         for (let i = 0; i < gameOutcomeModelList.length; i++) {
             if (playerId == gameOutcomeModelList[i].playerWinId && deleted == false) {
                 await this.client.deleteGameOutcome(gameOutcomeModelList[i].gameOutcomeId);
