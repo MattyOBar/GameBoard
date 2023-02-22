@@ -119,6 +119,8 @@ class ViewGameOutcomes extends BindingClass {
             element.innerText = printThis;
             gameOutcomeEl.append(element);
         }
+        var loadingMessage = document.getElementById("loadingMessage");
+        loadingMessage.parentNode.removeChild(loadingMessage);
     }
 
     async deleteGameOutcome() {

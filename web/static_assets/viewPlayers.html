@@ -8,19 +8,24 @@
 <body class="background">
     <header class="header" id="header"></header>
     <div class="main">
+        <script type="text/javascript">
+            function showMessage() {
+                document.getElementById('loadingMessage').style.display = 'block';
+            }
+        </script>
         <h3 class="groupName" id="groupName"></h3>
         <h5>Players in this group:</h5>
         <div class="displayPlayerNames" id="displayPlayerNames"></div>
-        <div class="input" id="inputfield">
+        <div class="input" id="inputField">
             <input type="field" id="userInput">
         </div>
         <div class="addButton" id="addPlayer">
-            <button type="button" id="addPlayerButton">Add Player!</button>
+            <button type="button" id="addPlayerButton" onclick="showMessage()">Add Player!</button>
         </div>
-
-        <div class="removeButton" id="removePlayer">
+        <div class="removeButton" id="removePlayer" onclick="showMessage()">
             <button type="button" id="removePlayerButton">Remove Player!</button>
         </div>
+        <p class="loadingMessage" id="loadingMessage" style="display:none">(Loading... Page will refresh.)</p>
     </div>
 </body>
 </html>
