@@ -12,8 +12,8 @@
     {
       "PutRequest": {
         "Item": {
-          "playerId": {"S":  "Oliviaemail@gmail.com"},
-          "playerName": {"S": "Olivia A."},
+          "playerId": {"S":  "jack@gmail.com"},
+          "playerName": {"S": "Jack S."},
           "groupIds": {"SS": ["GRP00001"]}
         }
       }

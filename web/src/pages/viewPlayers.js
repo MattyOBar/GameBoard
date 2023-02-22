@@ -45,7 +45,7 @@ class ViewPlayers extends BindingClass {
         for (let i = 0; i < playerIdsInGroupSet.length; i++) {
             var player = await this.client.getPlayer(playerIdsInGroupSet[i]);
             let newDiv = document.createElement("div");
-            newDiv.innerText = player.playerName;
+            newDiv.innerText = player.playerName + "   |   email: " + player.playerId;
             playerNames.appendChild(newDiv);
         }
     }
