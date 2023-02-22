@@ -52,10 +52,11 @@ class ViewPlayers extends BindingClass {
     async addPlayerToGroup() {
         const playerId = document.getElementById("userInput").value;
         const group = this.dataStore.get('group');
-        var updatedPlayerIds = group.playerIds;
-        updatedPlayerIds.push(playerId);
-        await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
-        var player = await this.client.getPlayer(playerId);
+
+        var player = await this.client.getPlayer(playerId, (error) => {
+            var warningMessage = document.getElementById("warningMessage");
+            warningMessage.innerText = `Error: ${error.message}`;
+        });
         var playerGroupIds = player.groupIds;
         if (playerGroupIds.length == 1) {
             if (playerGroupIds[0] == "should've used an optional") {
@@ -64,6 +65,10 @@ class ViewPlayers extends BindingClass {
         }
         playerGroupIds.push(group.groupId);
         player = await this.client.updatePlayer(player.playerId, player.playerName, playerGroupIds);
+        var updatedPlayerIds = group.playerIds;
+               updatedPlayerIds.push(playerId);
+               await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
+
         location.reload();
     }
 
