@@ -3,6 +3,7 @@
 <head>
     <script type="text/javascript" src="assets/viewGameOutcomes.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <title>GameBoard</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
         <h2 class="groupName" id="groupName"></h2>
         <h5>GameOutcomes:</h5>
         <div class="displayGameOutcomes" id="displayGameOutcomesHere">
-            <p id="loadingMessage">(Loading... Please wait..)</p>
+            <dl id="GameOutcomesList"></dl>
         </div>
         <div class="addButton" id="addGameOutcomes">
             <button type="button" id="addGameOutcomesButton" onclick="showForm()">Add New Outcome!</button>
@@ -21,8 +22,7 @@
             <p id="showGameMessage" style="display:none">Please select the game.</p>
             <select id="loadGamesDropDown" style="display: none;">
             </select>
-            <button type="button" id="submitButton" style="display: none" onclick="showMessage()">Submit!</button>
-            <p id="loadingMessageAdd" style="display: none">(Loading... Page will refresh.)</p>
+            <button type="button" id="submitButton" style="display: none">Submit!</button>
             <script type="text/javascript">
                 function showForm() {
                     document.getElementById('playersWinDropDown').style.display = 'block';
@@ -31,11 +31,6 @@
                     document.getElementById('showGameMessage').style.display = 'block';
                     document.getElementById('submitButton').style.display = 'block';
 
-                }
-            </script>
-            <script type="text/javascript">
-                function showMessage() {
-                    document.getElementById('loadingMessageAdd').style.display = 'block';
                 }
             </script>
         </div>
@@ -47,7 +42,7 @@
             <p id="showGameMessageRemove" style="display:none">Please select the game.</p>
             <select id="loadGamesDropDownRemove" style="display: none;">
             </select>
-            <button type="button" id="submitButtonRemove" style="display: none;" onclick="showMessageRemove()">Submit!</button>
+            <button type="button" id="submitButtonRemove" style="display: none;">Submit!</button>
             <p id="loadingMessageRemove" style="display: none">(Loading...  Page will refresh.)</p>
             <script type="text/javascript">
                 function showFormRemove() {
@@ -56,11 +51,6 @@
                     document.getElementById('showPlayerMessageRemove').style.display = 'block';
                     document.getElementById('showGameMessageRemove').style.display = 'block';
                     document.getElementById('submitButtonRemove').style.display = 'block';
-                }
-            </script>
-            <script type="text/javascript">
-                function showMessageRemove() {
-                    document.getElementById('loadingMessageRemove').style.display = 'block';
                 }
             </script>
         </div>

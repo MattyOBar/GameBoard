@@ -3,7 +3,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: #4d94ff;
     padding: 4px 20px;
+    font-family: Helvetica;
+}
+
+body {
+    background-color: #4ddbff;
+    align-items: center;
+
 }

@@ -90,7 +90,7 @@
           "favoriteGameId": {"S":  "GM00001"},
           "gameIds": {"SS": ["GM00001", "GM00002", "GM00003"]},
           "gameOutcomeIds": {"SS": ["GO1ed7b","GO3a563","GO4e3f7","GO5b995"]},
-          "playerIds": {"SS": ["charlie@nss.com","jake@gmail.com","matthewobar@gmail.com","trashboatthecat@gmail.com"]}
+          "playerIds": {"SS": ["charlie@nss.com","jake@gmail.com","matthewobar@gmail.com"]}
         }
       }
     },
