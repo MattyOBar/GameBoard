@@ -52,19 +52,6 @@ class ViewPlayers extends BindingClass {
         }
     }
 
-    async clearDisplay() {
-        const playerNamesList = document.querySelector("dl");
-        var child = playerNamesList.firstElementChild;
-        while (child) {
-            playerNamesList.removeChild(child);
-            child = playerNamesList.firstElementChild;
-        }
-        const inputField = document.getElementById("inputField");
-        inputField.innerText = ""
-        document.getElementById("loadingMessage").style.display="none";
-        document.getElementById("userInput").value = "";
-    }
-
     async addPlayerToGroup() {
         const playerId = document.getElementById("userInput").value;
         const group = this.dataStore.get('group');

@@ -37,7 +37,39 @@ class ViewGameOutcomes extends BindingClass {
         document.getElementById('groupName').innerText = group.groupName;
     }
 
-    //populates the dropdown menu to select winners
+    async displayGameOutcomes() {
+        const gameOutcomeDataList = document.querySelector("dl");
+        var child = gameOutcomeDataList.firstElementChild;
+        while (child) {
+            gameOutcomeDataList.removeChild(child);
+            child = gameOutcomeDataList.firstElementChild;
+        }
+        document.getElementById('playersWinDropDown').style.display = 'none';
+        document.getElementById('loadGamesDropDown').style.display = 'none';
+        document.getElementById('showPlayerMessage').style.display = 'none';
+        document.getElementById('showGameMessage').style.display = 'none';
+        document.getElementById('submitButton').style.display = 'none';
+        document.getElementById('playersWinDropDownRemove').style.display = 'none';
+        document.getElementById('loadGamesDropDownRemove').style.display = 'none';
+        document.getElementById('showPlayerMessageRemove').style.display = 'none';
+        document.getElementById('showGameMessageRemove').style.display = 'none';
+        document.getElementById('submitButtonRemove').style.display = 'none';
+        const group = this.dataStore.get('group');
+        const gameOutcomeEl = document.getElementById("GameOutcomesList")
+        const gameIds = group.gameIds;
+        const gameOutcomeIds = group.gameOutcomeIds;
+        for (let i = 0; i < gameOutcomeIds.length; i++) {
+            var gameOutcome = await this.client.getGameOutcome(gameOutcomeIds[i]);
+            const gameId = gameOutcome.gameId;
+            var game = await this.client.getGame(gameId);
+            var player = await this.client.getPlayer(gameOutcome.playerWinId);
+            let element = document.createElement("dt");
+            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName;
+            element.innerText = printThis;
+            gameOutcomeEl.append(element);
+        }
+    }
+
     async loadPlayersDropDownAdd() {
         const group = this.dataStore.get('group');
         const playerIds = group.playerIds;
@@ -92,38 +124,13 @@ class ViewGameOutcomes extends BindingClass {
         var updatedGameOutcomeIds = group.gameOutcomeIds;
         updatedGameOutcomeIds.push(gameOutcome.gameOutcomeId);
         await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, updatedGameOutcomeIds, group.playerIds);
-        location.reload();
+        this.displayGameOutcomes();
     }
 
-    async displayGameOutcomes() {
-        const group = this.dataStore.get('group');
-        const gameOutcomeEl = document.getElementById("displayGameOutcomesHere")
-        const gameIds = group.gameIds;
-//        const gameOutcomes = new Array();
-//        for (let i = 0; i < gameIds.length; i++) {
-//            var gameOutcomeModelLists = await this.client.getGameOutcomeByGroupId(group.groupId, gameIds[i]);
-//
-//            console.log("inside of loop: " + gameOutcomes);
-//        }
-//        console.log(gameOutcomes);
 
-        const gameOutcomeIds = group.gameOutcomeIds;
-        for (let i = 0; i < gameOutcomeIds.length; i++) {
-            var gameOutcome = await this.client.getGameOutcome(gameOutcomeIds[i]);
-            const gameId = gameOutcome.gameId;
-            var game = await this.client.getGame(gameId);
-            var player = await this.client.getPlayer(gameOutcome.playerWinId);
-            let element = document.createElement("div");
-            const printThis = "The Game is: " + game.gameName + ".  The winner is " + player.playerName;
-            element.innerText = printThis;
-            gameOutcomeEl.append(element);
-        }
-        var loadingMessage = document.getElementById("loadingMessage");
-        loadingMessage.parentNode.removeChild(loadingMessage);
-    }
 
     async deleteGameOutcome() {
-        const group = this.dataStore.get('group');
+        var group = this.dataStore.get('group');
         const gameId = document.getElementById("loadGamesDropDownRemove").value;
         const playerId = document.getElementById("playersWinDropDownRemove").value;
         var gameOutcomeModelList = await this.client.getGameOutcomeByGroupId(group.groupId, gameId);
@@ -140,11 +147,13 @@ class ViewGameOutcomes extends BindingClass {
                     }
                 }
                 console.log(updatedGameOutcomeIds)
-                await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, updatedGameOutcomeIds, group.playerIds);
+                group = await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, updatedGameOutcomeIds, group.playerIds);
+                this.dataStore.set('group', group);
                 deleted = true;
-                location.reload()
+
             }
         }
+        this.displayGameOutcomes();
     }
 
 }
