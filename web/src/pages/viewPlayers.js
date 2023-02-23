@@ -35,18 +35,34 @@ class ViewPlayers extends BindingClass {
     }
 
     async displayPlayersInGroup() {
+        const playerNamesList = document.querySelector("dl");
+        var child = playerNamesList.firstElementChild;
+        while (child) {
+            playerNamesList.removeChild(child);
+            child = playerNamesList.firstElementChild;
+        }
         const group = this.dataStore.get('group');
         document.getElementById('groupName').innerText = group.groupName;
-
         const playerIdsInGroupSet = group.playerIds;
-
-        const playerNames = document.getElementById('displayPlayerNames')
         for (let i = 0; i < playerIdsInGroupSet.length; i++) {
             var player = await this.client.getPlayer(playerIdsInGroupSet[i]);
-            let newDiv = document.createElement("div");
-            newDiv.innerText = player.playerName + "   |   email: " + player.playerId;
-            playerNames.appendChild(newDiv);
+            let newDiv = document.createElement("dt");
+            newDiv.innerText = player.playerName + "   |    " + player.playerId;
+            playerNamesList.appendChild(newDiv);
         }
+    }
+
+    async clearDisplay() {
+        const playerNamesList = document.querySelector("dl");
+        var child = playerNamesList.firstElementChild;
+        while (child) {
+            playerNamesList.removeChild(child);
+            child = playerNamesList.firstElementChild;
+        }
+        const inputField = document.getElementById("inputField");
+        inputField.innerText = ""
+        document.getElementById("loadingMessage").style.display="none";
+        document.getElementById("userInput").value = "";
     }
 
     async addPlayerToGroup() {
@@ -66,22 +82,15 @@ class ViewPlayers extends BindingClass {
         playerGroupIds.push(group.groupId);
         player = await this.client.updatePlayer(player.playerId, player.playerName, playerGroupIds);
         var updatedPlayerIds = group.playerIds;
-               updatedPlayerIds.push(playerId);
-               await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
+        updatedPlayerIds.push(playerId);
+        await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
 
-        location.reload();
+        this.displayPlayersInGroup();
     }
 
     async removePlayerFromGroup() {
         const playerId = document.getElementById("userInput").value;
-        const group = this.dataStore.get('group');
-        var updatedPlayerIds = new Array();
-        for (let i = 0; i < group.playerIds.length; i++) {
-            if (group.playerIds[i] != playerId) {
-                updatedPlayerIds.push(group.playerIds[i]);
-            }
-        }
-        await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
+        var group = this.dataStore.get('group');
         var player = await this.client.getPlayer(playerId);
         var updatedGroupIds = new Array();
         for (let j = 0; j < player.groupIds.length; j++) {
@@ -93,7 +102,17 @@ class ViewPlayers extends BindingClass {
             updatedGroupIds.push("should've used an optional");
         }
         player = await this.client.updatePlayer(player.playerId, player.playerName, updatedGroupIds);
-        location.reload();
+
+        var updatedPlayerIds = new Array();
+        for (let i = 0; i < group.playerIds.length; i++) {
+            if (group.playerIds[i] != playerId) {
+                updatedPlayerIds.push(group.playerIds[i]);
+            }
+        }
+        group = await this.client.updateGroup(group.groupId, group.groupName, group.favoriteGameId, group.gameIds, group.gameOutcomeIds, updatedPlayerIds);
+        this.dataStore.set('group', group);
+
+        this.displayPlayersInGroup();
     }
 }
 
