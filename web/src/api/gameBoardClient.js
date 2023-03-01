@@ -15,7 +15,7 @@ export default class GameBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createGameOutcome', 'getGameOutcome',
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createPlayer', 'createGameOutcome', 'getGameOutcome',
         'getGameOutcomeByGroupId', 'deleteGameOutcome', 'getPlayer', 'getGroupsByPlayerId', 'getGroup', 'getGame',
         'updateGroup', 'updatePlayer'];
         this.bindClassMethods(methodsToBind, this);
@@ -33,6 +33,22 @@ export default class GameBoardClient extends BindingClass {
     clientLoaded() {
         if (this.props.hasOwnProperty("onReady")) {
             this.props.onReady(this);
+        }
+    }
+
+    async createPlayer(groupIds, errorCallback) {
+    try {
+            const token = await this.getTokenOrThrow("Please create an account!");
+            const response = await this.axiosClient.post(`players`,{
+                groupIds: groupIds
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.gameOutcomeModel;
+        } catch (error){
+            this.handleError(error, errorCallback);
         }
     }
 

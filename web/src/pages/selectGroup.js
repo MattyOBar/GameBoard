@@ -6,15 +6,18 @@ import DataStore from '../util/DataStore';
 class SelectGroup extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayNameAndGroupsOnPage'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'createPlayerIfNewUser', 'displayName', 'displayGroups'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
 
     async clientLoaded() {
         document.getElementById('welcome-name').innerText = "(Loading please wait...)"
-
-        this.displayNameAndGroupsOnPage();
+        const currentUser = await this.client.getIdentity();
+        this.dataStore.set('currentUser', currentUser);
+        await this.createPlayerIfNewUser();
+        await this.displayName();
+        await this.displayGroups();
     }
 
     async mount() {
@@ -23,29 +26,48 @@ class SelectGroup extends BindingClass {
         await this.clientLoaded();
     }
 
-    async displayNameAndGroupsOnPage() {
-        const currentUser = await this.client.getIdentity();
-        const playerId = currentUser.email;
-        const playerName = currentUser.name;
-        console.log(playerName);
-        console.log(playerId);
-        const player = await this.client.getPlayer(playerId);
-        console.log(player);
-        document.getElementById('welcome-name').innerText = playerName;
+    sync createPlayerIfNewUser() {
+        const currentUser = this.dataStore.get('currentUser');
+        console.log("currentUser " + currentUser);
+        try {
+            const player = await this.client.getPlayer(currentUser.email);
+            this.dataStore.set('player', player);
+        } catch (error) {
+        console.log("error was caught");
+            var player = await this.client.createPlayer(["should've used an optional"]);
+            this.dataStore.set('player', player);
+        }
+
+    }
+    async displayName() {
+        const player = this.dataStore.get('player');
+        document.getElementById('welcome-name').innerText = player.playerName;
+    }
+
+    async displayGroups() {
+        const player = this.dataStore.get('player');
         const groupsList = player.groupIds;
-        console.log(groupsList);
         document.getElementById('loading-message').innerText = "(Loading Please Wait...)";
         const groupButtons = document.getElementById('groupName-buttons');
-        for (let i = 0; i < groupsList.length; i++) {
-            const group = await this.client.getGroup(groupsList[i]);
-            let button = document.createElement("button");
-            button.innerHTML = group.groupName;
-            button.onclick = function () {
-                window.location.href = "/viewGroup.html?groupId=" + group.groupId;
-            };
-            groupButtons.appendChild(button);
+        if (groupsList.length == 1 && groupsList[0].equals("should've used an optional")) {
+            console.log("you need to create or join a group!");
+            document.getElementById('loading-message').innerText = "You need to create or join a group!";
+        } else {
+            for (let i = 0; i < groupsList.length; i++) {
+                const group = await this.client.getGroup(groupsList[i]);
+                let button = document.createElement("button");
+                button.innerHTML = group.groupName;
+                button.onclick = function () {
+                    window.location.href = "/viewGroup.html?groupId=" + group.groupId;
+                };
+                groupButtons.appendChild(button);
+            }
+            document.getElementById('loading-message').innerText = "";
         }
-        document.getElementById('loading-message').innerText = "";
+
+
+
+
     }
 
 }
